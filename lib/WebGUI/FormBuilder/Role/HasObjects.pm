@@ -22,6 +22,8 @@ use experimental 'smartmatch';
 
 with 'WebGUI::FormBuilder::Role::ToJson';  
 
+with 'WebGUI::FormBuilder::Role::ToJson';  
+
 has 'objects' => (
     is => 'rw',
     isa => 'ArrayRef',
