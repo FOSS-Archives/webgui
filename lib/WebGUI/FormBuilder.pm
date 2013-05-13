@@ -7,6 +7,7 @@ use Moose;
 use MooseX::Storage;
 use WebGUI::Exception;
 use experimental 'smartmatch';
+use JSON;
 
 =head1 NAME
 
@@ -113,6 +114,7 @@ with Storage( format => 'JSON' );
 with 'WebGUI::FormBuilder::Role::HasFields';
 with 'WebGUI::FormBuilder::Role::HasFieldsets'; 
 with 'WebGUI::FormBuilder::Role::HasTabs';
+with 'WebGUI::FormBuilder::Role::ToJson';
 
 use WebGUI::FormBuilder::Tab;
 use WebGUI::FormBuilder::Tabset;
