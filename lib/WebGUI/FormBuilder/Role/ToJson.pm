@@ -26,7 +26,7 @@ warn "toJson: root: $root class: " . ref $self;
     $structure->{ name  } = $self->can('name')  ? $self->name  : '';
     $structure->{ label } = $self->can('label') ? $self->label : '';
 
-    $structure->{type} = ref $self;
+    $structure->{class} = ref $self;
 
     if ( $self->DOES('WebGUI::FormBuilder::Role::HasFields') ) {
         my @fields;
