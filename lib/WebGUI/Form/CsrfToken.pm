@@ -77,7 +77,7 @@ sub toJson {
     my $structure = $_[0] || { };
     $structure->{name} = 'webguiCsrfToken';
     $structure->{value} = $self->session->scratch->get('webguiCsrfToken');
-    $structure->{class} = ref $self;
+    $structure->{ _object_type } = ref $self;
     if( ! $_[0] ) {
         return encode_json $structure;
     } else {
