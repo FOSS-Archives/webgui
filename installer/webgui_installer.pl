@@ -1,6 +1,9 @@
 #!/usr/local/bin/perl
 
-# to run this installer on Debian, do:
+# Report bugs to scott@plainblack.com, or open a ticket at https://github.com/AlliumCepa/webgui/issues/, or post in the 
+# forums on http://webgui.org.
+
+# To run this installer on Debian, do:
 
 # apt-get install wget
 # apt-get install perl 
@@ -10,7 +13,7 @@
 # Have backups (at least of /etc) and use "More Questions" on existing systems to major
 # package and config changes aren't made without a chance to say no.
 
-# to run this installer on CentOS, do:
+# To run this installer on CentOS, do:
 
 # yum install wget
 # yum install perl
@@ -102,8 +105,6 @@ my $os;
 
 # cpu architecture and flags for different cpu architectures
 
-my $cpu = 'unknown';  # right now, only Linux sets this and uses it
-
 # where config files wind up
 
 my $nginx_etc;
@@ -119,8 +120,6 @@ my $mysql_root_password;
 
 sub opt ($) { scalar grep $_ eq $_[0], @ARGV }
 sub arg ($) { my $opt = shift; my $i=1; while($i<=@ARGV) { return $ARGV[$i] if $ARGV[$i-1] eq $opt; $i++; } }
-
-my $bugtracker = 'https://github.com/AlliumCepa/webgui/issues/';
 
 # XXX might have to export these symbols to make things work for that one French fellow, but I don't actually see where in the code it's matching the output of commands
 # LANG=en_US
@@ -163,15 +162,6 @@ BEGIN {
     $os = 'debian' if $os eq 'linux' and -f '/etc/debian_version';
     $os = 'redhat' if $os eq 'linux' and -f '/etc/redhat-release';
 
-    # only applicable to Linux
-
-    if( $os eq 'linux' ) {
-        $cpu = $Config{archname};
-        $cpu =~ s{-.*}{};
-        $cpu = 'i686' if $cpu eq 'i386'; # at least for RedHat
-        $cpu or die "Couldn't detect which CPU you have, which we use for figuring out which version of certain packages to install; please open a bug ticket at $bugtracker";
-    }
-    
     # default install dir
 
     $install_dir = $root ? '/data' : "$ENV{HOME}/webgui";
@@ -198,7 +188,7 @@ BEGIN {
         $nginx_etc = '/etc';
 
         # no counterpart to libcurses-perl or libcurses-widgets-perl so we have to fallback on building from the bundled tarball XXX really?
-        $cmd = "yum install --assumeyes gcc make automake kernel-devel man ncurses-devel.$cpu perl-devel.$cpu sudo";
+        $cmd = "yum install --assumeyes gcc make automake kernel-devel man ncurses-devel sudo";
 
     } elsif( $os eq 'darwin' ) {
 
@@ -487,14 +477,14 @@ sub bail {
         use Socket; 
         socket my $s, 2, 1, 6 or die $!;
         connect $s, scalar sockaddr_in(80, scalar inet_aton("slowass.net")) or do {print "failed to send feedback: $!"; exit; };
-        $message .= "\n\nOS: $os\nperl: $perl\n\nroot: $root\n\ncpu: $cpu\n\n";
+        $message .= "\n\nOS: $os\nperl: $perl\n\nroot: $root\n\nuname: " . `uname -a` . "\n\n";
         (my $encoded_message = $message) =~ s{([^a-zA-Z0-9_-])}{ '%'.sprintf("%02x", ord($1)) }ge;
         my $postdata = 'message=' . $encoded_message;
         syswrite $s, "POST /~scott/wginstallerbug.cgi HTTP/1.0\r\nHost: slowass.net\r\nContent-type: application/x-www-form-urlencoded\r\nContent-Length: " . length($postdata) . "\r\n\r\n" . $postdata;
     }
     endwin();
     print $message, "\n";
-    $feedback == 0 and print "\nIf this is a bug, Scott should soon post a fix on http://twitter.com/scrottie, or please feel free to open a bug ticket on $bugtracker.\n";
+    $feedback == 0 and print "\nIf this is a bug, please email scott\@plainblack.com or feel free to open a bug ticket on https://github.com/AlliumCepa/webgui/issues/ to be notified of fixes.\n";
     exit 1;
 }
 
@@ -1218,14 +1208,14 @@ if( $mysqld_safe_path ) {
 
     } elsif( $os eq 'redhat' ) {
 
-        run( "yum install --assumeyes mysql.$cpu mysql-devel.$cpu mysql-server.$cpu" );
+        # run( "yum install --assumeyes mysql mysql-devel mysql-server" );  # have to do a 3rd party semi-manual install to get these
+        run( "yum install --assumeyes mariadb mariadb-devel mariadb-server" );
 
         # have to start mysqld; rpm doesn't do it
 
-        if( ! -f "/etc/sysconfig/network" ) {
-            # XXX sudo cat?
+        if( ! -f "/etc/sysconfig/network" or ! grep !/^#/, IO::File->new('/etc/sysconfig/network')->getlines ) {
             # 'chkconfig mysqld on' fails if /etc/sysconfig/network wasn't set by the installer; from looking at Google's results, this doesn't seem to be the uncommon problem that RedHat users claim
-            $root or bail "/etc/sysconfig/network doesn't exist; cannot proceed; other tools won't work; yell at CentOS/RedHat about it";
+            # more recently, /etc/sysconfig/network has only comment lines in it, which also fails
             open my $fh, '>', '/etc/sysconfig/network' or bail "cannot write to /etc/sysconfig/network: $!";
             $fh->print(<<EOF) or bail "writing to /etc/sysconfig/network: $!";
 NETWORK=yes
@@ -1234,8 +1224,11 @@ EOF
             close $fh or bail "writing to /etc/sysconfig/network: $!";
         }
 
-        run "/sbin/chkconfig mysqld on";
-        run "/sbin/service mysqld start"; # this initializes the database, when it works
+        # run "/sbin/chkconfig mysqld on";
+        run "/sbin/chkconfig mariadb on";
+
+        # run "/sbin/service mysqld start"; # this initializes the database, when it works
+        run "/sbin/service mariadb start"; # this initializes the database, when it works
 
         if( $verbosity < 0 ) {
 
@@ -1442,11 +1435,9 @@ do {
 
     } elsif( $os eq 'redhat' ) {
 
-die "RedHat/CentOS support is currently broken.  Sorry.";
-
         # XXX this installs a ton of stuff, including X, cups, icon themes, etc.  what triggered that?  can we avoid it?
 
-        run( "yum install --assumeyes libpng12-dev ImageMagick-perl.$cpu openssl.$cpu openssl-devel.$cpu expat-devel.$cpu git curl" ); # $cpu looks like eg 'x86_64'
+        run( "yum install --assumeyes libpng12-dev ImageMagick-perl openssl openssl-devel expat-devel git curl" );
         # http://wiki.nginx.org/Install:
         # "Due to differences between how CentOS, RHEL, and Scientific Linux populate the $releasever variable, it is necessary to manually 
         # replace $releasever with either "5" (for 5.x) or "6" (for 6.x), depending upon your OS version."
@@ -1454,7 +1445,9 @@ die "RedHat/CentOS support is currently broken.  Sorry.";
 
         # if( ! -f '/etc/yum.repos.d/nginx.repo' ) 
 
-        # XXX sudo cat?
+        # XXXXXXXXXXXXXX is all of this still needed?
+        # XXXX maybe better to let the user set up nginx in this case...
+
         my $fh;
         open $fh, '<', '/etc/redhat-release' or bail "can't open /etc/redhat-release to figure out which version we are to set the correct nginx repo with: $!";  
         (my $version) = readline $fh;
@@ -1464,6 +1457,10 @@ die "RedHat/CentOS support is currently broken.  Sorry.";
         $redhatcentos = lc $redhatcentos;
         $redhatcentos = 'rhel' if $redhatcentos eq 'redhat'; # just guessing here
         open $fh, '>', '/etc/yum.repos.d/nginx.repo' or bail "can't write to /etc/yum.repos.d/nginx.repo: $!";
+        my $cpu = $Config{archname};
+        $cpu =~ s{-.*}{};
+        $cpu = 'i686' if $cpu eq 'i386'; # at least for RedHat
+        $cpu or die "Couldn't detect which CPU you have, which we use for figuring out which version of certain packages to install; please open a bug ticket.";
         my $cpu2 = $cpu;  $cpu2 = 'i386' if $cpu2 eq 'i686'; # for crying out loud...
         $fh->print(<<EOF);
 [nginx]
