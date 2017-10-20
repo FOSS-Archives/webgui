@@ -812,6 +812,8 @@ sub updateAsset {
 
 =head2 www_view ( session )
 
+Show the Admin menu
+
 Show the main Admin console wrapper
 
 =cut
@@ -820,6 +822,9 @@ sub www_view {
     my ( $self ) = @_;
     my $session = $self->session;
     my ( $user, $url, $style ) = $session->quick(qw{ user url style });
+    my $output;
+
+    my $json = defined $session->form->get('json');    # requests JSON version of the admin menu
 
     my $var;
     $var->{backToSiteUrl} = $url->page;
@@ -836,11 +841,21 @@ sub www_view {
     $var->{viewUrl} = $url->page;
     $var->{homeUrl} = WebGUI::Asset->getDefault( $session )->getUrl;
 
-    # Asset types for later use
-    $var->{assetTypesJson} = JSON->new->encode( { $self->getAssetTypes } );
+    $var->{assetTypes} = $self->getAssetTypes;
 
-    my $tmpl   = WebGUI::Asset::Template->newById( $session, $session->setting->get('templateIdAdmin') );
-    my $output = $style->process( $tmpl->process( $var ), "PBtmpl0000000000000137" );
+    if( $json ) {
+
+        $session->response->content_type('application/json');
+        $output = JSON->new->encode( $var );
+
+    } else {
+
+        $var->{assetTypesJson} = JSON->new->encode( { delete $var->{assetTypes} } );
+
+        my $tmpl = WebGUI::Asset::Template->newById( $session, $session->setting->get('templateIdAdmin') );
+        $output  = $style->process( $tmpl->process( $var ), "PBtmpl0000000000000137" );
+
+    }
 
     return $output;
 } ## end sub www_view
