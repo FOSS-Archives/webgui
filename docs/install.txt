@@ -13,9 +13,6 @@ WebGUI 7.
 
 * Install a recent MySQL and set up a user account
 
-* Install ImageMagick (http://www.imagemagick.org/, compile and install the 
-  source or binary package)
-
 * Get WebGUI from GitHub and check out the WebGUI8 branch:
 
   $ git clone https://github.com/plainblack/webgui.git
