@@ -112,6 +112,7 @@ This assumes that your site is "www.example.com".  If it's something else, chang
 
 Generic source install instructions:
 
+* Run `cpanm Task::WebGUI` and `perl sbin/testEnvironment.pl` to install Perl module deps
 * Create a database named after your site, such as `www_whatever_com`
 * Load `share/create.sql` into your MySQL/MariaDB/Percona
 * Run .`bin/testEnvironment.pl` to install all new requirements

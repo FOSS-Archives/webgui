@@ -22,7 +22,7 @@ BEGIN {
     unshift @INC, File::Spec->catdir($webguiRoot, 'lib');
 }
 
-use CPAN;
+# use CPAN;
 use Getopt::Long;
 use Pod::Usage;
 use Cwd ();
@@ -133,7 +133,7 @@ checkModule("URI::Escape",                  "3.29"       );
 checkModule("POSIX"                                      );
 checkModule("List::Util"                                 );
 checkModule("Color::Calc"                                );
-checkModule("Weather::Com::Finder",         "0.5.3"      );
+# checkModule("Weather::Com::Finder",         "0.5.3"      ); # broken
 checkModule("HTML::TagCloud",               "0.34"       );
 checkModule("Image::ExifTool",              "7.67"       );
 checkModule("Archive::Any",                 "0.0932"     );
@@ -432,7 +432,8 @@ sub installModule {
         my $module = shift;
         print "Attempting to install ".$module."...\n";
         my $cwd = Cwd::cwd;
-        CPAN::Shell->install($module);
+        # CPAN::Shell->install($module);
+        system 'cpanm', $module;
         chdir $cwd;
 }
 
