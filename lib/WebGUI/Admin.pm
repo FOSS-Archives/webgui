@@ -101,6 +101,8 @@ sub getAdminPluginTemplateVars {
             }
             next unless $canUse;
 
+            WebGUI::Macro::process($session, \ $funcDef->{url} );
+
             # build the attributes
             $var = {
                 title        => $title,
