@@ -764,6 +764,7 @@ sub toJson {
     my $structure = shift() || { };
     $structure->{ _object_type } = ref $self;
     my %templateVars =    %{ $self->toTemplateVars };
+    $templateVars{label} = $self->get('label');            # get the raw value instead of HTML
     for my $key ( keys %templateVars ) {
         $structure->{ $key } = $templateVars{ $key };
     }
