@@ -17,7 +17,7 @@ RUN cpanm --notest --force IO::Interactive::Tiny LWP HTML::Form Net::DNS Try::Ti
    POE POE::Component::IKC::Server POE::Component::Client::HTTP Net::Twitter Business::PayPal::API Geo::Coder::Googlev3 Plack UUID::Tiny HTTP::BrowserDetect \
    Plack::Middleware::Debug Search::QueryParser Facebook::Graph
 
-RUN apt remove -y cpanminus make gcc libmagick++-dev libperl-dev && rm -rf /root/.cpanm
+RUN apt remove -y gcc libmagick++-dev
 
 ADD etc   /WebGUI/etc
 ADD lib   /WebGUI/lib
