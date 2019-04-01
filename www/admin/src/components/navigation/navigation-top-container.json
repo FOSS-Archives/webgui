@@ -1,0 +1,66 @@
+[
+   {
+      "label": "Home",
+      "command": null,
+      "icon": "pi pi-home"  
+   },
+   {
+      "label": "Assets",
+      "command": null,
+      "icon": "pi pi-th-large",
+      "items": [
+         {
+            "label": "History",
+            "command": null,
+            "icon": "pi pi-calendar"
+         },
+         {
+            "label": "List",
+            "command": null,
+            "icon": "pi pi-list"
+         }
+      ]
+   },
+   {
+      "label": "Content",
+      "command": null,
+      "icon": "pi pi-images"  
+   },
+   {
+      "label": "Settings",
+      "command": null,
+      "icon": "pi pi-cog"  
+   },
+   {
+      "label": "Auth",
+      "command": null,
+      "icon": "pi pi-fw pi-user",
+      "items": [
+         {
+            "label": "Active Sessions",
+            "command": null,
+            "icon": "pi pi-key"
+         }, 
+         {
+            "label": "Groups",
+            "command": null,
+            "icon": "pi pi-users"
+         },
+         {
+            "label": "Login History",
+            "command": null,
+            "icon": "pi pi-calendar"
+         }, 
+         {
+            "label": "Profiling",
+            "command": null,
+            "icon": "pi pi-clock"
+         },
+         {
+            "label": "Users",
+            "command": null,
+            "icon": "pi pi-list"
+         }
+      ]
+   }
+]

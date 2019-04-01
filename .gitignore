@@ -1,1 +1,6 @@
 /*.kpf
+/www/admin/node_modules/
+/www/admin/coverage/
+/www/admin/package-lock.json
+/www/admin/yarn-error.log
+/nbproject/
