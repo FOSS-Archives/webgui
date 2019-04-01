@@ -1,5 +1,8 @@
 .gitignore
 /*.kpf
 www/uploads
-lib/WebGUI.pm.orig
-selenium/selenium-server-standalone-2.25.0.jar
+/www/admin/node_modules/
+/www/admin/coverage/
+/www/admin/package-lock.json
+/www/admin/yarn-error.log
+/nbproject/
