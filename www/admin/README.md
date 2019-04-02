@@ -1,4 +1,4 @@
-# AlliumCepa Admin Interface Unoficial
+# AlliumCepa Admin Interface Unofficial
 
 In the abscense of a good/natural Perl CMS system that is OpenSource I decided to give this another look and possibly revive this CMS.
 
