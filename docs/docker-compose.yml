@@ -1,0 +1,30 @@
+version: '2'
+services:
+   db:
+     image: mariadb
+     container_name: db
+     environment:
+     - MYSQL_ROOT_PASSWORD=123qwe
+     volumes:
+     - ../share/create.sql:/create.sql          
+     - ./install.db:/install
+     ports:
+      - 3306:3306
+     entrypoint:
+      - sh
+      - -c
+      - "/install && docker-entrypoint.sh mysqld"
+
+   allium-cepa:
+     image: localhost/alliumcepa:20190401
+     container_name: allium
+     depends_on:
+      - db
+     volumes:
+      - ..:/WebGUI
+     ports:
+      - "80:5000"
+     entrypoint:
+      - sh
+      - -c
+      - "plackup -I/WebGUI/lib"

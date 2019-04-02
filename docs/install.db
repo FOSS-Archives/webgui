@@ -1,0 +1,16 @@
+#!/bin/sh
+cat << EOM > webgui.db.sql
+   create database www_example_com;
+   create user webgui identified by '123qwe';
+   grant all on www_example_com.* to 'webgui'@'%';
+   flush privileges;
+EOM
+
+cat << EOM > /tmp/pre-entrypoint
+   # Give the DB a few seconds to start properly
+   sleep 10
+   mysql -u root -p123qwe -h localhost < webgui.db.sql
+   mysql -u root -p123qwe -h localhost www_example_com < /create.sql
+EOM
+
+sh /tmp/pre-entrypoint &
