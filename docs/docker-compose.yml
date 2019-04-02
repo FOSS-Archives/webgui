@@ -1,4 +1,4 @@
-version: '2'
+version: '3.7'
 services:
    db:
      image: mariadb
@@ -16,7 +16,7 @@ services:
       - "/install && docker-entrypoint.sh mysqld"
 
    allium-cepa:
-     image: localhost/alliumcepa:20190401
+     image: webgui:local
      container_name: allium
      depends_on:
       - db

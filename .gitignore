@@ -1,4 +1,6 @@
 .gitignore
+.DS_Store
+.DS_Store?
 /*.kpf
 www/uploads
 /www/admin/node_modules/
