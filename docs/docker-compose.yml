@@ -28,3 +28,4 @@ services:
       - sh
       - -c
       - "plackup -I/WebGUI/lib"
+      
