@@ -9,6 +9,7 @@ There are NO guarantees that this project will be supported.  As a matter of fac
 The developers use a variety of resources to support this project:
 
 * [Docker &copy;](https://www.docker.com) - Docker resources
+* [Docker Compose](https://docs.docker.com/compose/overview/) - Docker compose
 * [AlliumCepa](https://github.com/AlliumCepa/webgui) - Content Management System
 * [MariaDB &copy;](https://mariadb.org) - MariaDB
 * [Netbeans &copy;](https://netbeans.org) - Netbeans (Developer IDE)
