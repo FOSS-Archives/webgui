@@ -9,3 +9,4 @@ www/uploads
 /www/admin/yarn-error.log
 /nbproject/
 /www/admin/build/
+node_modules/

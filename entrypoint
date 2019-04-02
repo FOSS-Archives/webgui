@@ -1,0 +1,2 @@
+#!/bin/sh
+plackup -I/WebGUI/lib

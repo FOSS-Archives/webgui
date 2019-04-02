@@ -120,16 +120,20 @@ RUN cpanm --notest --force \
    XML::FeedPP::MediaRSS \
    XML::Simple
 
-RUN apt remove -y gcc libmagick++-dev
-
-ADD etc   /WebGUI/etc
-ADD lib   /WebGUI/lib
-ADD sbin  /WebGUI/sbin
-ADD share /WebGUI/share
-ADD www   /WebGUI/www
+ADD etc        /WebGUI/etc
+ADD lib        /WebGUI/lib
+ADD sbin       /WebGUI/sbin
+ADD share      /WebGUI/share
+ADD www        /WebGUI/www
+ADD app.psgi   /WebGUI/
 
 WORKDIR /WebGUI
 
-RUN chown -R nobody: /WebGUI
+ADD entrypoint /
+
+RUN apt remove -y gcc libmagick++-dev && \
+   chown -R nobody: /WebGUI && chmod 755 /entrypoint
 
 USER nobody
+
+CMD [ "/entrypoint" ]
