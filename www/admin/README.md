@@ -22,9 +22,8 @@ Start the Docker Engine in your local environemt
 
 ```sh
 $ git clone https://github.com/AlliumCepa/webgui.git
-$ cd webgui
+$ cd webgui/docs
 $ docker build -t webgui:local .
-$ cd docs
 $ docker-compose up
 ```
 
