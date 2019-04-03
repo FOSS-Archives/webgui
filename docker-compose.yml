@@ -1,3 +1,6 @@
+#  This file is ideal for development and testing. 
+#   ---  DO NOT USE FOR PRODUCTION ---
+#  however, you can use it as a guide to create a proper production environment.
 version: '3.7'
 services:
    db:
@@ -14,6 +17,7 @@ services:
       - sh
       - -c
       - "/install && docker-entrypoint.sh mysqld"
+      
    allium-cepa:
      image: webgui:local
      container_name: allium
