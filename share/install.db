@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# this is loaded inside the mariadb docker image as /install via
+# docker-compose up and docker-compose.yaml
+
 cat << EOM > webgui.db.sql
    create database www_example_com;
    create user webgui identified by '123qwe';

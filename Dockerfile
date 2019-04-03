@@ -120,20 +120,21 @@ RUN cpanm --notest --force \
    XML::FeedPP::MediaRSS \
    XML::Simple
 
-ADD etc        /WebGUI/etc
-ADD lib        /WebGUI/lib
-ADD sbin       /WebGUI/sbin
-ADD share      /WebGUI/share
-ADD www        /WebGUI/www
-ADD app.psgi   /WebGUI/
+RUN apt remove -y gcc libmagick++-dev
+
+RUN useradd --home=/WebGUI webgui
+
+ADD lib      /WebGUI/lib
+ADD sbin     /WebGUI/sbin
+ADD share    /WebGUI/share
+ADD www      /WebGUI/www
+# do this one last so that it's quicker to rebuild when we change it
+ADD etc      /WebGUI/etc
+
+ADD app.psgi /WebGUI/app.psgi
 
 WORKDIR /WebGUI
 
-ADD entrypoint /
+RUN chown -R webgui: /WebGUI
 
-RUN apt remove -y gcc libmagick++-dev && \
-   chown -R nobody: /WebGUI && chmod 755 /entrypoint
-
-USER nobody
-
-CMD [ "/entrypoint" ]
+USER root

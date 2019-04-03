@@ -6,22 +6,25 @@ services:
      environment:
      - MYSQL_ROOT_PASSWORD=123qwe
      volumes:
-     - ../share/create.sql:/create.sql          
-     - ./install.db:/install
-     ports:
-      - 3306:3306
+     - ./share/create.sql:/create.sql          
+     - ./share/install.db:/install
+     expose: 
+      - 3306
      entrypoint:
       - sh
       - -c
       - "/install && docker-entrypoint.sh mysqld"
-
    allium-cepa:
      image: webgui:local
      container_name: allium
      depends_on:
       - db
      volumes:
-      - ..:/WebGUI
+      - .:/WebGUI
      ports:
       - "80:5000"
-      
+     entrypoint:
+      - su
+      - webgui
+      - -c
+      - "plackup -I/WebGUI/lib"
