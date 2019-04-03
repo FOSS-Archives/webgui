@@ -1,4 +1,4 @@
 #!/bin/sh
 # script that runs when the docker container starts
-su webgui -c 'plackup -I/WebGUI/lib'
+plackup -I/WebGUI/lib
 

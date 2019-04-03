@@ -138,6 +138,6 @@ WORKDIR /WebGUI
 
 RUN chown -R webgui: /WebGUI;chmod 755 /entrypoint
 
-USER root
+USER webgui
 CMD [ "/entrypoint" ]
 
