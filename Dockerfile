@@ -132,9 +132,12 @@ ADD www      /WebGUI/www
 ADD etc      /WebGUI/etc
 
 ADD app.psgi /WebGUI/app.psgi
+ADD share/entrypoint /entrypoint
 
 WORKDIR /WebGUI
 
-RUN chown -R webgui: /WebGUI
+RUN chown -R webgui: /WebGUI;chmod 755 /entrypoint
 
 USER root
+CMD [ "/entrypoint" ]
+

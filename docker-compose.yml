@@ -23,8 +23,3 @@ services:
       - .:/WebGUI
      ports:
       - "80:5000"
-     entrypoint:
-      - su
-      - webgui
-      - -c
-      - "plackup -I/WebGUI/lib"
