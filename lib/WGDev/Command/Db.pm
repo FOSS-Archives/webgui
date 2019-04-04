@@ -33,7 +33,7 @@ sub process {
     }
 
     if ( $self->option('print') ) {
-        print join q{ }, map {"'$_'"} @command_line;
+        print join q{ }, map {"$_"} @command_line;
         return 1;
     }
     if ( $self->option('clear') ) {
