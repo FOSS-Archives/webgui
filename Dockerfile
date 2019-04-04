@@ -1,28 +1,28 @@
 FROM nginx
 
 RUN apt update && apt -y install perl cpanminus libaspell-dev make libdbd-mysql-perl libdigest-perl-md5-perl libxml-simple-perl \
-   libmodule-install-perl gcc libmagick++-dev libperl-dev libmysql++-dev && \
-   ln -s /usr/include/x86_64-linux-gnu/ImageMagick-6/magick /usr/local/include/magick
+   libmodule-install-perl gcc libperl-dev libmysql++-dev libpng-dev build-essential libgd-dev mariadb-client
 
 RUN cpanm --notest --force \
+   Algorithm::Permute \
+   App::Cmd \
    Archive::Any \
    Archive::Tar \
    Archive::Zip \
    Business::OnlinePayment \
    Business::OnlinePayment::AuthorizeNet \
    Business::PayPal::API \
-   Business::PayPal::API \
    Business::Tax::VAT::Validation \
    CHI \
    CSS::Minifier::XS \
    CSS::Packer \
    Cache::FastMmap \
+   Capture::Tiny \
    Class::C3 \
    Class::InsideOut \
    Clone \
    Color::Calc \
    Compress::Zlib \
-   common::sense \
    Config::JSON \
    DBD::mysql \
    DBI \
@@ -32,13 +32,17 @@ RUN cpanm --notest --force \
    DateTime::Format::HTTP \
    DateTime::Format::Mail \
    DateTime::Format::Strptime \
+   Devel::StackTrace \
+   Devel::StackTrace::WithLexicals \
    Digest::MD5 \
    Digest::SHA \
+   Email::Valid \
    Exception::Class \
    Facebook::Graph \
    File::Path \
    Finance::Quote \
-   Geo::Coder::Googlev3 \
+   GD \
+   GD::Graph \
    Geo::Coder::Googlev3 \
    HTML::Form \
    HTML::Highlight \
@@ -49,6 +53,7 @@ RUN cpanm --notest --force \
    HTML::Template \
    HTML::Template::Expr \
    HTTP::BrowserDetect \
+   HTTP::Exception \
    HTTP::Headers \
    HTTP::Request \
    IO::File::WithPath \
@@ -56,14 +61,16 @@ RUN cpanm --notest --force \
    IO::Socket::SSL \
    IO::Zlib \
    Image::ExifTool \
-   Image::Magick \
    Imager \
+   Imager::File::PNG \
    JSON \
+   JSON::Any \
    JSON::PP \
    JavaScript::Minifier::XS \
    JavaScript::Packer \
    Kwargs \
    LWP \
+   LWP::Protocol::https \
    List::MoreUtils \
    List::Util \
    Locales \
@@ -71,14 +78,15 @@ RUN cpanm --notest --force \
    MIME::Tools \
    Module::Find \
    Monkey::Patch \
+   Moose \
    MooseX::NonMoose \
    MooseX::Storage \
+   MooseX::Storage::Format::JSON \
    Net::CIDR::Lite \
    Net::DNS \
    Net::LDAP \
    Net::POP3 \
    Net::SMTP \
-   Net::Twitter \
    Net::Twitter \
    Number::Format \
    POE \
@@ -91,13 +99,18 @@ RUN cpanm --notest --force \
    PerlIO::eol \
    Plack \
    Plack::Middleware::Debug \
+   Plack::Middleware::Status \
+   Plack::Request \
+   Plack::Response \
    Pod::Coverage \
    Readonly \
    Scope::Guard \
    Search::QueryParser \
    Storable \
    Template \
+   Test::Class \
    Test::Deep \
+   Test::Differences \
    Test::Exception \
    Test::Harness \
    Test::Log::Dispatch \
@@ -106,6 +119,7 @@ RUN cpanm --notest --force \
    Test::MockTime \
    Test::More \
    Test::Tester \
+   Test::WWW::Mechanize::PSGI \
    Text::Aspell \
    Text::Balanced \
    Text::CSV_XS \
@@ -118,9 +132,9 @@ RUN cpanm --notest --force \
    Weather::Com::Finder \
    XML::FeedPP \
    XML::FeedPP::MediaRSS \
-   XML::Simple
-
-RUN apt remove -y gcc libmagick++-dev
+   XML::Simple \
+   common::sense \
+   namespace::autoclean
 
 RUN useradd --home=/WebGUI webgui
 
@@ -139,5 +153,9 @@ WORKDIR /WebGUI
 RUN chown -R webgui: /WebGUI;chmod 755 /entrypoint
 
 USER webgui
+
+# RUN perl -Ilib /WebGUI/sbin/wgd reset --upgrade --config-file=webgui.conf --webgui-root=/WebGUI/  # can't do this as there's no 'db' host on the net when we're building
+RUN perl -Ilib /WebGUI/sbin/wgd reset --uploads --config-file=webgui.conf --webgui-root=/WebGUI/
+
 CMD [ "/entrypoint" ]
 

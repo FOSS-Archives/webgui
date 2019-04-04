@@ -1,4 +1,11 @@
 #!/bin/sh
 # script that runs when the docker container starts
+while true; do
+    mysql --user=webgui --password=123qwe www_example_com --host db -e 'select 1;' && break
+    # mysql -e 'select * from webguiVersion;' `perl -Ilib sbin/wgd db --config-file=webgui.conf --webgui-root=/WebGUI --print` && break # fails and I can't see why
+    echo "waiting for the database to come up..."
+    sleep 10
+done
+perl -Ilib sbin/wgd reset --upgrade --config-file=webgui.conf --webgui-root=/WebGUI/
 plackup -I/WebGUI/lib
 
