@@ -1,11 +1,27 @@
-#!/bin/sh
+#!/bin/bash
+
 # script that runs when the docker container starts
-while true; do
-    mysql --user=webgui --password=123qwe www_example_com --host db -e 'select 1;' && break
-    # mysql -e 'select * from webguiVersion;' `perl -Ilib sbin/wgd db --config-file=webgui.conf --webgui-root=/WebGUI --print` && break # fails and I can't see why
-    echo "waiting for the database to come up..."
-    sleep 10
+
+for configfile in `perl -Ilib sbin/wgd for-each`;do
+
+    # wait for the db to come up and get our version so we know if we need to run upgrades
+    connection_info=`perl -Ilib sbin/wgd db --config-file=$configfile --webgui-root=/WebGUI --print | sed "s/'//g" `
+    while true; do
+        db_version=`mysql --skip-column-names -e 'select webguiVersion from webguiVersion order by dateApplied desc limit 1;' $connection_info ` && break
+        echo "waiting for the database to come up..."
+        sleep 10
+    done
+
+    code_version=`perl -Ilib -e 'use WebGUI; print $WebGUI::VERSION;'`
+
+    echo "code version $code_version"
+    echo "database version $db_version for $configfile"
+
+    if [ "$db_version" != "$code_version" ];then
+        perl -Ilib sbin/wgd reset --upgrade --verbose --config-file=$configfile --webgui-root=/WebGUI/
+    fi
+
 done
-perl -Ilib sbin/wgd reset --upgrade --config-file=webgui.conf --webgui-root=/WebGUI/
+    
 plackup -I/WebGUI/lib
 
