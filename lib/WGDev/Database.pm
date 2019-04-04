@@ -48,11 +48,11 @@ sub command_line {
     my @params = (
         '-h' . $self->hostname,
         '-P' . $self->port,
-        $self->database,
         '-u' . $self->username,
         ( $self->password ? '-p' . $self->password : () ),
         '--default-character-set=utf8',
         @_,
+        $self->database,
     );
     return wantarray ? @params : join q{ }, map {"'$_'"} @params;
 }
