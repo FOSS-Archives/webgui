@@ -136,26 +136,20 @@ RUN cpanm --notest --force \
    common::sense \
    namespace::autoclean
 
-RUN useradd --home=/WebGUI webgui
-
 ADD lib      /WebGUI/lib
 ADD sbin     /WebGUI/sbin
 ADD share    /WebGUI/share
 ADD www      /WebGUI/www
-# do this one last so that it's quicker to rebuild when we change it
 ADD etc      /WebGUI/etc
 
 ADD app.psgi /WebGUI/app.psgi
 ADD share/entrypoint /entrypoint
 
-WORKDIR /WebGUI
-
-RUN chown -R webgui: /WebGUI;chmod 755 /entrypoint
+RUN useradd --home=/WebGUI webgui; chown -R webgui: /WebGUI; chmod 755 /entrypoint; \
+  apt remove -y cpanminus make gcc libperl-dev ; rm -rf /root/.cpanm
 
 USER webgui
 
-# RUN perl -Ilib /WebGUI/sbin/wgd reset --upgrade --config-file=webgui.conf --webgui-root=/WebGUI/  # can't do this as there's no 'db' host on the net when we're building
-RUN perl -Ilib /WebGUI/sbin/wgd reset --uploads --config-file=webgui.conf --webgui-root=/WebGUI/
+WORKDIR /WebGUI
 
 CMD [ "/entrypoint" ]
-
