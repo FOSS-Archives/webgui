@@ -1,12 +1,12 @@
 import * as constants from '../actions/constants';
 
-const menuReducer = (state = {}, action) => {
+const menuReducer = (menus = {}, action) => {
    switch(action.type){
       case constants.MENUS:
          return action.menu;
       
       default:
-         return state;
+         return menus;
    }   
 
 };

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Panel} from 'primereact/panel';
 import {Button} from 'primereact/button';
+import {connect} from 'react-redux';
 import './LoginContainer.css';
+import login from '../actions/authentication';
 
 class LoginContainer extends Component {
    
@@ -15,7 +17,7 @@ class LoginContainer extends Component {
    
    onLogin = event => {
       event.preventDefault();
-      this.props.onLogin(this.state);
+      this.props.login(this.state.login, this.state.password);
       
    }
    
@@ -24,19 +26,21 @@ class LoginContainer extends Component {
       this.setState({login:'', password:''});
    }
    
-   renderLogout = () => {
-      return <Button label="Logout" icon="pi pi-power-off" className="p-button-danger" onClick={this.onClear} style={{marginLeft:4}} />;
+   onLogout = event => {
+      event.preventDefault();
+      this.props.login('','');
+      
    }
    
    render(){
       if ( this.props.authenticated ){
-         return this.renderLogout();
+         return <Button label="Logout" icon="pi pi-power-off" className="p-button-danger" onClick={this.onLogout} style={{marginLeft:4}} />;
       }
       return (
          <div className="p-grid">
             <div className="p-col-4"></div>
             <div className="p-col-4">
-                <Panel header="Login">
+                <Panel header="Admin Login">
                    <form>
                      <div className="p-grid">
                         <div className="p-col-2"><label>Username:</label></div>
@@ -60,4 +64,10 @@ class LoginContainer extends Component {
    }   
 };
 
-export default LoginContainer;
+const mapStateToProps = state => {
+   return {
+      authenticated: state.authenticated
+   };
+};
+
+export default connect(mapStateToProps, {login})(LoginContainer);

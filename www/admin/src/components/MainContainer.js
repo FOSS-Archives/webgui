@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import BlankPanel from './panels/Blank';
 import Login from './LoginContainer';
 import NavigationTop from './navigation/NavigationTopContainer';
@@ -7,34 +8,18 @@ import BreadCrumbs from './navigation/BreadCrumbs';
 
 class MainContainer extends Component {
 
-   constructor(props) {
-      super(props);
-      this.state = { authenticated: false };
-      //Location();
-   }
-
-   loginAction = auth => {
-      if (auth.login === 'admin' && auth.password === '123qwe'){
-         this.setState({authenticated: true});
-      }else{
-         console.log('Invalid login and password.');
-         console.log(auth);
-      }
-      
-   }
-   
    render() {     
-      if (!this.state.authenticated){      
+      if (!this.props.authenticated){      
          return (
             <div  style={{ paddingTop: '40px'}}>
-               <Login onLogin={this.loginAction} />
+               <Login />
             </div>
          );
          
       }else{
          return (
              <div>
-                <NavigationTop authenticated={this.state.authenticated} />
+                <NavigationTop authenticated={this.props.authenticated} />
                 <BreadCrumbs />
                 <BlankPanel />
              </div>              
@@ -42,6 +27,12 @@ class MainContainer extends Component {
  
       }
    }
-}
+};
 
-export default MainContainer;
+const mapStateToProps = state => {
+   return {
+      authenticated: state.authenticated
+   };
+};
+
+export default connect(mapStateToProps)(MainContainer);

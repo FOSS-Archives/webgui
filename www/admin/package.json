@@ -13,7 +13,9 @@
     "react-redux": "^6.0.1",
     "react-scripts": "^2.1.8",
     "redux": "^4.0.1",
-    "redux-form": "^8.1.0"
+    "redux-form": "^8.1.0",
+    "ts-pnp": "^1.0.1",
+    "typescript": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -3,3 +3,18 @@
    background-color: DodgerBlue !important;
    font-weight: bold !important;
 }
+
+.login-container {
+  text-align: center;
+}
+
+.login-container {
+  background-color: azure;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
