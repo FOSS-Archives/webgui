@@ -6,26 +6,23 @@ import NavigationTop from './navigation/NavigationTopContainer';
 import BreadCrumbs from './navigation/BreadCrumbs';
 //import Location from './Location';
 
-class MainContainer extends Component {
+const mainContainer = props => {
+   if (!props.authenticated) {
+      return (
+          <div  style={{paddingTop: '40px'}}>
+             <Login />
+          </div>
+       );
 
-   render() {     
-      if (!this.props.authenticated){      
-         return (
-            <div  style={{ paddingTop: '40px'}}>
-               <Login />
-            </div>
-         );
-         
-      }else{
-         return (
-             <div>
-                <NavigationTop authenticated={this.props.authenticated} />
-                <BreadCrumbs />
-                <BlankPanel />
-             </div>              
-         );         
- 
-      }
+   } else {
+      return (
+          <div>
+             <NavigationTop authenticated={props.authenticated} />
+             <BreadCrumbs />
+             <BlankPanel />
+          </div>
+       );
+
    }
 };
 
@@ -35,4 +32,4 @@ const mapStateToProps = state => {
    };
 };
 
-export default connect(mapStateToProps)(MainContainer);
+export default connect(mapStateToProps)(mainContainer);
