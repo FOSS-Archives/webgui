@@ -26,6 +26,7 @@ use WebGUI::Deprecate;
 use Scope::Guard qw(guard);
 use Encode ();
 use Tie::IxHash;
+use DateTime;
 
 our @ISA = qw(WebGUI::Auth);
 
@@ -796,10 +797,13 @@ sub www_displayLogin {
 #-------------------------------------------------------------------
 sub www_login {
    my $self = shift;
-   if(!$self->authenticate($self->session->form->process("username"),$self->session->form->process("identifier"))){
-      $self->session->response->status(401);
-      $self->session->log->security("login to account ".$self->session->form->process("username")." with invalid information.");
-	my $i18n = WebGUI::International->new($self->session);
+   my $session = $self->session;
+
+   if(!$self->authenticate($session->form->process("username"),$session->form->process("identifier"))){
+      $session->response->status(401);
+      $session->log->security("login to account ".$session->form->process("username")." with invalid information.");
+	my $i18n = WebGUI::International->new($session);
+          return $session->response->json({ code => 401, messsage => $i18n->get(70) }) if $session->request->isAjax;
 	  return $self->www_displayLogin("<h1>".$i18n->get(70)."</h1>".$self->error);
    }
    
@@ -809,9 +813,24 @@ sub www_login {
       if (time() >= $expireTime){
 		my $userId = $self->userId;
 		 $self->logout;
+             # return $session->response->json({ code => 401, messsage => $i18n->get(70) }) if $session->request->isAjax; # XXX success, kind of
    	     return $self->www_resetExpiredPassword($userId);
       }  
    }
+
+   my $user = $session->user;
+
+   return $session->response->json({
+     data => [
+         "identity" => {
+               "first" => $user->get('firstName'),
+               "last" => $user->get('lastName'),
+               "avatar" => $user->get('avatar'),
+         },
+         "joined" => DateTime->from_epoch( epoch => $user->dateCreated )->ymd,
+         "session" => $session->getId,
+     ]
+   }) if $session->request->isAjax;
       
    return $self->SUPER::www_login();
 }
