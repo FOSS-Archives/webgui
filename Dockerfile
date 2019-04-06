@@ -91,7 +91,7 @@ RUN cpanm --notest --force \
    POE \
    POE::Component::Client::HTTP \
    POE::Component::IKC::Server \
-   POSIX \
+   POE::Component::IKC \
    Package::Stash \
    Params::Validate \
    Path::Class \
