@@ -11,7 +11,7 @@ services:
      volumes:
      - ./share/create.sql:/create.sql          
      - ./share/install.db:/install
-     expose: 
+     ports:
       - 3306
      entrypoint:
       - sh
