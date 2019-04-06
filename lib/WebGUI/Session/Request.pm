@@ -56,27 +56,6 @@ sub clientIsSpider {
 
 #-------------------------------------------------------------------
 
-=head2 callerIsSearchSite ( )
-
-Returns true if the remote address matches a site which is a known indexer or spider.
-
-=cut
-
-sub callerIsSearchSite {
-
-    my $self = shift;
-    my $remoteAddress = $self->address;
-
-    return 1 if $remoteAddress =~ /203\.87\.123\.1../    # Blaiz Enterprise Rawgrunt search
-             || $remoteAddress =~ /123\.113\.184\.2../   # Unknown Yahoo Robot
-             || $remoteAddress == '';
-
-    return 0;
-
-}
-
-#-------------------------------------------------------------------
-
 =head2 ifModifiedSince ( epoch [, maxCacheTimeout] )
 
 Returns 1 if the epoch is greater than the modified date check.
@@ -145,6 +124,17 @@ sub requestNotViewed {
 
 }
 
+=head2 isAjax()
+
+Returns true if the request is an AJAX request.
+These need a JSON reply instead of HTML.
+
+=cut
+
+sub isAjax() {
+    my $self = shift;
+    return $self->header('Accept') =~ m|application/json|;  # XXX should probably make sure that when this appears, it comes before text/html in the list.
+}
 
 # This is only temporary
 sub TRACE { 

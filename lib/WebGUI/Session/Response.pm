@@ -8,6 +8,7 @@ use parent qw(Plack::Response);
 use IO::File::WithPath;
 use Class::C3;
 use LWP::MediaTypes;
+use JSON;
 
 use Plack::Util::Accessor qw(session streaming writer streamer);
 
@@ -341,6 +342,24 @@ sub getCacheControl {
     my $self = shift;
     return $self->{_http}{cacheControl} || 1;
 }   
+
+=head2 json( $hashref_or_arrayref )
+
+Sets the response to C<application/json> and returns the encoded the hash or array ref.
+Should generally be used idiomatically:
+
+   return $session->response->json({ success => \1, message => 'Success', })
+       if $session->request->isAjax;
+
+=cut
+
+sub json {
+    my $self = shift;
+    my $data_structure = shift;
+	$self->content_type('application/json; charset=UTF-8');
+    die if ! $data_structure;
+    return JSON->new->encode( $data_structure );
+}
 
 =head2 finalize ( ) 
 
