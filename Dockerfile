@@ -72,7 +72,6 @@ RUN cpanm --notest --force \
    LWP \
    LWP::Protocol::https \
    List::MoreUtils \
-   List::Util \
    Locales \
    Log::Log4perl \
    MIME::Tools \
