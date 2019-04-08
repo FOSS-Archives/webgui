@@ -1,17 +1,27 @@
 import * as constants from './constants';
-import axios from 'axios';
+import jsonPlaceholder from '../apis/jsonPlaceholder';
 
-export default (login, password) => {
-   if (login === 'admin' && password === '123qwe'){
-      return {
+export const login = (login, password) => async (dispatch, storeState) => {
+   const response = await jsonPlaceholder.get(`?op=auth&method=login&username=${login}&identifier=${password}`);
+ 
+   if (response.data !== undefined && response.data.joined){
+      dispatch({
          type: constants.LOGIN,
-         payload: true
-      };
+         payload: { ...response.data, authenticated: true }
+      });
+      
    }else{
-      console.log(`Invalid login [${login}] and password [${password}].`);
-      return {
+      dispatch({
          type: constants.LOGIN,
-         payload: false
-      };
+         payload: { authenticated: false }
+      });
+      
    }      
+};
+
+export const logout = () => {
+   return {
+      type: constants.LOGIN,
+      payload: { authenticated: false }
+   };
 };

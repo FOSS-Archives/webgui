@@ -29,7 +29,13 @@
    {
       "label": "Settings",
       "command": null,
-      "icon": "pi pi-cog"  
+      "icon": "pi pi-cog",
+      "items" : [
+         {
+            "label": "Upgrade",
+            "icon": "pi pi-spin pi-spinner"
+         }
+      ]
    },
    {
       "label": "Auth",

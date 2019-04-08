@@ -3,7 +3,7 @@ import {errors} from './errors';
 import authentication from './authentication';
 
 const rootReducer = combineReducers({
-   authenticated: authentication,
+   user: authentication,
    errors: errors
 });
 

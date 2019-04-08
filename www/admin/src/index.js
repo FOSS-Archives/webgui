@@ -1,7 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 // In production, we register a service worker to serve assets from local cache.
 import registerServiceWorker from './registerServiceWorker';
 // These are imported here to make them available through the application
@@ -13,8 +14,10 @@ import './styles/primeflex.css';
 import MainContainer from './components/MainContainer';
 import reducers from './reducers';
 
+const store = createStore(reducers, applyMiddleware(thunk));
+
 render(
-   <Provider store={createStore(reducers)}>
+   <Provider store={store}>
       <MainContainer />
    </Provider>, document.getElementById('root'));
 

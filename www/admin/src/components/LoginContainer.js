@@ -3,7 +3,7 @@ import {Panel} from 'primereact/panel';
 import {Button} from 'primereact/button';
 import {connect} from 'react-redux';
 import './LoginContainer.css';
-import login from '../actions/authentication';
+import { login, logout } from '../actions/authentication';
 
 class LoginContainer extends Component {
    
@@ -28,12 +28,12 @@ class LoginContainer extends Component {
    
    onLogout = event => {
       event.preventDefault();
-      this.props.login('','');
+      this.props.logout();
       
    }
    
    render(){
-      if ( this.props.authenticated ){
+      if ( this.props.user && this.props.user.authenticated ){
          return <Button label="Logout" icon="pi pi-power-off" className="p-button-danger" onClick={this.onLogout} style={{marginLeft:4}} />;
       }
       return (
@@ -66,8 +66,8 @@ class LoginContainer extends Component {
 
 const mapStateToProps = state => {
    return {
-      authenticated: state.authenticated
+      user: state.user
    };
 };
 
-export default connect(mapStateToProps, {login})(LoginContainer);
+export default connect(mapStateToProps, {login, logout})(LoginContainer);

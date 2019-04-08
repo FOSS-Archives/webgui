@@ -7,7 +7,7 @@ import BreadCrumbs from './navigation/BreadCrumbs';
 //import Location from './Location';
 
 const mainContainer = props => {
-   if (!props.authenticated) {
+   if (!props.user.authenticated) {
       return (
           <div  style={{paddingTop: '40px'}}>
              <Login />
@@ -17,7 +17,7 @@ const mainContainer = props => {
    } else {
       return (
           <div>
-             <NavigationTop authenticated={props.authenticated} />
+             <NavigationTop user={props.user} />
              <BreadCrumbs />
              <BlankPanel />
           </div>
@@ -28,7 +28,7 @@ const mainContainer = props => {
 
 const mapStateToProps = state => {
    return {
-      authenticated: state.authenticated
+      user: state.user
    };
 };
 
