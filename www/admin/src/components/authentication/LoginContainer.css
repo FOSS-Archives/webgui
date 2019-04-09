@@ -1,0 +1,15 @@
+.p-panel-titlebar {
+   color: whitesmoke !important;
+   background-color: #7B68EE !important;
+   font-weight: bold !important;
+}
+
+.login-container {
+  align-items: center;
+  justify-content: center;
+  padding-top: 5em;
+}
+
+.allium-logout-button {
+
+}

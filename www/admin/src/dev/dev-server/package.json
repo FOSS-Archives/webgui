@@ -1,0 +1,14 @@
+{
+  "name": "JSON-Test-Server",
+  "version": "1.0.0",
+  "description": "Use this for prototyping and developing new JavaScript modules",
+  "main": "index.js",
+  "scripts": {
+     "start" : "json-server -p 3001 -w db.json"
+  },
+  "author": "Daniel Maldonado",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.14.2"
+  }
+}

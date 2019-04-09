@@ -1,7 +1,7 @@
 import React from 'react';
 import {Menubar} from 'primereact/menubar';
 import {InputText} from 'primereact/inputtext';
-import Login from '../LoginContainer';
+import Login from '../authentication/LoginContainer';
 import menus from './navigation-top-container';
 
 export default props => {

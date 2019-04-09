@@ -1,18 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import BlankPanel from './panels/Blank';
-import Login from './LoginContainer';
+import Login from './authentication/LoginContainer';
 import NavigationTop from './navigation/NavigationTopContainer';
 import BreadCrumbs from './navigation/BreadCrumbs';
 //import Location from './Location';
 
+import './MainContainer.css';
 const mainContainer = props => {
    if (!props.user.authenticated) {
-      return (
-          <div  style={{paddingTop: '40px'}}>
-             <Login />
-          </div>
-       );
+      return <Login />;
 
    } else {
       return (
