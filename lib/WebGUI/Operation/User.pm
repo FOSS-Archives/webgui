@@ -223,8 +223,8 @@ sub doUserSearch {
 	} else {
 		$keyword = "%".$keyword;
 	}
-	my $sql = "select users.userId, users.username, users.status, users.dateCreated, users.lastUpdated,
-                users.email from users 
+	my $sql = "select users.*
+                from users 
                 where $selectedStatus (users.username like ? or alias like ? or email like ? 
                     or firstName like ? or lastName like ? or CONCAT(firstName, ' ', lastName) LIKE ? ) 
                 and users.userId not in (".$session->db->quoteAndJoin($userFilter).")  order by users.username";
@@ -1083,6 +1083,9 @@ If the current user is not allowed to edit or create users, it returns adminOnly
 sub www_listUsers {
 	my $session = shift;
 
+	return www_ajaxListUsers($session) if $session->request->isAjax;
+
+
     # If the user is only allowed to add users, send them right there.
 	unless (canEdit($session)) {
 		if (canAdd($session)) {
@@ -1190,6 +1193,69 @@ sub www_listUsers {
                     { workarea => $output, }
                   );
 	return $submenu;
+}
+
+sub www_ajaxListUsers {
+    my $session = shift;
+
+    my $i18n = WebGUI::International->new($session);
+
+    unless (canEdit($session)) {
+        return $session->response->json({ code => 401, messsage => $i18n->get(70) }) if $session->request->isAjax;
+    }
+
+    my $pn = $session->form->param('pn') || 1;
+    $pn =~ m/^\d+$/ or die;
+
+    my $p = doUserSearch($session, 'listUsers', 1);  # the 1 tells it to return the WebGUI::Paginator instance
+
+    my $user_loginlog = $session->db->prepare(
+        q{
+            select   timeStamp
+            from     userLoginLog
+            where    userId = ?
+            order by timeStamp desc
+            limit    1
+        },
+    );
+
+    my @data;
+
+    foreach my $data ( @{ $p->getPageData($pn) } ) {
+
+        $user_loginlog->execute([$data->{userId}]);
+        my ( $lastLogin ) = $user_loginlog->fetchrow_array;
+         
+        push @data, {
+            id => $data->{userId},
+            username => $data->{username},
+            email => $data->{email},
+            firstname => $data->{firstName},
+            lastname => $data->{lastName},
+            avatar => $data->{avatar},
+            created => $data->{dateCreated},
+            lastLogin => $lastLogin,
+            # "exipires" => "1554747086492", # XXX don't think this exists
+            active => $data->{status} eq 'Active' ? \1 : \0,
+        };
+
+    }
+
+    $p->setAlphabeticalKey('username');
+    $user_loginlog->finish;
+
+    my $zoneField = WebGUI::ProfileField->new( $session, 'timeZone' );
+    my $timezone = $zoneField->get()->{dataDefault};
+
+    return $session->response->json({
+        server_time => scalar time,
+        server_timezone => $timezone,
+        page => $pn,
+        count => $p->getRowCount,
+        perpage => $p->getRowsPerPage,
+       data => \@data,
+    });
+
 }
 
 1;
