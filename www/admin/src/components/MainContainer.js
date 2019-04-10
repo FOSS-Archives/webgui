@@ -1,10 +1,9 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
-import BlankPanel from './panels/Blank';
+import BottomPane from './BottomPaneComponent';
 import Login from './authentication/LoginContainer';
 import NavigationTop from './navigation/NavigationTopContainer';
-import BreadCrumbs from './navigation/BreadCrumbs';
-//import Location from './Location';
 
 import './MainContainer.css';
 const mainContainer = props => {
@@ -14,11 +13,12 @@ const mainContainer = props => {
    } else {
       return (
           <div>
-             <NavigationTop user={props.user} />
-             <BreadCrumbs />
-             <BlankPanel />
+             <BrowserRouter>
+                <NavigationTop user={props.user} />
+                <BottomPane />              
+             </BrowserRouter>
           </div>
-       );
+      );
 
    }
 };

@@ -11,6 +11,18 @@
          "session": "3wnJeyDlRXanBqChk5gH1A"         
       }
    ],
-   "sessions":[
+   "users":[
+      {
+         "id": "55f97ffd69-47jq2",
+         "username": "myUsername",
+         "email": "jdoe@whatever.com",
+         "firstname": "John",
+         "lastname": "Doe",
+         "avatar": "myAvatar",
+         "created": "1554747081111",
+         "exipires": "1554747086492",
+         "lastlogin": "1554747081122",
+         "active": "1|0"
+	  }      
    ]
 }
