@@ -351,12 +351,23 @@ Should generally be used idiomatically:
    return $session->response->json({ success => \1, message => 'Success', })
        if $session->request->isAjax;
 
+If a C<code> key is at the top level of the hash, that is used for the response HTTP status code.  Eg:
+
+   return $session->response->json({ code => 401, message => 'Not Authorized', })
+       if $session->request->isAjax;
+
+C<200> (success) is used by default.
+
 =cut
 
 sub json {
     my $self = shift;
     my $data_structure = shift;
-	$self->content_type('application/json; charset=UTF-8');
+    if( my $code = $data_structure->{code} ) {
+        die "code is used as the HTTP status code which must be 3 digits long" unless $code =~ m/^\d{3}$/;
+        $self->status($code);
+    }
+    $self->content_type('application/json; charset=UTF-8');
     die if ! $data_structure;
     return JSON->new->encode( $data_structure );
 }
