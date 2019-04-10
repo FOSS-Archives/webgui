@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {Menubar} from 'primereact/menubar';
 import {InputText} from 'primereact/inputtext';
 import Login from '../authentication/LoginContainer';
+import {users as userAction} from '../../actions/users';
 
-const Menus = props => {
-   const options = [
+class Menus extends Component {
+   getUsers = () => {
+      this.props.userAction();
+      this.props.history.push('/users');
+   }
+   
+   options = [
          {
             "label": "Home",
-            command:()=> props.history.push('/'),
+            command:() => this.props.history.push('/'),
             "icon": "pi pi-home"  
          },
          {
@@ -71,19 +78,23 @@ const Menus = props => {
                },
                {
                   "label": "Users",
-                  command:()=> props.history.push('/users'),
+                  command: () => this.getUsers(),
                   "icon": "pi pi-list"
                }
             ]
          }
       ];
       
-   return (
-      <Menubar model={options}>
-          <InputText placeholder="Search" type="text" />
-          <Login authenticated={props.authenticated} />
-      </Menubar>
-   );
+   render(){
+      return (
+         <Menubar model={this.options}>
+             <InputText placeholder="Search" type="text" />
+             <Login authenticated={this.props.authenticated} />
+         </Menubar>
+      );
+   }
 };
 
-export default withRouter(Menus);
+const routedMenu = withRouter(Menus);
+
+export default connect(null, {userAction})(routedMenu);

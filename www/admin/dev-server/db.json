@@ -20,9 +20,9 @@
          "lastname": "Doe",
          "avatar": "myAvatar",
          "created": "1554747081111",
-         "exipires": "1554747086492",
+         "expires": "1554747086492",
          "lastlogin": "1554747081122",
-         "active": "1|0"
+         "active": "1"
 	  }      
    ]
 }

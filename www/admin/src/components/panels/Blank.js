@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Panel} from 'react-bootstrap';
 import {TabView,TabPanel} from 'primereact/tabview';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
 
 const BlankComponent = props => {
    let title = (
@@ -17,12 +15,7 @@ const BlankComponent = props => {
         {props.display}
         <TabView activeIndex={0}>
            <TabPanel header="Header I">
-            <DataTable value={[]}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+Thank you
            </TabPanel>
            <TabPanel header="Header II">
               Content II
