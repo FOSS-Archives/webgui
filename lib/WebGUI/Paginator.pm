@@ -572,6 +572,19 @@ sub getRowCount {
 	return $_[0]->{_totalRows};
 }
 
+#-------------------------------------------------------------------
+
+=head2 getRowsPerPage
+
+Returns the number of rows per page set, if set.
+Defaults to 25 if not specified.
+
+=cut
+
+sub getRowsPerPage {
+    my $self = shift;
+    return $self->{_rpp};
+}
 
 #-------------------------------------------------------------------
 
