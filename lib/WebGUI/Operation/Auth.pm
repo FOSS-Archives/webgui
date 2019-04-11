@@ -32,8 +32,11 @@ Get the instance of this object or create a new instance if none exists
 
 sub getInstance {
 	my $session = shift;
-	#Get Auth Settings
-	my $authMethod  = $_[0]
+	# Pick an Auth backend, which is a module under WebGUI::Auth:: and listed in authMethod in the config file
+        my $default_auth;
+	($default_auth) = $session->db->quickArray("select authMethod from users where username=? ", [  scalar $session->form->process("username") ]) if $session->form->process("username");
+	my $authMethod  = $session->form->get('authTypeOverride')
+                        || $default_auth
                         || ( !$session->user->isVisitor && $session->user->authMethod ) # Visitor has no authType
                         || $session->form->get('authType') 
                         || $session->setting->get("authMethod")
@@ -70,9 +73,7 @@ is returned.
 sub www_auth {
 	my $session = shift;
 	$session->response->setCacheControl("none");
-	my $auth;
-	($auth) = $session->db->quickArray("select authMethod from users where username=".$session->db->quote($session->form->process("username"))) if($session->form->process("username"));
-	my $authMethod = getInstance($session,$auth);
+	my $authMethod = getInstance($session);
 	my $methodCall = shift || $session->form->process("method") || "view";
 	if(!$authMethod->isCallable($methodCall)){
 		$session->log->security("access uncallable auth method: $methodCall");
