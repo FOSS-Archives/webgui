@@ -2,21 +2,9 @@ import React from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {connect} from 'react-redux';
-import {epocToFormatDate} from '../../util/date/';
 
 import './List.css';
-const Users = props => {
-   let users = null;
-   if ( props.users && props.users.length > 0 ){
-      users = props.users.map( user => {
-         user.created   = epocToFormatDate(user.created);
-         user.expires   = user.expires ? epocToFormatDate(user.expires) : '';
-         user.lastlogin = user.lastlogin ? epocToFormatDate(user.lastlogin) : '';
-         user.active = user.active === '1' ? 'true' : 'false';
-         return user;      
-      });
-   }
-
+const Users = ({users = []}) => {
    return (
       <div className="user-list">
          <DataTable value={users}>
