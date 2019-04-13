@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import {connect} from 'react-redux';
 import BottomPane from './BottomPaneComponent';
 import Login from './authentication/LoginContainer';
@@ -13,10 +13,10 @@ const mainContainer = props => {
    } else {
       return (
           <div>
-             <BrowserRouter>
+             <Router>
                 <NavigationTop user={props.user} />
                 <BottomPane />              
-             </BrowserRouter>
+             </Router>
           </div>
       );
 

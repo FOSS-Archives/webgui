@@ -15,7 +15,7 @@ class Menus extends Component {
    options = [
          {
             "label": "Home",
-            command:() => this.props.history.push('/'),
+            command: () => this.props.history.push('/'),
             "icon": "pi pi-home"  
          },
          {

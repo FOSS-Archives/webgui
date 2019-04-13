@@ -39,14 +39,14 @@ If you want to contribute to the new Admin interface you can skip the installati
 
 Start the backend test rest server (https://github.com/typicode/json-server) 
 ```
-cd WebGUI/www/admin/dev-server
+cd WebGUI/www/developer/admin/dev-server
 npm start
 ```
 This will start the REST service on http://localhost:3001/
 
 Start the interface test environment
 ```
-cd WebGUI/www/admin
+cd WebGUI/www/developer/admin
 npm start
 ```
 Use your browser to view the interface at http://localhost:3000/
