@@ -1,4 +1,13 @@
 import * as constants from '../actions/constants';
 export default (state = {}, action) => {
-   return (action.type === constants.LOGIN) ? action.payload : state;    
+   switch (action.type) {
+      case constants.LOGIN:
+         return action.payload;
+    
+      case constants.PURGE:
+         return action.payload;
+      
+      default:
+         return state;
+   } 
 };

@@ -13,8 +13,8 @@ class LoginContainer extends Component {
    onLogout = event => {
       event.preventDefault();
       this.props.logout();
-      
-   }
+
+}
    
    renderInput = ({input, label, type, meta}) => {
       return (

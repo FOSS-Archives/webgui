@@ -7,7 +7,7 @@ import NavigationTop from './navigation/NavigationTopContainer';
 
 import './MainContainer.css';
 const mainContainer = props => {
-   if (!props.user.authenticated) {
+   if (!props.user || !props.user.authenticated) {
       return <Login />;
 
    } else {

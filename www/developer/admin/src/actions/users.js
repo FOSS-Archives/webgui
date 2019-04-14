@@ -9,7 +9,6 @@ export const users = () => async dispatch => {
    if ( data && data.data && data.data.length > 0 ){
       users = data.data.map( user => {
          user.created   = epocToFormatDate(user.created);
-         user.expires   = user.expires ? epocToFormatDate(user.expires) : '';
          user.lastlogin = user.lastlogin ? epocToFormatDate(user.lastlogin) : '';
          user.active = user.active ? 'true' : 'false';
          return user;      

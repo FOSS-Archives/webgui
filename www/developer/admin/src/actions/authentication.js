@@ -21,13 +21,16 @@ export const login = (username, password) => async (dispatch, storeState) => {
          type: constants.LOGIN,
          payload: { authenticated: false }
       });
-      
-   }      
+      dispatch({ // Purge the state of the store based on reducers implementation
+         type: constants.PURGE,
+         payload: undefined 
+      });
+   }    
 };
 
 export const logout = () => {
    return {
-      type: constants.LOGIN,
-      payload: { authenticated: false }
+      type: constants.PURGE,
+      payload: null
    };
 };
