@@ -4,14 +4,14 @@ import {epocToFormatDate} from '../util/date/';
 
 export const users = () => async dispatch => {
    const response = await jsonPlaceholder.get(process.env.REACT_APP_users);
-   let data = response.data
+   let data = response.data;
    let users = [];
    if ( data && data.data && data.data.length > 0 ){
       users = data.data.map( user => {
          user.created   = epocToFormatDate(user.created);
          user.expires   = user.expires ? epocToFormatDate(user.expires) : '';
          user.lastlogin = user.lastlogin ? epocToFormatDate(user.lastlogin) : '';
-         user.active = user.active === '1' ? 'true' : 'false';
+         user.active = user.active ? 'true' : 'false';
          return user;      
       });
      

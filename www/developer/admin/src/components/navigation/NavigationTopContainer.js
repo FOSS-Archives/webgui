@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
+import {withRouter} from 'react-router-dom';
 import {Menubar} from 'primereact/menubar';
 import {InputText} from 'primereact/inputtext';
 import Login from '../authentication/LoginContainer';

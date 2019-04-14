@@ -5,14 +5,13 @@ import {Button} from 'primereact/button';
 import {Message} from 'primereact/message';
 import { login, logout } from '../../actions/authentication';
 import { Field, reduxForm } from 'redux-form';
-import { saveToLocalStorage } from '../../util/state/';
+import Errors from '../Errors';
 
 import './LoginContainer.css';
 class LoginContainer extends Component {
    onLogin = ({username, password}) => this.props.login(username, password);
    onLogout = event => {
       event.preventDefault();
-      saveToLocalStorage({});
       this.props.logout();
       
    }

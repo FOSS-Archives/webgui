@@ -1,8 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { PersistGate } from 'redux-persist/integration/react';
 // In production, we register a service worker to serve assets from local cache.
 import registerServiceWorker from './registerServiceWorker';
 // These are imported here to make them available through the application
@@ -12,18 +11,13 @@ import 'primeicons/primeicons.css';
 import './styles/primeflex.css';
 // Our app starts here
 import MainContainer from './components/MainContainer';
-import reducers from './reducers';
-import { saveToLocalStorage, loadFromLocalStorage } from './util/state/';
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const persistedState = loadFromLocalStorage();
-const store = createStore(reducers, persistedState, composeEnhancers(applyMiddleware(thunk)) );
-store.subscribe(() => saveToLocalStorage(store.getState()));
+import {store, persistor} from './store';
 
 render(
    <Provider store={store}>
-      <MainContainer />
+      <PersistGate loading={null} persistor={persistor}>
+         <MainContainer />
+      </PersistGate>
    </Provider>, document.getElementById('root'));
 
 registerServiceWorker();
