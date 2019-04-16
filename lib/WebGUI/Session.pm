@@ -492,7 +492,35 @@ Returns a boolean indicating whether admin mode is on or not.
 
 sub isAdminOn {
         my $self = shift;
-        return $self->get("adminOn");
+        return $self->{_var}{'adminOn'};
+}
+
+=head2 switchAdminOn  ( )
+
+Set admin mode on the site which affects how some things work.
+It's more nuanced and random than user access.
+Being logged in as someone in the correct groups gives you access.
+This is also distinct from showing the admin control panel.
+
+=cut
+
+sub switchAdminOn {
+        my $self = shift;
+        $self->{_var}{'adminOn'} = 1;
+        return 1;
+}
+
+=head2 switchAdminOff  ( )
+
+Turn off admin mode on the site which affects how some things work.
+This is distinct from showing the admin control panel and from the logged in user.
+
+=cut
+
+sub switchAdminOff {
+        my $self = shift;
+        $self->{_var}{'adminOn'} = 0;
+        return 1;
 }
 
 #-------------------------------------------------------------------
@@ -764,10 +792,7 @@ sub start {
     $self->{_sessionId} = $sessionId;
     $self->cache->set($sessionId, $self->{_var}, $timeout);
     delete $self->{_var}{nextCacheFlush};
-        if ( $self->user->isInGroup( 12 ) ) { # Turn Admin On!!
-            $self->{_var}{adminOn} = 1;
-        }
-	$self->db->setRow("userSession","sessionId",$self->{_var}, $sessionId);
+    $self->db->setRow("userSession","sessionId",$self->{_var}, $sessionId);
     $self->scratch->set('webguiCsrfToken', $self->id->generate); # create cross site request forgery token
 }
 

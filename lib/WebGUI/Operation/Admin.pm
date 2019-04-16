@@ -47,15 +47,18 @@ sub www_adminConsole {
 If the current user is in the Turn On Admin Group, then allow them to turn off Admin mode
 via WebGUI::Session::switchAdminOff()
 
-
 =cut
 
 sub www_switchOffAdmin {
-	my $session = shift;
-	return "" unless ($session->user->canUseAdminMode);
-	$session->response->setCacheControl("none");
-	$session->switchAdminOff();
-	return "";
+        my $session = shift;
+        unless ($session->user->canUseAdminMode) {
+            return $session->response->json({ code => 401, }) if $session->request->isAjax;
+            return '';
+        }
+        $session->response->setCacheControl("none");
+        $session->switchAdminOff();
+        return $session->response->json({ success => \1, }) if $session->request->isAjax;
+        return '';
 }
 
 #-------------------------------------------------------------------
@@ -67,12 +70,15 @@ If the current user is in the Turn On Admin Group, then allow them to turn on Ad
 =cut
 
 sub www_switchOnAdmin {
-	my $session = shift;
-	return "" unless ($session->user->canUseAdminMode);
-	$session->response->setCacheControl("none");
-	$session->switchAdminOn();
-	return "";
+        my $session = shift;
+        unless ($session->user->canUseAdminMode) {
+            return $session->response->json({ code => 401, }) if $session->request->isAjax;
+            return '';
+        }
+        $session->response->setCacheControl("none");
+        $session->switchAdminOn();
+        return $session->response->json({ success => \1, }) if $session->request->isAjax;
+        return '';
 }
-
 
 1;
