@@ -1,0 +1,19 @@
+server {
+   listen 8080 default_server;
+   access_log  /dev/stdout main;
+   index index.htm index.html;
+   root /WebGUI/www;
+
+   location / {
+      proxy_pass http://allium-upstream;
+   }
+
+   location /extras/ {
+      add_header Cache-Control public;
+      expires 24h;
+      add_header Access-Control-Allow-Origin *;
+   }
+
+   location /uploads/filepump { expires max; }
+
+}

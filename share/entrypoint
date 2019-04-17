@@ -22,6 +22,10 @@ for configfile in `perl -Ilib sbin/wgd for-each`;do
     fi
 
 done
-    
-plackup -I/WebGUI/lib
 
+#perl -I/WebGUI/lib sbin/spectre.pl --daemon
+
+# Start the nginx server
+nginx
+# Start the Allium process
+plackup -I/WebGUI/lib

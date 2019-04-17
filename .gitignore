@@ -10,3 +10,8 @@ www/uploads
 /nbproject/
 /www/admin/build/
 node_modules/
+/docker-compose-dev.yml
+/myDevelopmentEntrypoint
+/www/extras/reactAdmin/
+/www/extras/Kestrel/
+/www/developer/admin/build/

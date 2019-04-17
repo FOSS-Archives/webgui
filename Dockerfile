@@ -135,20 +135,28 @@ RUN cpanm --notest --force \
    common::sense \
    namespace::autoclean
 
-ADD lib      /WebGUI/lib
-ADD sbin     /WebGUI/sbin
-ADD share    /WebGUI/share
-ADD www      /WebGUI/www
-ADD etc      /WebGUI/etc
+ADD lib                  /WebGUI/lib
+ADD sbin                 /WebGUI/sbin
+ADD share                /WebGUI/share
+ADD www/extras           /WebGUI/www/extras
+ADD www/maintenance.html /WebGUI/www/maintenance.html
+ADD www/uploads          /WebGUI/uploads
+ADD etc                  /WebGUI/etc
 
 ADD app.psgi /WebGUI/app.psgi
 ADD share/entrypoint /entrypoint
+ADD share/nginx-main           /etc/nginx/nginx.conf
+ADD share/nginx-default-server /etc/nginx/conf.d/default.conf
+ADD share/upstream-allium.conf /etc/nginx/streams.d/upstream-allium.conf
 
 RUN useradd --home=/WebGUI webgui; chown -R webgui: /WebGUI; chmod 755 /entrypoint; \
-  apt remove -y cpanminus make gcc libperl-dev ; rm -rf /root/.cpanm
-
+  apt remove -y cpanminus make gcc libperl-dev ; rm -rf /root/.cpanm; \
+  chown webgui /var/cache/nginx
+  
 USER webgui
 
 WORKDIR /WebGUI
+
+EXPOSE 8080
 
 CMD [ "/entrypoint" ]
