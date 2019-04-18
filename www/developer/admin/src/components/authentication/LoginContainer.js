@@ -5,7 +5,6 @@ import {Button} from 'primereact/button';
 import {Message} from 'primereact/message';
 import { login, logout } from '../../actions/authentication';
 import { Field, reduxForm } from 'redux-form';
-import Errors from '../Errors';
 
 import './LoginContainer.css';
 class LoginContainer extends Component {
@@ -14,7 +13,7 @@ class LoginContainer extends Component {
       event.preventDefault();
       this.props.logout();
 
-}
+   }
    
    renderInput = ({input, label, type, meta}) => {
       return (

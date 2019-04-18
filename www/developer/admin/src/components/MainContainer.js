@@ -14,7 +14,7 @@ const mainContainer = props => {
       return (
           <div>
              <Router>
-                <NavigationTop user={props.user} />
+                <NavigationTop loginContainer={<Login user={props.user} />} />
                 <BottomPane />              
              </Router>
           </div>

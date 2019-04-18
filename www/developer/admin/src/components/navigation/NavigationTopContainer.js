@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {Menubar} from 'primereact/menubar';
 import {InputText} from 'primereact/inputtext';
-import Login from '../authentication/LoginContainer';
 import {users as userAction} from '../../actions/users';
 
 class Menus extends Component {
@@ -89,7 +88,7 @@ class Menus extends Component {
       return (
          <Menubar model={this.options}>
              <InputText placeholder="Search" type="text" />
-             <Login authenticated={this.props.authenticated} />
+             {this.props.loginContainer}
          </Menubar>
       );
    }

@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Messages} from 'primereact/messages';
 
-const Errors = props => {
-   const showSticky = () => {
-      props.messages.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
+class Errors extends Component {
+   showSticky = () => {
+      this.props.errors.each( error => {
+         this.messages.show({severity: 'error', summary: error.summary, detail: error.detail, sticky: true});         
+      });
    };
-   showSticky();
-   
-   if (props.errors) {
-      return <Messages ref={el => this.messages = el} />;
+
+   render(){
+      if (this.props.errors) {
+         this.showSticky();
+         return <Messages ref={el => this.messages = el} />;
+      }
+      return '';
    }
-   return '';
 };
 
 const mapStateToProps = state => {
