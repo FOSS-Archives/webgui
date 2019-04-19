@@ -475,22 +475,6 @@ sub deleteFromGroups {
 	$self->session->stow->delete("gotGroupsForUser");
 }
 
-#-------------------------------------------------------------------
-
-=head2 DESTROY ( )
-
-Deconstructor.
-
-=cut
-
-sub DESTROY {
-        my $self = shift;
-        if (exists $self->{_friendsGroup}) {
-            $self->{_friendsGroup}->DESTROY;
-        }
-        undef $self;
-}
-
 #----------------------------------------------------------------------------
 
 =head2 disable ( [options] )
@@ -870,10 +854,10 @@ fails.
 
 sub getWholeName {
     my $self  = shift;
-    if ($self->profileField('firstName') and $self->profileField('lastName')) {
-        return join ' ', $self->profileField('firstName'), $self->profileField('lastName');
+    if ($self->get('firstName') and $self->get('lastName')) {
+        return join ' ', $self->get('firstName'), $self->get('lastName');
     }
-    return $self->profileField("alias") || $self->username;
+    return $self->get("alias") || $self->username;
 }
 
 #-------------------------------------------------------------------
