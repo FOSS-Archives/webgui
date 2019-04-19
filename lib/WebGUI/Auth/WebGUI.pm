@@ -820,17 +820,19 @@ sub www_login {
 
    my $user = $session->user;
 
+   my $login_message = $self->SUPER::www_login();
+
    return $session->response->json({
       identity => {
-         "first" => $user->get('firstName'),
-         "last" => $user->get('lastName'),
-         "avatar" => $user->get('avatar')
+         first  => $user->get('firstName'),
+         last   => $user->get('lastName'),
+         avatar => $user->get('avatar')
       },
       joined => DateTime->from_epoch( epoch => $user->dateCreated )->ymd,
       session => $session->getId
    }) if $session->request->isAjax;
 
-   return $self->SUPER::www_login();
+   return $login_message;
 }
 
 #-------------------------------------------------------------------
