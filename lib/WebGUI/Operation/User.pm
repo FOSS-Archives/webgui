@@ -990,14 +990,14 @@ Takes C<userid> CGI param.
 sub www_user {
     my $session = shift;
     my $userid = $session->form->process("userid") or return $session->response->json({
-        success => \0, error => 'No userid passed', id => undef, timestamp => time,
+        success => \0, error => 'No userid passed', id => undef, timestamp => time, code => 400, # bad request
     });
     canEdit($session) or return $session->response->json({
-        success => \0, error => 'No edit privilege', id => $userid, timestamp => time,
+        success => \0, error => 'No edit privilege', id => $userid, timestamp => time, code => 401, # unauth
     });
     my $user = WebGUI::User->new($session, $userid);
     $user->userId or return $session->response->json({
-        success => \0, error => 'User not found', id => $userid, timestamp => time,
+        success => \0, error => 'User not found', id => $userid, timestamp => time, code => 410, # gone
     }); 
     my $method = $session->request->method;
     if( $method eq 'GET' ) {
