@@ -79,7 +79,7 @@ checkModule("Test::Exception",              0.27,      2 );
 checkModule("Test::Differences",            0.5,       2 );
 checkModule("Test::Class",                  0.31,      2 );
 checkModule("Test::MockTime",               0.09,      2 );
-checkModule("Test::WWW::Mechanize::PSGI",   0.35,      2 );
+checkModule("Test::WWW::Mechanize::PSGI",   0.35,        );
 checkModule("Pod::Coverage",                0.19,      2 );
 checkModule("Text::Balanced",               2.00,      2 );
 checkModule("Capture::Tiny",                0.08,      2 );
@@ -92,6 +92,7 @@ checkModule("Archive::Zip",                 1.26         );
 checkModule("IO::Zlib",                     1.09         );
 checkModule("Compress::Zlib",               2.015        );
 checkModule("Net::SMTP",                    2.31         );
+checkModule("Net::SMTP::Server",                         );
 checkModule("MIME::Tools",                  5.427        );
 checkModule("Net::POP3",                    2.29         );
 checkModule("Tie::IxHash",                  1.21         );
@@ -168,6 +169,7 @@ checkModule("Test::Harness",                "3.17"       );
 checkModule("DateTime::Event::ICal",        "0.10"       );
 checkModule("Cache::FastMmap",              "1.35"       );
 checkModule("Test::Log::Dispatch",          "0"          );
+checkModule("Test::MockObject::Extends",                 );
 checkModule("CHI",                          "0.34"       );
 checkModule('IO::Socket::SSL',                           );
 checkModule('Package::Stash',               "0.36"       );
@@ -469,7 +471,7 @@ sub prompt {
         my $answer = <STDIN>;
         chomp $answer;
         $answer = $default if ($answer eq "");
-        $answer = prompt($question,$default,@answers) if (($#answers > 0 && !($answer ~~ @answers)) || $answer eq "");
+        $answer = prompt($question,$default,@answers) if (($#answers > 0 && !(grep $answer =~ $_, @answers)) || $answer eq "");
         return $answer;
 }
 
