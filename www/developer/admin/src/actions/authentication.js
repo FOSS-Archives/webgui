@@ -19,11 +19,11 @@ export const login = (username, password) => async (dispatch, storeState) => {
    }else{
       dispatch({
          type: constants.LOGIN,
-         payload: { authenticated: false }
+         payload: { ...response.data, authenticated: false }
       });
       dispatch({ // Purge the state of the store based on reducers implementation
          type: constants.ERROR,
-         payload: { detail: 'Invalid login or password', summary: 'My Sumary' }
+         payload: { detail: 'Invalid state, please try again.', summary: 'Login failed' }
       });
    }    
 };
