@@ -5,7 +5,7 @@ export default (state = [], action) => {
          return action.payload;
          
       case constants.PURGE:
-         return action.payload;
+         return null;
       
       default:
          return state;

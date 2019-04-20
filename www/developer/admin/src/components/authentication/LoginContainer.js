@@ -5,6 +5,7 @@ import {Button} from 'primereact/button';
 import {Message} from 'primereact/message';
 import { login, logout } from '../../actions/authentication';
 import { Field, reduxForm } from 'redux-form';
+import Messages from '../Errors';
 
 import './LoginContainer.css';
 class LoginContainer extends Component {
@@ -17,33 +18,36 @@ class LoginContainer extends Component {
    
    renderInput = ({input, label, type, meta}) => {
       return (
-          <div className="p-grid">
-             <div className="p-col-3">
-                <div className="box"><label>{label}</label></div>
-             </div>
-             <div className="p-col-6">
-                <div className="box"><input {...input} type={type} className="p-error" autoComplete="off" /></div>
-             </div>
-             <div className="p-col-3">
-                <div className="box">{meta.touched ? meta.error : ''}</div>
-             </div>
+          <div>
+            <div className="p-grid">
+               <div className="p-col-3">
+                  <div className="box"><label>{label}</label></div>
+               </div>
+               <div className="p-col-6">
+                  <div className="box"><input {...input} type={type} className="p-error" autoComplete="off" /></div>
+               </div>
+               <div className="p-col-3">
+                  <div className="box">{meta.touched ? meta.error : ''}</div>
+               </div>
+            </div>
           </div>
       );
    }
    
    render(){
-      let submitable = "disabled";
       if ( this.props.user && this.props.user.authenticated ){
          return <Button label="Logout" icon="pi pi-power-off" className="p-button-danger allium-logout-button" onClick={this.onLogout} />;
-      }else{
-         // Make sure the user can login
-         let { username, password } = ( this.props.loginForm && this.props.loginForm.values ) ? this.props.loginForm.values : {};
-         if ( (username && username.trim().length > 0) && (password && password.trim().length > 0) ){
-            submitable = "";
-         }
+      }
+      
+      let submitable = "disabled";      
+      // Make sure the user can login
+      let { username, password } = ( this.props.loginForm && this.props.loginForm.values ) ? this.props.loginForm.values : {};
+      if ( (username && username.trim().length > 0) && (password && password.trim().length > 0) ){
+         submitable = "";
       }
       return ( 
          <form onSubmit={this.props.handleSubmit(this.onLogin)} className="login-container">
+            <Messages />
             <div className="p-grid">
                <div className="p-col-4"></div>
                <div className="p-col-4">

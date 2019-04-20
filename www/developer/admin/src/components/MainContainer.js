@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import BottomPane from './BottomPaneComponent';
 import Login from './authentication/LoginContainer';
 import NavigationTop from './navigation/NavigationTopContainer';
+import Messages from './Errors';
 
 import './MainContainer.css';
 const mainContainer = props => {
@@ -15,6 +16,7 @@ const mainContainer = props => {
           <div>
              <Router>
                 <NavigationTop loginContainer={<Login user={props.user} />} />
+                <Messages />
                 <BottomPane />              
              </Router>
           </div>
