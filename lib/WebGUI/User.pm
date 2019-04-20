@@ -1638,4 +1638,26 @@ sub validUserId {
 	return ($sth->rows == 1);
 }
 
+#-------------------------------------------------------------------
+
+=head2 lastLogin
+
+Unix epoch of this user's last login, if any, or C<undef> if none.
+
+=cut
+
+sub lastLogin {
+    my $self = shift;
+    return $self->session->db->quickScalar( 
+        q{
+            select   timeStamp  
+            from     userLoginLog
+            where    userId = ?
+            order by timeStamp desc
+            limit    1
+        },
+        [ $self->{_userId} ],
+    );
+}
+
 1;

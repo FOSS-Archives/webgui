@@ -978,6 +978,47 @@ sub www_editUserSave {
 
 #-------------------------------------------------------------------
 
+=head2 www_user
+
+RESTful-ish user view/update/delete.
+XXX needs delete.
+XXX needs update.
+Takes C<userid> CGI param.
+
+=cut
+
+sub www_user {
+    my $session = shift;
+    my $userid = $session->form->process("userid") or return $session->response->json({
+        success => \0, error => 'No userid passed', id => undef, timestamp => time, code => 400, # bad request
+    });
+    canEdit($session) or return $session->response->json({
+        success => \0, error => 'No edit privilege', id => $userid, timestamp => time, code => 401, # unauth
+    });
+    my $user = WebGUI::User->new($session, $userid);
+    $user->userId or return $session->response->json({
+        success => \0, error => 'User not found', id => $userid, timestamp => time, code => 410, # gone
+    }); 
+    my $method = $session->request->method;
+    if( $method eq 'GET' ) {
+        return $session->response->json({
+            id         => $user->userId,
+            username   => $user->username,
+            email      => $user->get('email'),
+            firstname  => $user->get('firstName'),
+            lastname   => $user->profileField('lastName'),
+            avatar     => $user->get('avatar'),
+            created    => $user->dateCreated,
+            lastlogin  => $user->lastLogin,
+            active     => $user->status eq 'Active' ? \1 : \0,
+        });
+    }
+    # XXX else DELETE, PUT
+}
+
+
+#-------------------------------------------------------------------
+
 =head2 www_editUserKarma ( )
 
 Provides a form for directly editing the karma for a user.  Returns adminOnly
@@ -1235,7 +1276,6 @@ sub www_ajaxListUsers {
             avatar => $data->{avatar},
             created => $data->{dateCreated},
             lastLogin => $lastLogin,
-            # "exipires" => "1554747086492", # XXX don't think this exists
             active => $data->{status} eq 'Active' ? \1 : \0,
         };
 

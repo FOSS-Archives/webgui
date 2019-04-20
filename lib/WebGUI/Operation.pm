@@ -213,6 +213,7 @@ sub getOperations {
 		'editUserKarmaSave' => 'User',
 		'formUsers' => 'User',
 		'listUsers' => 'User',
+		'user' => 'User',
 
 		'approveVersionTag' => 'VersionTag',
 		'commitVersionTag' => 'VersionTag',
