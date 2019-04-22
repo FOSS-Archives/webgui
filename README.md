@@ -17,32 +17,23 @@ WebGUI is a mature, feature rich Content Management System.  It's written in Per
 
 ## Installation
 
-Deploying a Docker Image is the easiest method
+Deploying a Docker Image is the easiest method.
 
-The Installer Script method offers full native installs using your system package manager and system Perl, and has an interactive dialog for customizing your install.
-It is however prone to breakage as system packages get broken up and changed around, and as Perl modules break support for different versions of Perl.
-The Docker Image is built from "As Few Questions as Possible" mode of this installer script, with minor changes to the `/data/webgui.sh` startup script.
-
-The Source Install process should support any system that supports MySQL, has a semi-recent version of Perl, and is supported by the necessary system libraries (libgd, for example).
+The Source Install process should support any system that supports MariaDB or MySQL, has a semi-recent version of Perl, and is supported by the necessary system
+libraries (libgd, for example).
 
 ### Docker Image
 
 An experimental Docker image is available on Docker Hub:
 
-    https://hub.docker.com/r/scrottie/webgui8/
+    XXX where are they?  Probably don't want to publish these under my name.  Create an org?
+    t.b.d.
 
-To install Docker on Debian Linux, add "backports" to your `/etc/apt/sources.list`, following the instructions here at http://backports.debian.org/Instructions/, then run these commands:
-
-    sudo apt-get update
-    sudo apt-get install docker.io
-
-More information for the Debian Docker install is here, https://docs.docker.com/installation/debian/
-
-See https://docs.docker.com/installation/ for Docker installation instructions for other platforms, including Ubuntu, CentOS, MacOSX, Microsoft Windows, and others.
+See https://docs.docker.com/install/ for instructions on installing Docker.
 
 Once Docker is installed, run these commands as root to start WebGUI:
 
-    docker pull scrottie/webgui8
+    docker pull scrottie/webgui8                    # XXX old image; new one may be at a different location
     docker run -p 80:80 scrottie/webgui8:latest     # adding '-t -i' flags runs it interactively
 
 If not run interactively, `docker ps -l` shows the last Docker container started, `docker log <id>` shows the output (which will be the `plack` process output for WebGUI), and `docker stop <id>` stops it.
@@ -53,77 +44,34 @@ Each time `docker run` is executed, a new, distinct, persistent copy of WebGUI's
 
 See http://docker.com for more usage information, and for installation instructions for Windows and Mac OSX.
 
-Please report problems and suggestions for improvements for that in the Docker ticket at https://github.com/AlliumCepa/webgui/issues/8.
-
-### Installer Script
-
-An installer script is available on Mac OSX, Debian, and CentOS (CentOS support currently broken, OSX likely also)
-for native installs using the system packages and system Perl.
-It lags behind the current releases of operating system distros, and often fails due to system perl and perl module incompatabilities.
-
-To launch the installer:
-
-    wget https://raw.githubusercontent.com/AlliumCepa/webgui/master/installer/webgui_installer.pl
-    perl webgui_installer.pl
-
-Or from an existing git checkout of WebGUI, do:
-
-    cd installer
-    perl webgui_installer.pl
-
-Then answer the questions about site URL, installation directory, what MySQL password to use, and so on.
-
-If the installer encounters any errors, it will offer to automatically send a problem report.  Please allow it to
-do so if this happens.
-The problem report contains several autodetected values (such as operating system and machine architecture) as well as the text
-of the fatal error message.  No user identifying information is sent.  B<Passwords will be sent if the failed command includes a password.>  
-This happens in the clear and is not a desired feature.
-
-After the installer completes, a `webgui.sh` file will be left in the install directory you picked, along with the
-`WebGUI` directory containing the install.
-`webgui.sh` allows you to manually start MySQL, nginx, and WebGUI8.
-
-If you have SysVInit, the installer will write startup files in `/etc/init.d/webgui8` and `/etc/rc4.d/S45webgui8`.
-It will also use those startup files to start WebGUI.
-If your operating system's package manager wrote startup files for nginx and MySQL, those services should be running
-and should start on boot as well.
-
-These commands may be used to stop and start WebGUI8 on systems that use SysVInit:
-
-    /etc/init.d/webgui8 stop
-    /etc/init.d/webgui8 start
-
-Go to http://your.server:8081 to access the site directly, or http://your.server will work if nginx was probably 
-configured and started.
-
-The admin user is `Admin` and the default starting password is `123qwe`.
+Please report problems and suggestions for improvements for that in the Docker ticket at https://github.com/AlliumCepa/webgui/issues/8 or on https://github.com/AllumCepa/webgui/issues.
 
 ### Source Installation
 
 Use this manual installation from source for OSX, FreeBSD, and other systems, or for those who like to see exactly what is happening.
 
-Many perl modulues require system libraries, such as `libexpat1-dev` on Debian; you have to figure out which system packages you need to install for your system.
-If you do that, please tell us what they are so we can document that for other people on the same system.
-
-For example, on Debian, at least the following system packages are needed:
-`perlmagick libssl-dev libexpat1-dev git curl nginx build-essential libpng-dev mysql-server mysql-client`.
+You'll need the system packages (dev or source installs of needed libraries) used by wG and the Perl modules wG uses.
+On Debian, at least the following system packages are needed:
+```
+apt-get install
+   perl cpanminus libaspell-dev make libdbd-mysql-perl libdigest-perl-md5-perl libxml-simple-perl \
+   libmodule-install-perl gcc libperl-dev libmysql++-dev libpng-dev build-essential libgd-dev mariadb-client
+```
 
 This assumes that your site is "www.example.com".  If it's something else, change the commands to match.
 
 Generic source install instructions:
 
-* Run `cpanm Task::WebGUI` and `perl sbin/testEnvironment.pl` to install Perl module deps
+* Run `perl sbin/testEnvironment.pl` to install Perl module deps
 * Create a database named after your site, such as `www_whatever_com`
 * Load `share/create.sql` into your MySQL/MariaDB/Percona
-* Run .`bin/testEnvironment.pl` to install all new requirements
-* Get a new wgd, the wG command line tool, from http://haarg.org/wgd
 * Copy [etc/WebGUI.conf.original](etc/WebGUI.conf.original) to `etc/www.whatever.com.conf`
-* Edit the conf file and set `dbuser`, `dbpass`, `dsn`, `uploadsPath` (eg to `/data/domains/www.example.com/public/uploads/`), `extrasPath`, `maintenancePage`, and `siteName`
+* Edit the conf file and set `dbuser`, `dbpass`, `dsn`, `uploadsPath` (eg to `/data/domains/www.example.com/public/uploads/`), `extrasPath`, `maintenancePage`, and `siteName`.  You can point `extrasPath` at the existing copy under `www/extras` if you're only hosting one site on wG.  Otherwise, make a per-site copy.
+* Copy the `extras` directory from whereever you unpacked it to whereever you pointed `extrasPath` to in the config file.
 * Copy [etc/log.conf.original](etc/log.conf.original) to `etc/log.conf`
 * Edit `etc/log.conf` such that `log4perl.appender.mainlog.filename` points to a writable path.  For example: `log4perl.appender.mainlog.filename = webgui.log` works for local development
 * Set `WEBGUI_CONFIG` to point at your new config file.  For example: `export WEBGUI_CONFIG=www.whatever.com.conf`
 * Run upgrades (yes, even for brand new install):  `wgd reset --upgrade`
-* Copy the `extras` directory from whereever you unpacked it to whereever you pointed `extrasPath` to in the config file.  For example, if you unpacked the source in `/data/WebGUI` and pointed the `extrasPath` to `/data/domains/www.example.com/public/`, you'd run: `rsync -r -a /data/WebGUI/www/extras /data/domains/www.example.com/public/`
 
 More detailed (but less well maintained) instructions are in [docs/install.txt](docs/install.txt).
 
@@ -160,19 +108,20 @@ We welcome contributions.
 
 Where things are at:
 
-* The bug tracker is here:  http://www.webgui.org/8
+* The (an?) unofficial community process repo is at http://github.org/AlliumCepa/webgui
+* The bug tracker for this community effort is here:  http://github.com/AlliumCepa/webgui/issues
+* The original bug tracker is here:  http://www.webgui.org/8
 * Developer discussion forums, for conversations relating to the code itself, are here:  http://www.webgui.org/webgui/dev/discuss
-* Community process discussion is here:  https://github.com/AlliumCepa/webgui/issues/
 * IRC chat is at #webgui on FreeNode; use your favorite IRC-enabled chat client or see irc.org for more info
 * The Wiki is at http://webgui.org/wiki
 * The official PlainBlack WebGUI repo is at http://github.org/plainblack/webgui
-* The (an?) unofficial community process repo is at http://github.org/AlliumCepa/webgui
+
+If you connect to IRC, please be patient.
 
 As a general rule, if you're fixing a bug mentioned in http://www.webgui.org/8, discuss it at http://www.webgui.org/webgui/dev/discuss.
 If you're adding a new feature or want to talk about the community process itself, discuss it on https://github.com/AlliumCepa/webgui/issues/.
 
 If you're adding a new feature, improving wG, or fixing bugs, please fork http://github.org/AlliumCepa/webgui.
-If you're only fixing bugs, you may wish to fork http://github.org/plainblack/webgui.
 
 There are plenty of ways to help:
 
@@ -187,9 +136,7 @@ If the request is accepted, your code goes into http://github.org/AlliumCepa/web
 
 Here are some specific tasks to be done:
 
-* Merge in Haarg's work on replacing ImageMagick with something that installs reliably 
 * Work on an importer for WordPress sites:  https://github.com/AlliumCepa/webgui/issues/9
-* Merge in the experimental installer from https://gist.github.com/scrottie/2973558 and update the documentation to suggest using it
 * Create a new, modern theme; documentation for doing this is in the _WebGUI Designers Guide_ at https://www.webgui.org/documentation2/webgui-designers-guide
 * Merge in various projects people have started:  https://github.com/AlliumCepa/webgui/issues/3
 * Forward port relevant bug fixes from the 7.x branch to 8.x.
@@ -209,7 +156,7 @@ Rules and process:
 * To minimize merge conflicts, contributions should not cause undue numbers of changes; please do not reformat code, change whitespace, or make significant number of global replacements except by special arrangement among all concerned
 * I (scrottie) may hand out and revoke commit bits as I deem predudent
 * If you don't have a commit bit, don't worry, just send a pull request from your fork
-* Generally, commit bits will be taken back if you're idle, or if you commit major things to the master branch without to discussion and wind up upsetting people
+* Generally, commit bits may be taken back if you're idle (but can be returned), or if you commit major things to the master branch without to discussion and wind up upsetting people
 * The project is GPL licensed (see http://www.gnu.org/licenses/gpl.html for exact terms and conditions); use and modification of this code constitutes agreement to the terms; one of the terms is that code added to the project must also be released as GPL
 
 ## The Request Cycle
@@ -218,13 +165,12 @@ This needs to be moved to a design document.
 
 * The root level app.psgi file loads all the config files found and loads the site specific psgi file for each, linking them to the proper host names.
 * The site psgi file uses the WEBGUI_CONFIG environment variable to find the config.
-* It instantiates the $wg WebGUI object (one per app).
-* $wg creates and stores the WebGUI::Config (one per app)
-* $wg creates the $app PSGI app code ref (one per app)
-* WebGUI::Middleware::Session is wrapped around $app at the outer-most layer so that it can open and close the $session WebGUI::Session. Any other wG middleware that needs $session should go in between it and $app ($session created one per request)
-* $session creates the $request WebGUI::Session::Request and $response WebGUI::Session::Response objects (one per request)
-* lib/WebGUI.pm does basic dispatch, first checking for a content handler, and then as a last resort (but the usual case), defaulting to the asset content handler
-* The content handlers are configured in the .conf file
-* The asset content handler, lib/WebGUI/Content/Asset.pm, looks up the asset by URL in the database
+* It instantiates the `$wg` WebGUI object (one per site).
+* `$wg` creates and stores the `WebGUI::Config` (one per site)
+* `$wg` creates the `$app` PSGI app code ref (one per site)
+* `WebGUI::Middleware::Session` is wrapped around `$app` at the outer-most layer so that it can open and close the `$session` `WebGUI::Session`. Any other wG middleware that needs `$session` should go in between it and `$app` (`$session` created one per request)
+* `$session` creates the `$session->user WebGUI::User`, `$session->request` `WebGUI::Session::Request`, and `$session->response` `WebGUI::Session::Response` objects (one per request)
+* `lib/WebGUI.pm` does basic dispatch, first checking for a content handler, and then as a last resort (but the usual case), defaulting to the asset content handler.  Content handlers are listed in the config file, in order.
+* The asset content handler, lib/WebGUI/Content/Asset.pm, looks up the asset by URL in the database, creates an instance of the specified class for that asset, and invokes it.
 
 
