@@ -1,7 +1,7 @@
 import React from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 
-let BreadCrumbs = props => {    
+let BreadCrumbs = ({trail}) => {    
    const items = [
        {label:'Categories'},
        {label:'Sports'},
@@ -13,7 +13,7 @@ let BreadCrumbs = props => {
        {label:'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi'}
    ];      
       
-   return <BreadCrumb model={items} home={{icon: 'pi pi-folder-open', url: '/'}} />;
+   return <BreadCrumb model={trail} home={{icon: 'pi pi-folder-open', url: '/'}} />;
 };
 
 export default BreadCrumbs;
