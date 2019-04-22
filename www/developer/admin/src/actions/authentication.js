@@ -7,24 +7,34 @@ export const login = (username, password) => async (dispatch, storeState) => {
       loginTemplate = `login/1`;
       console.log("Always login in development");
    }
-   const response = await jsonPlaceholder.get(loginTemplate);
 
-   if (response.data !== undefined && response.data.session){
+   try{
+      const response = await jsonPlaceholder.get(loginTemplate);
+      if (response.data !== undefined && response.data.session){
+         dispatch({
+            type: constants.LOGIN,
+            payload: { ...response.data, authenticated: true }
+         });
+
+      }else{
+         dispatch({
+            type: constants.LOGIN,
+            payload: { ...response.data, authenticated: false }
+         });
+         dispatch({ // Purge the state of the store based on reducers implementation
+            type: constants.ERROR,
+            payload: { detail: 'Invalid state, please try again.', summary: 'Login failed' }
+         });
+      }  
+      
+   }catch(e){
       dispatch({
-         type: constants.LOGIN,
-         payload: { ...response.data, authenticated: true }
-      });
-           
-   }else{
-      dispatch({
-         type: constants.LOGIN,
-         payload: { ...response.data, authenticated: false }
-      });
-      dispatch({ // Purge the state of the store based on reducers implementation
          type: constants.ERROR,
-         payload: { detail: 'Invalid state, please try again.', summary: 'Login failed' }
+         payload: { detail: "Unknown Error Occured. Server response not received. Check server logs.", summary: '' }
       });
-   }    
+      
+   }
+   
 };
 
 export const logout = () => {

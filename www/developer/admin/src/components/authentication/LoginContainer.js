@@ -47,8 +47,11 @@ class LoginContainer extends Component {
       }
       return ( 
          <form onSubmit={this.props.handleSubmit(this.onLogin)} className="login-container">
-            <Messages />
             <div className="p-grid">
+               <div className="p-col-2"></div>            
+               <div className="p-col-8"><Messages /></div>
+               <div className="p-col-2"></div>               
+            
                <div className="p-col-4"></div>
                <div className="p-col-4">
                    <Panel header="Admin Login">
