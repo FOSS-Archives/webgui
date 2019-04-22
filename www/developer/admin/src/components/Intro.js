@@ -19,12 +19,12 @@ export default () => {
          <li>Scalable architecture suitable for busy sites</li>
          </ul>
      
-      You can find more information about the CMS at:  <a href="https://github.com/AlliumCepa/webgui">WebGUI</a>
+      You can find more information about the CMS at:  <a href="https://github.com/AlliumCepa/webgui" rel="noopener noreferrer" target="_blank">WebGUI</a>
       <br />
       <br />
-      <h4>This interface was written using the excellent JavaScript library: <a href="https://reactjs.org">React</a></h4>
-      <h4>The fantastic component library <a href="https://www.primefaces.org/primereact">PrimeReact</a> can be found <a href="https://www.primefaces.org/primereact">here</a></h4>
-     
+      <h4>This interface was written using the excellent JavaScript library: <a href="https://reactjs.org" rel="noopener noreferrer" target="_blank">React</a></h4>
+      <h4>The fantastic component library <a href="https://www.primefaces.org/primereact" rel="noopener noreferrer" target="_blank">PrimeReact</a> can be found
+      <a href="https://www.primefaces.org/primereact" rel="noopener noreferrer" target="_blank">here</a></h4>
       </Card>
    );   
 }

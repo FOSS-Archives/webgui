@@ -5,12 +5,11 @@ export const login = (username, password) => async (dispatch, storeState) => {
    let loginTemplate = `?op=auth&method=login&username=${username}&identifier=${password}`;
    if (process.env.NODE_ENV === 'development'){
       loginTemplate = `login/1`;
-      console.log("Always login in development ");
-   
+      console.log("Always login in development");
    }
    const response = await jsonPlaceholder.get(loginTemplate);
 
-   if (response.data !== undefined && response.data.joined){
+   if (response.data !== undefined && response.data.session){
       dispatch({
          type: constants.LOGIN,
          payload: { ...response.data, authenticated: true }

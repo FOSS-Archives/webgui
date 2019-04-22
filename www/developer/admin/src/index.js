@@ -21,3 +21,7 @@ render(
    </Provider>, document.getElementById('root'));
 
 registerServiceWorker();
+
+/*
+ *       //if(data instanceof Array)
+ */
