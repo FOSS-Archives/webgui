@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {Panel} from 'react-bootstrap';
 import {TabView,TabPanel} from 'primereact/tabview';
 
-const BlankComponent = props => {
+import 'Blank.css';
+const Blank = props => {
    let title = (
       <h3>{props.title}</h3>
    );
@@ -29,10 +30,10 @@ Thank you
     
 };
 
-BlankComponent.propTypes = {
+Blank.propTypes = {
    title: PropTypes.string,
    content: PropTypes.string,
    display: PropTypes.object   
 };
 
-export default BlankComponent;
+export default Blank;

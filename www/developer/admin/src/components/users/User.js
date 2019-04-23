@@ -7,6 +7,7 @@ import Auths from './Auths';
 import Groups from './Groups';
 import Profile from './Profile';
 
+import './User.css';
 const User = props => {
    if (!props.users){
       props.history.push('/');
@@ -27,7 +28,7 @@ const User = props => {
    
    return (
       <div>
-         <BreadCrumb home={{icon: 'pi pi-list', url: '/users'}} model={[{ label: label }]} />
+         <BreadCrumb home={{icon: 'pi pi-list', command: () => props.history.push('/users')}} model={[{ label: label }]} style={{border:"none"}} />
          <TabView>
              <TabPanel header="Account">
                  <Account {...user} />
