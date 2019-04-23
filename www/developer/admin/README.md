@@ -51,6 +51,9 @@ npm start
 ```
 Use your browser to view the interface at http://localhost:3000/
 
+To deploy the software to a live website simply invoke the buid script: ./buildAndDeploy.sh
+Once complete you can access the "deployed" sofware at:  http://localhost/extras/Kestrel/index.html
+
 Want to contribute? Great!
 Contact https://github.com/AlliumCepa/webgui 
 
