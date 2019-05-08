@@ -368,12 +368,12 @@ sub www_edit {
             my $rawPrivacySetting   = $user->getProfileFieldPrivacySetting($fieldId);
             my $fieldPrivacySetting = $privacySettingsHash->{$rawPrivacySetting};
             
-            my $fieldPrivacy = WebGUI::Form::selectBox($session,{
+            my $fieldPrivacy = WebGUI::Form::SelectBox->new($session,{
                 name    => "privacy_$fieldId",
                 options => $privacySettingsHash,
                 value   => $rawPrivacySetting,
                 extras  => (!$fieldViewable) ? " disabled" : ""
-            });
+            })->toHtml;
 
             #Create a seperate template var for each field
             my $fieldBase = 'profile_field_'.$fieldId;

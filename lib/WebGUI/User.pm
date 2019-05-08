@@ -169,7 +169,7 @@ sub acceptsPrivateMessages {
     return 0 if ($userId eq "1");    # Visitor can't send private messages
     return 0 if ($self->userId eq $userId);  #Can't send private messages to yourself
 
-    my $pmSetting = $self->profileField('allowPrivateMessages');
+    my $pmSetting = $self->get('allowPrivateMessages');
 
     return 0 if ($pmSetting eq "none");
     return 1 if ($pmSetting eq "all");
@@ -212,7 +212,7 @@ sub acceptsFriendsRequests {
     my $friend = WebGUI::Friends->new($session,$user);
     return 0 if ($me->isInvited($user->userId) || $friend->isInvited($self->userId)); #Invitation sent by one or the other
 
-    return $self->profileField('ableToBeFriend'); #Return profile setting
+    return $self->get('ableToBeFriend'); #Return profile setting
 }
 
 #-------------------------------------------------------------------
@@ -641,7 +641,7 @@ Returns first name, or alias, or username depeneding upon what exists.
 
 sub getFirstName {
     my $self = shift;
-    return $self->profileField('firstName') || $self->profileField('alias') || $self->username;
+    return $self->get('firstName') || $self->get('alias') || $self->username;
 }   
 
 #-------------------------------------------------------------------
@@ -765,12 +765,12 @@ Non digits, such as area code separators, are removed from the cell phone inform
 sub getInboxSmsNotificationAddress {
     my $self   = shift;
     
-    return unless $self->profileField('receiveInboxSmsNotifications');
+    return unless $self->get('receiveInboxSmsNotifications');
     
     my $smsGateway = $self->session->setting->get('smsGateway');
     return unless $smsGateway;
     
-    my $cellPhone = $self->profileField('cellPhone');
+    my $cellPhone = $self->get('cellPhone');
     return unless $cellPhone;
     
     # Remove non-numbers from cellPhone
@@ -1259,7 +1259,7 @@ sub profileIsViewable {
     return 0 if ($user->isVisitor);  #User is not allowed to see anyone's profile, either
     return 1 if ($self->userId eq $userId);  #Users can always view their own profile
 
-    my $profileSetting = $self->profileField('publicProfile');
+    my $profileSetting = $self->get('publicProfile');
     
     return 0 if ($profileSetting eq "none");
     return 1 if ($profileSetting eq "all");
@@ -1567,7 +1567,7 @@ sub validateProfileDataFromForm {
     my $errorCat    = undef;
     my $errorFields = [];
     my $warnFields  = [];
-    
+
 	FIELD: foreach my $field (@{$fields}) {
         my $fieldId       = $field->getId;
         my $fieldLabel    = $field->getLabel;

@@ -134,15 +134,15 @@ sub view {
         action => $self->getUrl,
         method => "GET"
 		})
-    .WebGUI::Form::hidden($self->session,{name=>"doit", value=>"1"});
+    .WebGUI::Form::Hidden->new($self->session,{name=>"doit", value=>"1"})->toHtml;
 	$var{'form_footer'  } = WebGUI::Form::formFooter($session);
-	$var{'form_submit'  } = WebGUI::Form::submit($session, {
+	$var{'form_submit'  } = WebGUI::Form::Submit->new($session, {
         value=>$i18n->get("search")
-    });
-	$var{'form_keywords'} = WebGUI::Form::text($session, {
+    })->toHtml;
+	$var{'form_keywords'} = WebGUI::Form::Text->new($session, {
         name=>"keywords",
         value=>$keywords
-    });
+    })->toHtml;
 	$var{'no_results'   } = $i18n->get("no results");
     my $searchRoot = $self->searchRoot;
     if (my $searchOverride = $form->get('searchroot', 'asset')) {
