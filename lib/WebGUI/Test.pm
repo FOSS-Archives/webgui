@@ -41,6 +41,7 @@ use Try::Tiny;
 use Monkey::Patch       qw( patch_object );
 use Scope::Guard;
 use WebGUI::Paths -inc;
+use Data::Dumper;
 use namespace::clean;
 
 our @EXPORT = qw(cleanupGuard addToCleanup);
@@ -178,21 +179,23 @@ sub newSession {
     require WebGUI::Session;
     my $session = WebGUI::Session->open( $CLASS->config, newEnv( $http_request ) );
     my $request = Test::MockObject::Extends->new( $session->request );
+
+    my @params;
+    my $params_cache;
+    $request->mock('parameters', sub {
+        $params_cache ||= Hash::MultiValue->new( @params );
+    });
     $request->mock('setup_body', sub {
         my $self = shift;
         my $params = shift;
-        delete $self->env->{$_} for grep { /^plack\./ } keys %{ $self->env };
-        my $body_params = $self->body_parameters;
-        $body_params->clear;
-        $body_params->add( $_ => $params->{$_} ) for keys %$params;
+        $params_cache = undef;
+        @params = %$params;   # previously, this was clearing all params when either body or request params were set.  having only one set of params should be the same.
     });
     $request->mock('setup_param', sub {
         my $self = shift;
         my $params = shift;
-        delete $self->env->{$_} for grep { /^plack\./ } keys %{ $self->env };
-        my $query_params = $self->query_parameters;
-        $query_params->clear;
-        $query_params->add( $_ => $params->{$_} ) for keys %$params;
+        $params_cache = undef;
+        @params = %$params;
     });
     if ( ! $noCleanup ) {
         $CLASS->addToCleanup($session);
@@ -202,6 +205,9 @@ sub newSession {
 
 =head2 newEnv
 
+Returns a Plack object either created from C<$form> (if it is an C<HTTP::Request>),
+constructed from a new C<HTTP::Request::Common::POST> with C<$form> as the form
+data (if C<$form> is a hash), or else a C<HTTP::Request::Common::GET> if C<$form> is C<undef>.
 This method works either as a object method, or as a standalone subroutine.
 
 =head3 form
