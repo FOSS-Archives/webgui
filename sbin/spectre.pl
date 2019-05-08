@@ -136,7 +136,7 @@ elsif ($daemon) {
 }
 
 sub ping {
-	my $remote = create_ikc_client(
+	my $remote = POE::Component::IKC::ClientLite->spawn(
 	        port=>$config->get("port"),
 	        ip=>$config->get("ip"),
 	        name=>rand(100000),
