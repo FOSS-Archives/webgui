@@ -29,8 +29,8 @@ use WebGUI::Fork;
 
 my $class     = 'WebGUI::Fork';
 my $testClass = 'WebGUI::Test::Fork';
-my $pipe      = $class->init();
 my $session   = WebGUI::Test->session;
+my $pipe      = $class->init($session);
 
 # test simplest (non-forking) case
 
