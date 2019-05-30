@@ -38,6 +38,7 @@ use WebGUI::Session::Setting;
 use WebGUI::Session::Stow;
 use WebGUI::Session::Style;
 use WebGUI::Session::Url;
+use Try::Tiny;
 
 =head1 NAME
 
@@ -263,6 +264,20 @@ sub db {
 		}
 	}
 	return $self->{_db};
+}
+
+=head2 dbReconnect
+
+Disconnect from the database, ignoring errors, then reconnect.
+Useful after a fork.
+
+=cut
+
+sub dbReconnect {
+    my $self = shift;
+    $self->db if ! $self->{_db};  # can't reconnect if we aren't connected
+    my $db = $self->{_db} = $self->{_db}->clone;
+    return $db;
 }
 
 #-------------------------------------------------------------------

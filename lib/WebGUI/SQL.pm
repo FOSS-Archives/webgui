@@ -128,6 +128,7 @@ sub connect {
     $params->{PrintError} = 0;
     $params->{AutoCommit} = 1;
     $params->{ShowErrorStatement} = 1;
+    $params->{AutoInactiveDestroy} = 1;
     $params->{HandleError} = sub {
         WebGUI::Error::Database->throw(shift);
     };

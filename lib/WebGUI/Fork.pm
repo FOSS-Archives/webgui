@@ -433,6 +433,7 @@ my $pipe;
 
 sub init {
     my $class = shift;
+    my $session = shift;
     $pipe = IO::Pipe->new;
 
     my $pid = fork();
@@ -443,10 +444,13 @@ sub init {
         return $pipe;
     }
 
+    # server process
+
     $0 = 'webgui-fork-master';
     $pipe->reader;
     local $/ = "\x{0}";
     @INC = $class->cleanINC(@INC);
+    $session->dbReconnect;     # reconnect to the database
     while ( my $request = $pipe->getline ) {
         chomp $request;
         eval {
@@ -657,6 +661,7 @@ example).
 
 sub start {
     my ( $class, $session, $module, $subname, $data ) = @_;
+    $pipe or $class->init($session);
     my $self = $class->create($session);
     my $request = $self->request( $module, $subname, $data );
     $self->sendRequestToMaster($request) or $self->forkAndExec($request);
