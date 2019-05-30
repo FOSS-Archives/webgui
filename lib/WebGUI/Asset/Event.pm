@@ -1916,22 +1916,22 @@ sub getEditTemplate {
             = WebGUI::Form::formHeader($session, {
                 action  => $self->getParent->getUrl,
             })
-            . WebGUI::Form::hidden($self->session, {
+            . WebGUI::Form::Hidden->new($self->session, {
                 name    => "assetId",
                 value   => "new",
-            })
-            . WebGUI::Form::hidden($self->session, {
+            })->toHtml
+            . WebGUI::Form::Hidden->new($self->session, {
                 name    => "className",
                 value   => $self->session->form->process("className","className"),
-            })
-            . WebGUI::Form::hidden( $self->session, {
+            })->toHtml
+            . WebGUI::Form::Hidden->new( $self->session, {
                 name    => 'ownerUserId',
                 value   => $self->session->user->userId,
-            } )
-            . WebGUI::Form::hidden($self->session, {
+            } )->toHtml
+            . WebGUI::Form::Hidden->new($self->session, {
                 name    => "func",
                 value   => "addSave"
-            })
+            })->toHtml
             ;
     }
     else {
