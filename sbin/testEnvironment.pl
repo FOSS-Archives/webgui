@@ -134,7 +134,6 @@ checkModule("URI::Escape",                  "3.29"       );
 checkModule("POSIX"                                      );
 checkModule("List::Util"                                 );
 checkModule("Color::Calc"                                );
-# checkModule("Weather::Com::Finder",         "0.5.3"      ); # broken
 checkModule("HTML::TagCloud",               "0.34"       );
 checkModule("Image::ExifTool",              "7.67"       );
 checkModule("Archive::Any",                 "0.0932"     );
