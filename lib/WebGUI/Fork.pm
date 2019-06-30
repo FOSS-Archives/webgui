@@ -450,7 +450,7 @@ sub init {
     $pipe->reader;
     local $/ = "\x{0}";
     @INC = $class->cleanINC(@INC);
-    $session->dbReconnect;     # reconnect to the database
+    $session->dbReconnect if $session;     # reconnect to the database
     while ( my $request = $pipe->getline ) {
         chomp $request;
         eval {
