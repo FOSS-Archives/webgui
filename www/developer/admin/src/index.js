@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 // In production, we register a service worker to serve assets from local cache.
 import registerServiceWorker from './registerServiceWorker';
 // These are imported here to make them available through the application

@@ -4,11 +4,21 @@ import {withRouter} from 'react-router-dom';
 import {Menubar} from 'primereact/menubar';
 import {InputText} from 'primereact/inputtext';
 import {users as userAction} from '../../actions/users';
+import {sessions as sessionAction} from '../../actions/sessions';
 
 class Menus extends Component {
-   getUsers = () => {
-      this.props.userAction();
-      this.props.history.push('/users');
+   setModule = (route) => {
+      switch(route) {
+        case "users":
+          this.props.userAction();
+          break;
+        case "sessions":
+          this.props.sessionAction();
+          break;
+        default:
+          console.log("Invalid action");
+      }      
+      this.props.history.push('/' + route);
    }
    
    options = [
@@ -57,7 +67,7 @@ class Menus extends Component {
             "items": [
                {
                   "label": "Active Sessions",
-                  "command": null,
+                  command: () => this.setModule('sessions'),
                   "icon": "pi pi-key"
                }, 
                {
@@ -77,7 +87,7 @@ class Menus extends Component {
                },
                {
                   "label": "Users",
-                  command: () => this.getUsers(),
+                  command: () => this.setModule('users'),
                   "icon": "pi pi-list"
                }
             ]
@@ -96,4 +106,4 @@ class Menus extends Component {
 
 const routedMenu = withRouter(Menus);
 
-export default connect(null, {userAction})(routedMenu);
+export default connect(null, {userAction, sessionAction})(routedMenu);
