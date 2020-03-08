@@ -1,14 +1,14 @@
 {
    "login": [
       {
-         "id" : "1",
+         "id" : "55f97ffd69-47jq2",
          "identity": {
             "avatar": "",
              "first": null,
               "last": null
          },
          "joined": "2002-04-27",
-         "session": "3wnJeyDlRXanBqChk5gH1A"         
+         "session": "_2d-UzZpNpCv_j-bKky9Tw"         
       }
    ],
    "users": {
@@ -23,7 +23,19 @@
             "created": "1554747081111",
             "lastlogin": "1554747081122",
             "active": true
-	      }
+	 }
+      ]
+   },
+   "sessions": {
+      "data": [
+         {
+            "id": "_2d-UzZpNpCv_j-bKky9Tw",
+            "uid": "55f97ffd69-47jq2",
+            "expires": "100010010",
+            "last_view": "22222",
+            "ip": "127.0.0.1",
+            "created": "111111111"
+	 }
       ]
    }
 }
