@@ -4,7 +4,7 @@ import jsonPlaceholder from '../apis/jsonPlaceholder';
 export const login = (username, password) => async (dispatch, storeState) => {
    let loginTemplate = `?op=auth&method=login&username=${username}&identifier=${password}`;
    if (process.env.NODE_ENV === 'development'){
-      loginTemplate = `login/1`;
+      loginTemplate = `login/55f97ffd69-47jq2`;
       console.log("Always login in development");
    }
 
