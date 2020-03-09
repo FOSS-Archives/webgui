@@ -26,7 +26,7 @@ class Sessions extends Component {
       this.setState({displayBasic: false});
    }   
    
-   renderFooter(name) {
+   renderFooter() {
       return (
           <div>
              <Button label="Yes" icon="pi pi-check" onClick={this.handleDelete.bind(this)} />
@@ -36,7 +36,7 @@ class Sessions extends Component {
    }
    
    handleDelete() {
-      console.log("Delete triggered");
+      alert("Delete triggered - needs implementation");
       this.onHide();
    };
    
@@ -51,7 +51,7 @@ class Sessions extends Component {
    render(){
       return (
          <div className="session-list">
-             <Dialog header="Delete Session" visible={this.state.displayBasic} style={{width: '50vw'}} onHide={this.onHide} footer={this.renderFooter('displayBasic')}>
+             <Dialog header="Delete Session" visible={this.state.displayBasic} style={{width: '50vw'}} onHide={this.onHide} footer={this.renderFooter()}>
                 <p>Are you sure you want to delete this session?</p>
              </Dialog>
 
