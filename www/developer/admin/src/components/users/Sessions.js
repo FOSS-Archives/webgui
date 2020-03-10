@@ -47,7 +47,7 @@ class Sessions extends Component {
          </div>
       );
    }
-  
+   
    render(){
       return (
          <div className="session-list">

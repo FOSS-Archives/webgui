@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import {BreadCrumb} from 'primereact/breadcrumb';
 import {TabView,TabPanel} from 'primereact/tabview';
 import Account from './Account';
-import Auths from './Auths';
 import Groups from './Groups';
+import Preferences from './Preferences';
 import Profile from './Profile';
+import UI from './UI'
 
 import './User.css';
 const User = props => {
@@ -33,14 +34,17 @@ const User = props => {
              <TabPanel header="Account">
                  <Account {...user} />
              </TabPanel>
+             <TabPanel header="User Interface">
+                 <UI {...user} />
+             </TabPanel>             
              <TabPanel header="Profile">
                  <Profile {...user} />
              </TabPanel>
              <TabPanel header="Groups">
                  <Groups {...user} />
              </TabPanel>
-             <TabPanel header="Auth Methods">
-                 <Auths {...user} />
+             <TabPanel header="Preferences">
+                 <Preferences {...user} />
              </TabPanel>
          </TabView>
       </div>

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Tab, TabPanel, Tabs, TabList } from "react-web-tabs";
+import Contact from './Profile/Contact';
+import Home from './Profile/Home';
+import Personal from './Profile/Personal';
+import Work from './Profile/Work';
 
 import 'react-web-tabs/dist/react-web-tabs.css';
 const Profile = props => {
-   
-console.log(props);   
    if (!props.username){
       return <div>Nothing found</div>;
    }
@@ -12,22 +14,27 @@ console.log(props);
    return (
       <Tabs defaultTab="vertical-tab-one" vertical className="vertical-tabs">
         <TabList>
-          <Tab tabFor="vertical-tab-one">Tab 1</Tab>
-          <Tab tabFor="vertical-tab-two">Tab 2</Tab>
-          <Tab tabFor="vertical-tab-three">Tab 3</Tab>
+          <Tab tabFor="vertical-tab-contact">Contact</Tab>        
+          <Tab tabFor="vertical-tab-home">Home</Tab>
+          <Tab tabFor="vertical-tab-personal">Personal</Tab>          
+          <Tab tabFor="vertical-tab-work">Work</Tab>          
         </TabList>
 
-        <TabPanel tabId="vertical-tab-one">
-          <p>Tab 1 content</p>
+        <TabPanel tabId="vertical-tab-contact">
+           <Contact {...props} />
         </TabPanel>
 
-        <TabPanel tabId="vertical-tab-two">
-          <p>Tab content</p>
+        <TabPanel tabId="vertical-tab-home">
+           <Home {...props} />
         </TabPanel>
-
-        <TabPanel tabId="vertical-tab-three">
-          <p>Tab 3 content</p>
+        
+        <TabPanel tabId="vertical-tab-personal">
+           <Personal {...props} />
         </TabPanel>
+        
+        <TabPanel tabId="vertical-tab-work">
+           <Work {...props} />
+        </TabPanel>        
       </Tabs>
    );
 };
