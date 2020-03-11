@@ -1,7 +1,9 @@
-FROM nginx
+FROM nginx:1.17.8-perl
+
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update && apt -y install perl cpanminus libaspell-dev make libdbd-mysql-perl libdigest-perl-md5-perl libxml-simple-perl \
-   libmodule-install-perl gcc libperl-dev libmysql++-dev libpng-dev build-essential libgd-dev mariadb-client
+   libmodule-install-perl gcc libperl-dev default-libmysqlclient-dev libpng-dev build-essential libgd-dev mariadb-client
 
 RUN cpanm --notest --force \
    Algorithm::Permute \
