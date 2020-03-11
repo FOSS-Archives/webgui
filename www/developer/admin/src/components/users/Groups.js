@@ -35,8 +35,8 @@ class Groups extends Component {
          source: event.source,
          target: event.target
       });
-      this.props.user.groups = Object.keys(this.state.target);
-
+      
+      this.props.user.groups = event.target.map( group => Object.keys(group)[0] );
    }
    
    groupTemplate(group) {
@@ -55,6 +55,7 @@ class Groups extends Component {
              <PickList source={this.state.source} target={this.state.target} itemTemplate={this.groupTemplate}
                 sourceHeader="Available" targetHeader="Selected" responsive={true}
                 sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
+                showSourceControls={false} showTargetControls={false}
                 onChange={this.onChange}></PickList>
          </div>
       );
