@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {Menubar} from 'primereact/menubar';
 import {InputText} from 'primereact/inputtext';
+import {groups as groupAction} from '../../actions/groups';
 import {users as userAction} from '../../actions/users';
 import {sessions as sessionAction} from '../../actions/sessions';
 
@@ -11,6 +12,7 @@ class Menus extends Component {
       switch(route) {
         case "users":
           this.props.userAction();
+          this.props.groupAction();
           break;
         case "sessions":
           this.props.sessionAction();
@@ -106,4 +108,4 @@ class Menus extends Component {
 
 const routedMenu = withRouter(Menus);
 
-export default connect(null, {userAction, sessionAction})(routedMenu);
+export default connect(null, {groupAction, userAction, sessionAction})(routedMenu);

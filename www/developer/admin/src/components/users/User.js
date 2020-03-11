@@ -41,7 +41,7 @@ const User = props => {
                  <Profile {...user} />
              </TabPanel>
              <TabPanel header="Groups">
-                 <Groups {...user} />
+                 <Groups user={user} groups={props.groups} />
              </TabPanel>
              <TabPanel header="Preferences">
                  <Preferences {...user} />
@@ -53,6 +53,7 @@ const User = props => {
 
 const mapStateToProps = state => {
    return {
+      groups: state.groups,
       users: state.users
    };   
 };

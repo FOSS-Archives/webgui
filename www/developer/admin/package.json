@@ -5,8 +5,8 @@
   "dependencies": {
     "axios": "^0.19.2",
     "merge": "^1.2.1",
-    "primeicons": "^1.0.0",
-    "primereact": "^2.0.1",
+    "primeicons": "^2.0.0",
+    "primereact": "^4.1.0",
     "react": "^16.13.0",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^16.13.0",
