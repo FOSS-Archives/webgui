@@ -11,16 +11,13 @@
          "session": "_2d-UzZpNpCv_j-bKky9Tw"         
       }
    ],
-   "groups": {
-      "data": [
+   "groups": [
          {"1": "One"},
          {"2": "Two"},
          {"3": "Three"},
          {"4": "Four"}
-      ]
-   },
-   "users": {
-      "data": [
+   ],
+   "users": [
          {
             "id": "55f97ffd69-47jq2",
             "username": "myUsername",
@@ -67,10 +64,8 @@
             "worktimezone" : "PST",
             "groups": ["1","2"]
          }
-      ]
-   },
-   "sessions": {
-      "data": [
+   ],
+   "sessions": [
          {
             "id": "_2d-UzZpNpCv_j-bKky9Tw",
             "uid": "55f97ffd69-47jq2",
@@ -79,7 +74,6 @@
             "last_view": "22222",
             "ip": "127.0.0.1",
             "created": "111111111"
-	 }
-      ]
-   }
+	      }
+   ]
 }
