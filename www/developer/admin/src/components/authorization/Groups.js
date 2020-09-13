@@ -17,6 +17,10 @@ class Groups extends Component {
       this.onClick = this.onClick.bind(this);
       this.onHide = this.onHide.bind(this);
    }
+   
+   add(){
+      alert("Will implement add");
+   }
 
    onClick() {
       this.setState({displayBasic: true});
@@ -55,10 +59,11 @@ class Groups extends Component {
                 <p>Are you sure you want to delete this group?</p>
              </Dialog>
 
+            <Button label="Add" className="p-button-success" onClick={this.add} />
             <DataTable value={this.props.groups} header="Groups">
                <Column field="id" header="ID" />                 
                <Column field="name" header="Group" />
-               <Column header="Delete Group" body={this.actionTemplate.bind(this)} style={{textAlign:'center', width: '8em'}} />
+               <Column header="Delete" body={this.actionTemplate.bind(this)} style={{textAlign:'center', width: '8em'}} />
             </DataTable>     
          </div>
       );

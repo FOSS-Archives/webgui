@@ -23,7 +23,7 @@ export default () => {
       <br />
       <br />
       <h4>This interface was written using the excellent JavaScript library: <a href="https://reactjs.org" rel="noopener noreferrer" target="_blank">React</a></h4>
-      <h4>The fantastic component library <a href="https://www.primefaces.org/primereact" rel="noopener noreferrer" target="_blank">PrimeReact</a> can be found
+      <h4>The fantastic component library <a href="https://www.primefaces.org/primereact" rel="noopener noreferrer" target="_blank">PrimeReact</a> can be found&nbsp;
       <a href="https://www.primefaces.org/primereact" rel="noopener noreferrer" target="_blank">here</a></h4>
       </Card>
    );   
