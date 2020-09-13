@@ -15,6 +15,7 @@ The developers use a variety of resources to support this project:
 * [Netbeans Perl Plugin](http://plugins.netbeans.org/plugin/36183/perl-on-netbeans) - Netbeans Perl Plugin
 * [React](https://reactjs.org) - React, JavaScript Framework
 * [Redux](https://redux.js.org) - Redux, A predictable state container for JavaScript apps
+* [React Final Form] - Form management the React way (https://final-form.org/docs/react-final-form)
 * [Git](https://git-scm.com) - Git, version control system 
 
 ### Installation
@@ -39,8 +40,8 @@ If you want to contribute to the new Admin interface you can skip the installati
 
 Start the backend test rest server (https://github.com/typicode/json-server) 
 ```
-cd WebGUI/www/developer/admin/dev-server
-npm start
+cd WebGUI/www/developer/admin/database
+json-server -p 3001 --watch db.json
 ```
 This will start the REST service on http://localhost:3001/
 

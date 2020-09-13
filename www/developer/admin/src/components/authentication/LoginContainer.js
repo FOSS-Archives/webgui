@@ -4,49 +4,25 @@ import {Panel} from 'primereact/panel';
 import {Button} from 'primereact/button';
 import {Message} from 'primereact/message';
 import { login, logout } from '../../actions/authentication';
-import { Field, reduxForm } from 'redux-form';
+import { Form, Field } from 'react-final-form';
 import Messages from '../Errors';
 
 import './LoginContainer.css';
 class LoginContainer extends Component {
-   onLogin = ({username, password}) => this.props.login(username, password);
    onLogout = event => {
       event.preventDefault();
       this.props.logout();
 
    }
    
-   renderInput = ({input, label, type, meta}) => {
-      return (
-          <div>
-            <div className="p-grid">
-               <div className="p-col-3">
-                  <div className="box"><label>{label}</label></div>
-               </div>
-               <div className="p-col-6">
-                  <div className="box"><input {...input} type={type} className="p-error" autoComplete="off" /></div>
-               </div>
-               <div className="p-col-3">
-                  <div className="box">{meta.touched ? meta.error : ''}</div>
-               </div>
-            </div>
-          </div>
-      );
-   }
-   
-   render(){
-      if ( this.props.user && this.props.user.authenticated ){
-         return <Button label="Logout" icon="pi pi-power-off" className="p-button-danger allium-logout-button" onClick={this.onLogout} />;
-      }
+   onSubmit = async values => {
+      this.props.login(values.username, values.password);
       
-      let submitable = "disabled";      
-      // Make sure the user can login
-      let { username, password } = ( this.props.loginForm && this.props.loginForm.values ) ? this.props.loginForm.values : {};
-      if ( (username && username.trim().length > 0) && (password && password.trim().length > 0) ){
-         submitable = "";
-      }
+   };
+   
+   formFormat = handleSubmit => {
       return ( 
-         <form onSubmit={this.props.handleSubmit(this.onLogin)} className="login-container">
+         <form onSubmit={handleSubmit}>
             <div className="p-grid">
                <div className="p-col-2"></div>            
                <div className="p-col-8"><Messages /></div>
@@ -54,17 +30,45 @@ class LoginContainer extends Component {
             
                <div className="p-col-4"></div>
                <div className="p-col-4">
-                   <Panel header="Admin Login">
-                      <Field name="username" component={this.renderInput} label="Username:" type="text" />
-                      <Field name="password" component={this.renderInput} label="Password:" type="password" />
-                      <div className="p-grid">
-                         <div className="p-col"><button type="submit" disabled={submitable}>Submit</button></div>
-                      </div>
-                   </Panel>
+                  <Panel header="Admin Login">
+                     <Field name="username"
+                       render={({ input, meta }) => (
+                         <div>
+                           <label>Username:</label>&nbsp;
+                           <input {...input} />
+                           {meta.touched && meta.error && <span>{meta.error}</span>}
+                         </div>
+                       )}
+                     />
+                     
+                     <Field name="password"
+                       render={({ input, meta }) => (
+                         <div>
+                           <label>Password:</label>&nbsp;
+                           <input {...input} />
+                           {meta.touched && meta.error && <span>{meta.error}</span>}
+                         </div>
+                       )}
+                     />                   
+                     <div className="p-grid">
+                        <div className="p-col"><button type="submit">Submit</button></div>
+                     </div>
+                  </Panel>
                </div>
                <div className="p-col-4"></div>
             </div>
          </form>
+      );
+   };
+   
+   render(){
+      if ( this.props.user && this.props.user.authenticated ){
+         return <Button label="Logout" icon="pi pi-power-off" className="p-button-danger allium-logout-button" onClick={this.onLogout} />;
+      }
+      
+      return ( 
+         <Form onSubmit={this.onSubmit.bind(this)} validate={validate} className="login-container" 
+               render={({ handleSubmit }) => this.formFormat( handleSubmit ) } />
       );
       
    }   
@@ -82,14 +86,13 @@ const validate = ({username, password}) => {
    return errors;
 };
 
-const formWrapped = reduxForm({ form: "loginForm", validate })(LoginContainer);
+//const formWrapped = reduxForm({ form: "loginForm", validate })(LoginContainer);
 
 // Usual Redux flow
 const mapStateToProps = state => {
    return {
-      user: state.user,
-      loginForm: state.form.loginForm
+      user: state.user
    };
 };
 
-export default connect(mapStateToProps, {login, logout})(formWrapped);
+export default connect(mapStateToProps, {login, logout})(LoginContainer);

@@ -50,7 +50,7 @@ class Groups extends Component {
                <p>Are you sure you want to delete this group?</p>
             </Dialog>
             
-            <AddGroup display={this.state.displayAddDialog} hide={e => this.setState({displayAddDialog: false})}  />
+            <AddGroup canShowDialog={this.state.displayAddDialog} hideDialog={e => this.setState({displayAddDialog: false})}  />
          </div>
       );
    }
