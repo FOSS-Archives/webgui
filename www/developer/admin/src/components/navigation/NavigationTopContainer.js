@@ -10,6 +10,9 @@ import {sessions as sessionAction} from '../../actions/sessions';
 class Menus extends Component {
    setModule = (route) => {
       switch(route) {
+        case "groups":
+          this.props.groupAction();
+          break;         
         case "users":
           this.props.userAction();
           this.props.groupAction();
@@ -74,7 +77,7 @@ class Menus extends Component {
                }, 
                {
                   "label": "Groups",
-                  "command": null,
+                  command: () => this.setModule('groups'),
                   "icon": "pi pi-users"
                },
                {

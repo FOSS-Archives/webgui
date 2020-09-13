@@ -14,20 +14,23 @@ class Groups extends Component {
    }
 
    componentDidMount() {
-      let allGroups = this.props.groups;
-      let userAssignedGroupIds = this.props.user.groups;
+      let groups = this.props.groups;
+      let userGroupIds = this.props.user.groups;
       let unnassignedGroups = [];
-      let userAssignedGroups = allGroups.filter( group => {
-            // Strip out the unnasigned groups to be displayed in the available groups.
-            if ( ! userAssignedGroupIds.includes(Object.keys(group)[0]) ){
-               unnassignedGroups.push(group);
-            }
-            return userAssignedGroupIds.includes(Object.keys(group)[0]);
-         }).map( group => { 
-            return group;
-         });
+      let userAssignedGroups = groups.filter( group => {
+         let groupId =  group.id.toString() ;
+         // Strip out the unnasigned groups to be displayed in the available groups.
+         if ( ! userGroupIds.includes(groupId) ){
+            unnassignedGroups.push( {[group.id]: group.name} );
+         }
+         return userGroupIds.includes(groupId);
+         
+      }).map( group => { 
+         return {[group.id]: group.name};
+         
+      });      
       this.setState({source: unnassignedGroups, target: userAssignedGroups});
-
+         
    }
 
    onChange(event) {
@@ -42,7 +45,7 @@ class Groups extends Component {
    groupTemplate(group) {
       let key = Object.keys(group)[0];
       return (
-          <div className="p-clearfix">
+          <div className="p-clearfix" key={key}>
              <div style={{ float: 'right' }} alt={key}>{group[key]}</div>
           </div>
       );
