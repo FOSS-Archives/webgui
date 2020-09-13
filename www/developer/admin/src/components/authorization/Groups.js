@@ -5,66 +5,52 @@ import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import AddGroup from './AddGroup';
 
 import './Groups.css';
 class Groups extends Component {
-   constructor() {
-      super();
+   constructor(props) {
+      super(props);
       this.state = {
-         displayBasic: false,
+         displayAddDialog: false,
+         displayDeleteDialog: false,
          position: 'center'
       };
-      this.onClick = this.onClick.bind(this);
-      this.onHide = this.onHide.bind(this);
    }
-   
-   add(){
-      alert("Will implement add");
-   }
-
-   onClick() {
-      this.setState({displayBasic: true});
-   }
-
-   onHide() {
-      this.setState({displayBasic: false});
-   }   
    
    renderFooter() {
       return (
           <div>
              <Button label="Yes" icon="pi pi-check" onClick={this.handleDelete.bind(this)} />
-             <Button label="No" icon="pi pi-times" onClick={this.onHide} className="p-button-secondary"/>
+             <Button label="No" icon="pi pi-times" onClick={e => this.setState({displayDeleteDialog: false})} className="p-button-secondary"/>
           </div>
       );
    }
    
    handleDelete() {
       alert("Delete triggered - needs implementation");
-      this.onHide();
+      this.setState({displayDeleteDialog: false});
    };
    
    actionTemplate(rowData, column) {
-      return (
-         <div>
-             <Button label="Delete" className="p-button-danger" onClick={this.onClick} />
-         </div>
-      );
+      return <Button label="Delete" className="p-button-danger" onClick={e => this.setState({displayDeleteDialog: true})} />;
    }
    
    render(){
       return (
          <div className="session-list">
-             <Dialog header="Delete Groups" visible={this.state.displayBasic} style={{width: '50vw'}} onHide={this.onHide} footer={this.renderFooter()}>
-                <p>Are you sure you want to delete this group?</p>
-             </Dialog>
-
-            <Button label="Add" className="p-button-success" onClick={this.add} />
+            <Button label="Add" className="p-button-success" onClick={e => this.setState({displayAddDialog: true})} />
             <DataTable value={this.props.groups} header="Groups">
                <Column field="id" header="ID" />                 
                <Column field="name" header="Group" />
-               <Column header="Delete" body={this.actionTemplate.bind(this)} style={{textAlign:'center', width: '8em'}} />
+               <Column header="Delete" body={() => this.actionTemplate()} style={{textAlign:'center', width: '8em'}} />
             </DataTable>     
+
+            <Dialog header="Delete Groups" visible={this.state.displayDeleteDialog} style={{width: '50vw'}} onHide={e => this.setState({displayDeleteDialog: false})} footer={this.renderFooter()}>
+               <p>Are you sure you want to delete this group?</p>
+            </Dialog>
+            
+            <AddGroup display={this.state.displayAddDialog} hide={e => this.setState({displayAddDialog: false})}  />
          </div>
       );
    }
