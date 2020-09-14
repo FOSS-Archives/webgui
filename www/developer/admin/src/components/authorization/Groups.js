@@ -17,7 +17,7 @@ class Groups extends Component {
          displayAddDialog: false,
          displayDeleteDialog: false,
          displayEditDialog: false,
-         id: 0,
+         group: {},
          position: 'center'
       };
    }
@@ -32,12 +32,12 @@ class Groups extends Component {
    }
    
    handleDelete(e) {
-      this.props.deleteGroup(this.props.groups, this.state.id);
+      this.props.deleteGroup(this.props.groups, this.state.group.id);
       this.setState({displayDeleteDialog: false, id: 0});
    };
    
-   setDelete(rowData,column){
-      this.setState({displayDeleteDialog: true, id: rowData.id});
+   setDelete(group){
+      this.setState({displayDeleteDialog: true, group: group});
    };
    
    actionTemplate(rowData, column) {
@@ -64,7 +64,7 @@ class Groups extends Component {
             </DataTable>     
 
             <Dialog header="Delete Groups" visible={this.state.displayDeleteDialog} style={{width: '50vw'}} onHide={e => this.setState({displayDeleteDialog: false})} footer={this.renderFooter()}>
-               <p>Are you sure you want to delete this group?</p>
+               <p>Are you sure you want to delete the group [{this.state.group.name}]?</p>
             </Dialog>
             
             <AddGroup canShowDialog={this.state.displayAddDialog} hideDialog={e => this.setState({displayAddDialog: false})}  />
