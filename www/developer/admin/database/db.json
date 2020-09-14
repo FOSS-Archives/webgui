@@ -1,72 +1,91 @@
 {
-   "login": [
-      {
-         "id" : "55f97ffd69-47jq2",
-         "identity": {
-            "avatar": "",
-            "first": null,
-            "last": null
-         },
-         "joined": "2002-04-27",
-         "session": "_2d-UzZpNpCv_j-bKky9Tw"         
-      }
-   ],
-   "groups": [
-         {"id": 1, "name": "One"},
-         {"id": 2, "name": "Two"},
-         {"id": 3, "name": "Three"},
-         {"id": 4, "name": "Four"}
-   ],
-   "users": [
-         {
-            "id": "55f97ffd69-47jq2",
-            "username": "myUsername",
-            "alias" : "myAlias",
-            "email": "jdoe@whatever.com",
-            "firstname": "John",
-            "lastname": "Doe",
-            "avatar": "myAvatar",
-            "photo" : "myPhoto",
-            "created": "1554747081111",
-            "lastlogin": "1554747081122",
-            "language" : "English/US",
-            "friendly" : false,
-            "dateformat" : "YYYY/MM/DD",
-            "timeformat" : "24hrs",
-            "uilevel" : "5",
-            "profileprivacy" : "2",
-            "messageoptions" : "2",
-            "showwhenonline" : true,
-            "notifyemail" : true,
-            "notifyesms" : true,
-            "gender" : "male",
-            "pronoun" : "him",
-            "birthdate" : "1554747081111",
-            "active": true,
-            "cell" : "8005551212",
-            "signature" : "John Doe LLC",
-            "homephone" : "8005551213",
-            "workphone" : "8005551214",
-            "homeaddress" : "1 Main Street",
-            "homecity" : "Springfield",
-            "homestate" : "XX",
-            "homezip" : "000000",
-            "homecountry" : "US",
-            "hometimezone" : "EST",
-            "companyname" : "WebGUI",
-            "workdepartment":"Personnel",
-            "workwebsite":"http://www.webgui.org",
-            "workaddress":"10 Main Street",
-            "workcity":"Springfield",
-            "workstate":"XX",
-            "workzip":"00001",            
-            "workcountry":"US",
-            "worktimezone" : "PST",
-            "groups": ["1","2"]
-         }
-   ],
+  "login": [
+    {
+      "id": "55f97ffd69-47jq2",
+      "identity": {
+        "avatar": "",
+        "first": null,
+        "last": null
+      },
+      "joined": "2002-04-27",
+      "session": "_2d-UzZpNpCv_j-bKky9Tw"
+    }
+  ],
+  "groups": [
+    {
+      "name": "one",
+      "description": "First group",
+      "id": 1
+    },
+    {
+      "name": "two",
+      "description": "second group",
+      "id": 2
+    },
+    {
+      "name": "third",
+      "description": "David Hernandez",
+      "id": 3
+    },
+    {
+      "name": "Fourth",
+      "description": "Fourth",
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "id": "55f97ffd69-47jq2",
+      "username": "myUsername",
+      "alias": "myAlias",
+      "email": "jdoe@whatever.com",
+      "firstname": "John",
+      "lastname": "Doe",
+      "avatar": "myAvatar",
+      "photo": "myPhoto",
+      "created": "1554747081111",
+      "lastlogin": "1554747081122",
+      "language": "English/US",
+      "friendly": false,
+      "dateformat": "YYYY/MM/DD",
+      "timeformat": "24hrs",
+      "uilevel": "5",
+      "profileprivacy": "2",
+      "messageoptions": "2",
+      "showwhenonline": true,
+      "notifyemail": true,
+      "notifyesms": true,
+      "gender": "male",
+      "pronoun": "him",
+      "birthdate": "1554747081111",
+      "active": true,
+      "cell": "8005551212",
+      "signature": "John Doe LLC",
+      "homephone": "8005551213",
+      "workphone": "8005551214",
+      "homeaddress": "1 Main Street",
+      "homecity": "Springfield",
+      "homestate": "XX",
+      "homezip": "000000",
+      "homecountry": "US",
+      "hometimezone": "EST",
+      "companyname": "WebGUI",
+      "workdepartment": "Personnel",
+      "workwebsite": "http://www.webgui.org",
+      "workaddress": "10 Main Street",
+      "workcity": "Springfield",
+      "workstate": "XX",
+      "workzip": "00001",
+      "workcountry": "US",
+      "worktimezone": "PST",
+      "groups": [
+        "1",
+        "2"
+      ]
+    }
+  ],
    "sessions": [
-         {
+      {
             "id": "_2d-UzZpNpCv_j-bKky9Tw",
             "uid": "55f97ffd69-47jq2",
             "username": "myUsername",
@@ -74,6 +93,6 @@
             "last_view": "22222",
             "ip": "127.0.0.1",
             "created": "111111111"
-	      }
+      }
    ]
 }
