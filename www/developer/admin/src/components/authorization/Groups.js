@@ -6,7 +6,8 @@ import {Dialog} from 'primereact/dialog';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import AddGroup from './AddGroup';
-import {deleteGroup, groups as fetchGroups} from '../../actions/groups';
+import EditGroup from './EditGroup';
+import {deleteGroup, groups as fetchGroups, setGroup} from '../../actions/groups';
 
 import './Groups.css';
 class Groups extends Component {
@@ -15,6 +16,7 @@ class Groups extends Component {
       this.state = {
          displayAddDialog: false,
          displayDeleteDialog: false,
+         displayEditDialog: false,
          id: 0,
          position: 'center'
       };
@@ -42,12 +44,20 @@ class Groups extends Component {
       return <Button label="Delete" className="p-button-danger" onClick={e => this.setDelete(rowData)} />;
    }
    
+   editTemplate(rowData){
+      return <Button onClick={e => this.setEditGroup(rowData)} label={rowData.id.toString()} tooltip="Edit" className="p-button-secondary p-button-text" />;
+   }
+   setEditGroup(group){
+      this.props.setGroup(group);
+      this.setState({displayEditDialog: true});
+   }
+   
    render(){
       return (
          <div className="session-list">
             <Button label="Add" className="p-button-success" onClick={e => this.setState({displayAddDialog: true})} />
             <DataTable value={this.props.groups} header="Groups">
-               <Column field="id" header="ID" width="20" style={{width:'10%', textAlign:'right'}} />                 
+               <Column field="id" header="ID" style={{width:'10%', textAlign:'right'}} body={this.editTemplate.bind(this)} />
                <Column field="name" header="Group" />
                <Column field="description" header="Description" />               
                <Column header="Delete" body={this.actionTemplate.bind(this)} style={{textAlign:'center', width: '8em'}} />
@@ -58,6 +68,7 @@ class Groups extends Component {
             </Dialog>
             
             <AddGroup canShowDialog={this.state.displayAddDialog} hideDialog={e => this.setState({displayAddDialog: false})}  />
+            <EditGroup canShowDialog={this.state.displayEditDialog} hideDialog={e => this.setState({displayEditDialog: false})}  />
          </div>
       );
    }
@@ -71,4 +82,4 @@ const mapStateToProps = state => {
 
 const routed = withRouter(Groups);
 
-export default connect(mapStateToProps, {deleteGroup,fetchGroups})(routed);
+export default connect(mapStateToProps, {deleteGroup,fetchGroups,setGroup})(routed);

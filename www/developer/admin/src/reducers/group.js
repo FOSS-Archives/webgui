@@ -1,7 +1,7 @@
 import * as constants from '../actions/constants';
 export default (state = [], action) => {
    switch(action.type){
-      case constants.GROUPS:
+      case constants.GROUP:
          return action.payload;
       
       case constants.PURGE:

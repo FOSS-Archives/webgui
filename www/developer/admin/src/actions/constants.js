@@ -1,4 +1,5 @@
 export const ERROR = 'ERROR';
+export const GROUP = 'GROUP';
 export const GROUPS = 'GROUPS';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';

@@ -40,7 +40,7 @@ const deleteGroup = (groups, id) => async dispatch => {
          
          dispatch({
             type: constants.MESSAGE_OK,
-            payload: { detail: "Group deleted" }
+            payload: { detail: "Deleted" }
          });
       })
       .catch( error => {
@@ -51,4 +51,42 @@ const deleteGroup = (groups, id) => async dispatch => {
       });
 };
 
-export { addGroup, deleteGroup, groups };
+const updateGroup = (groups, group) => async dispatch => {
+   await jsonPlaceholder.put(process.env.REACT_APP_groups + '/' + group.id, group)
+      .then( response => {
+         // Edit the group in the array of groups
+         let editedGroups = [];
+         groups.forEach( current => {
+            if ( current.id === group.id ){
+               current = group;
+console.log(current);               
+            }
+            editedGroups.push(current);
+         });
+         // Update the group set in the store to reflect the edited group
+         dispatch({
+            type: constants.GROUPS,
+            payload: editedGroups
+         });
+         
+         dispatch({
+            type: constants.MESSAGE_OK,
+            payload: { detail: "Updated" }
+         });
+      })
+      .catch( error => {
+         dispatch({
+            type: constants.ERROR,
+            payload: { detail: error.response.statusText, sumary: error.response.status }
+         });
+      });
+};
+
+const setGroup = group => async dispatch => {
+   dispatch({
+      type: constants.GROUP,
+      payload: group
+   });   
+};
+
+export { addGroup, deleteGroup, groups, updateGroup, setGroup };
