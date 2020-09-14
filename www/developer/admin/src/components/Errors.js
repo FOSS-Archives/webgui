@@ -14,7 +14,11 @@ class Errors extends Component {
    }
 
    render(){  
-      return <Messages ref={el => this.messages = el} />;
+      return (
+         <div>
+            <Messages ref={el => this.messages = el} style={{width:'95%',paddingLeft:'1em'}} />
+         </div>
+      );
    }
 };
 
