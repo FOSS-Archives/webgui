@@ -30,11 +30,11 @@ class LoginContainer extends Component {
             
                <div className="p-col-4"></div>
                <div className="p-col-4">
-                  <Panel header="Admin Login">
+                  <Panel header="Admin Login">                  
                      <Field name="username"
                        render={({ input, meta }) => (
                          <div>
-                           <label>Username:</label>&nbsp;
+                           <label className="p-col-fixed" style={{width:'100px'}}>Username:</label>
                            <input {...input} />
                            {meta.touched && meta.error && <span>{meta.error}</span>}
                          </div>
@@ -44,7 +44,7 @@ class LoginContainer extends Component {
                      <Field name="password"
                        render={({ input, meta }) => (
                          <div>
-                           <label>Password:</label>&nbsp;
+                           <label className="p-col-fixed" style={{width:'100px'}}>Password:</label>
                            <input {...input} />
                            {meta.touched && meta.error && <span>{meta.error}</span>}
                          </div>
