@@ -59,7 +59,6 @@ const updateGroup = (groups, group) => async dispatch => {
          groups.forEach( current => {
             if ( current.id === group.id ){
                current = group;
-console.log(current);               
             }
             editedGroups.push(current);
          });
