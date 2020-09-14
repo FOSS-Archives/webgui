@@ -15,10 +15,7 @@ class LoginContainer extends Component {
 
    }
    
-   onSubmit = async values => {
-      this.props.login(values.username, values.password);
-      
-   };
+   onSubmit = async values => this.props.login(values.username, values.password);
    
    formFormat = ({ form, handleSubmit }) => {
       return ( 

@@ -9,6 +9,22 @@ const groups = () => async dispatch => {
    });
 };
 
+const addGroup = group => async dispatch => {
+   await jsonPlaceholder.post(process.env.REACT_APP_groups, group)
+      .then( response => {
+         dispatch({
+            type: constants.MESSAGE_OK,
+            payload: { detail: "Group added", type: "OK" }
+         });
+      })
+      .catch( error => {
+         dispatch({
+            type: constants.ERROR,
+            payload: { detail: error.response.statusText, sumary: error.response.status }
+         });
+      });
+};
+
 const deleteGroup = id => async dispatch => {
    await jsonPlaceholder.delete(process.env.REACT_APP_groups + '/' + id)
       .then( response => {
@@ -25,4 +41,4 @@ const deleteGroup = id => async dispatch => {
       });
 };
 
-export { deleteGroup, groups };
+export { addGroup, deleteGroup, groups };
