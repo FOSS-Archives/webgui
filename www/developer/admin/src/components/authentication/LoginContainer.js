@@ -20,7 +20,7 @@ class LoginContainer extends Component {
       
    };
    
-   formFormat = handleSubmit => {
+   formFormat = ({ form, handleSubmit }) => {
       return ( 
          <form onSubmit={handleSubmit}>
             <div className="p-grid">
@@ -68,7 +68,7 @@ class LoginContainer extends Component {
       
       return ( 
          <Form onSubmit={this.onSubmit.bind(this)} validate={validate} className="login-container" 
-               render={({ handleSubmit }) => this.formFormat( handleSubmit ) } />
+               render={formProps => this.formFormat( formProps )} />
       );
       
    }   
