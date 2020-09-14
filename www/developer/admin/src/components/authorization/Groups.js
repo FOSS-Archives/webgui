@@ -30,8 +30,7 @@ class Groups extends Component {
    }
    
    handleDelete(e) {
-      this.props.deleteGroup(this.state.id);
-      this.props.fetchGroups();
+      this.props.deleteGroup(this.props.groups, this.state.id);
       this.setState({displayDeleteDialog: false, id: 0});
    };
    

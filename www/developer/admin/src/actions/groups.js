@@ -25,12 +25,22 @@ const addGroup = group => async dispatch => {
       });
 };
 
-const deleteGroup = id => async dispatch => {
+const deleteGroup = (groups, id) => async dispatch => {
    await jsonPlaceholder.delete(process.env.REACT_APP_groups + '/' + id)
       .then( response => {
+         // Remove the group from all grous that has the id that was just removed from the DB
+         var subGroups = groups.filter( group => {
+            return group.id !== id;
+         });
+         // Update the group set in the store to reflect the removed group
+         dispatch({
+            type: constants.GROUPS,
+            payload: subGroups
+         });         
+         
          dispatch({
             type: constants.MESSAGE_OK,
-            payload: { detail: "Group deleted", type: "OK" }
+            payload: { detail: "Group deleted" }
          });
       })
       .catch( error => {
