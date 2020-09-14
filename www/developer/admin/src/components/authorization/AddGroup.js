@@ -23,7 +23,7 @@ class AddGroup extends Component {
       );
    };
    
-   formFormat = ({ form, handleSubmit }) => {
+   formFormat = ({ form, handleSubmit, submitting, pristine }) => {
       return ( 
          <form onSubmit={handleSubmit}>
             <div className="p-grid">
@@ -52,7 +52,7 @@ class AddGroup extends Component {
                </div>
                
                <div className="p-col-2"></div>
-               <div className="p-col-10"><button type="submit">Submit</button></div>
+               <div className="p-col-10"><button type="submit" disabled={submitting || pristine}>Submit</button></div>
             </div>
          </form>
       );
