@@ -35,7 +35,7 @@ class LoginContainer extends Component {
                        render={({ input, meta }) => (
                          <div>
                            <label className="p-col-fixed" style={{width:'100px'}}>Username:</label>
-                           <input {...input} />
+                           <input {...input} placeholder="username" />
                            {meta.touched && meta.error && <span>{meta.error}</span>}
                          </div>
                        )}
@@ -45,7 +45,7 @@ class LoginContainer extends Component {
                        render={({ input, meta }) => (
                          <div>
                            <label className="p-col-fixed" style={{width:'100px'}}>Password:</label>
-                           <input {...input} />
+                           <input type="password" {...input} placeholder="password" />
                            {meta.touched && meta.error && <span>{meta.error}</span>}
                          </div>
                        )}
