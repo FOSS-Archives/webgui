@@ -5,6 +5,7 @@ import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {deleteSession} from '../../actions/sessions';
 
 import './Sessions.css';
 class Sessions extends Component {
@@ -12,14 +13,16 @@ class Sessions extends Component {
       super();
       this.state = {
          displayBasic: false,
+         id: 0,
          position: 'center'
       };
       this.onClick = this.onClick.bind(this);
       this.onHide = this.onHide.bind(this);
+      this.handleDelete = this.handleDelete.bind(this);
    }
 
-   onClick() {
-      this.setState({displayBasic: true});
+   onClick(session) {
+      this.setState({displayBasic: true, id: session.id});
    }
 
    onHide() {
@@ -28,22 +31,22 @@ class Sessions extends Component {
    
    renderFooter() {
       return (
-          <div>
-             <Button label="Yes" icon="pi pi-check" onClick={this.handleDelete.bind(this)} />
-             <Button label="No" icon="pi pi-times" onClick={this.onHide} className="p-button-secondary"/>
-          </div>
+         <div>
+            <Button label="Yes" icon="pi pi-check" onClick={this.handleDelete} />
+            <Button label="No" icon="pi pi-times" onClick={this.onHide} className="p-button-secondary"/>
+         </div>
       );
    }
    
    handleDelete() {
-      alert("Delete triggered - needs implementation");
+      this.props.deleteSession(this.props.sessions, this.state.id);
       this.onHide();
    };
    
    actionTemplate(rowData, column) {
       return (
          <div>
-             <Button label="Delete" className="p-button-danger" onClick={this.onClick} />
+             <Button label="Delete" className="p-button-danger" onClick={e => this.onClick(rowData)} />
          </div>
       );
    }
@@ -77,4 +80,4 @@ const mapStateToProps = state => {
 
 const routed = withRouter(Sessions);
 
-export default connect(mapStateToProps)(routed);
+export default connect(mapStateToProps, { deleteSession })(routed);
