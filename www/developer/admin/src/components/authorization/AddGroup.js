@@ -1,29 +1,19 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
 import { Form, Field } from 'react-final-form';
-import errors from '../../actions/errors';
-import {addGroup, groups} from '../../actions/groups';
-
 import './AddGroup.css';
-class AddGroup extends Component {
-   
-   handleAdd = async group => {      
-      this.props.addGroup(group);
-      this.props.groups();
-      this.props.hideDialog();
-   };
+export default ({handleAdd, canShowDialog, hideDialog}) => {
 
-   renderFooter = () => {
+   let renderFooter = () => {
       return (
          <div>
-            <Button label="No" icon="pi pi-times" onClick={this.props.hideDialog} className="p-button-secondary"/>
+            <Button label="No" icon="pi pi-times" onClick={e => hideDialog()} className="p-button-secondary"/>
          </div>
       );
    };
    
-   formFormat = ({ form, handleSubmit, submitting, pristine }) => {
+   let formFormat = ({ form, handleSubmit, submitting, pristine }) => {
       return ( 
          <form onSubmit={handleSubmit}>
             <div className="p-grid">
@@ -58,17 +48,13 @@ class AddGroup extends Component {
       );
    };   
    
-   render(){
-      return (
-         <div className="session-list">
-            <Dialog header="Add Group" visible={this.props.canShowDialog} style={{width: '50vw'}} onHide={this.props.hideDialog} footer={this.renderFooter()}>
-               <Form onSubmit={this.handleAdd.bind(this)} render={formProps => this.formFormat( formProps )} />
-            </Dialog>
-         </div>
-      );
-   }
+   return (
+      <div className="session-list">
+         <Dialog header="Add Group" visible={canShowDialog} style={{width: '50vw'}} onHide={hideDialog} footer={renderFooter()}>
+            <Form onSubmit={handleAdd} render={formProps => formFormat( formProps )} />
+         </Dialog>
+      </div>
+   );
 };
-
-export default connect(null,{addGroup, groups, errors})(AddGroup);
 
 

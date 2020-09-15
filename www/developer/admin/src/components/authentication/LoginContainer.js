@@ -17,7 +17,7 @@ class LoginContainer extends Component {
    
    onSubmit = async values => this.props.login(values.username, values.password);
    
-   formFormat = ({ form, handleSubmit }) => {
+   formFormat = ({ form, handleSubmit, submitting, pristine }) => {
       return ( 
          <form onSubmit={handleSubmit}>
             <div className="p-grid">
@@ -48,7 +48,7 @@ class LoginContainer extends Component {
                        )}
                      />                   
                      <div className="p-grid">
-                        <div className="p-col"><button type="submit">Submit</button></div>
+                        <div className="p-col"><button type="submit" disabled={submitting || pristine}>Submit</button></div>
                      </div>
                   </Panel>
                </div>

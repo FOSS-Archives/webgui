@@ -46,7 +46,7 @@ class Groups extends Component {
       let key = Object.keys(group)[0];
       return (
           <div className="p-clearfix" key={key}>
-             <div style={{ float: 'right' }} alt={key}>{group[key]}</div>
+             <div alt={key} style={{ float: 'right' }}>{group[key]}</div>
           </div>
       );
     }   

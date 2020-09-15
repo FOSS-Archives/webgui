@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {Menubar} from 'primereact/menubar';
 import {InputText} from 'primereact/inputtext';
-import {groups as groupAction} from '../../actions/groups';
+import {fetchGroups as groupAction} from '../../actions/groups';
 import {users as userAction} from '../../actions/users';
 import {sessions as sessionAction} from '../../actions/sessions';
 

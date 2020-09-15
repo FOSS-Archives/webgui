@@ -1,7 +1,7 @@
 import * as constants from './constants';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
-const groups = () => async dispatch => {
+const fetchGroups = () => async dispatch => {
    const response = await jsonPlaceholder.get(process.env.REACT_APP_groups);
    dispatch({
       type: constants.GROUPS,
@@ -88,4 +88,4 @@ const setGroup = group => async dispatch => {
    });   
 };
 
-export { addGroup, deleteGroup, groups, updateGroup, setGroup };
+export { addGroup, deleteGroup, fetchGroups, updateGroup, setGroup };
