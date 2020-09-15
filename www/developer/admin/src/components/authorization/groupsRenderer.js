@@ -42,7 +42,7 @@ export default ({
             <Column header="Delete" body={deleteTemplate} style={{textAlign:'center', width: '8em'}} />
          </DataTable>
          
-         <AddGroup canShowDialog={isAddVisible} hideDialog={hideAddDialog} groups={groups} handleAdd={handleAdd} />
+         <AddGroup canShowDialog={isAddVisible} hideDialog={hideAddDialog} handleAdd={handleAdd} />
          <DeleteGroup canShowDialog={isDeleteVisible} hideDialog={hideDeleteDialog} group={group} groups={groups} handleDelete={handleDelete} />
          <EditGroup canShowDialog={isEditVisible} hideDialog={hideEditDialog} group={group} groups={groups} handleEdit={handleEdit} />
       </div>
