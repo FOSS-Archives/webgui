@@ -2,11 +2,21 @@ import * as constants from './constants';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
 const fetchGroups = () => async dispatch => {
-   const response = await jsonPlaceholder.get(process.env.REACT_APP_groups);
-   dispatch({
-      type: constants.GROUPS,
-      payload: response.data
-   });
+   await jsonPlaceholder.get(process.env.REACT_APP_groups)
+      .then( response => {
+         dispatch({
+            type: constants.GROUPS,
+            payload: response.data
+         });
+         
+      })
+      .catch( error => {
+         dispatch({
+            type: constants.ERROR,
+            payload: { detail: error.response.statusText, sumary: error.response.status }
+         });
+      });   
+   
 };
 
 const addGroup = group => async dispatch => {
@@ -14,7 +24,7 @@ const addGroup = group => async dispatch => {
       .then( response => {
          dispatch({
             type: constants.MESSAGE_OK,
-            payload: { detail: "Group added", type: "OK" }
+            payload: { detail: "Added", type: "OK" }
          });
       })
       .catch( error => {

@@ -30,15 +30,14 @@ export default ({
    };
       
    let editTemplate = (rowData, column) => {
-      return <Button label={rowData.id.toString()} onClick={e => showEditDialog(rowData)} tooltip="Edit" className="p-button-secondary p-button-text" />;
+      return <Button label={rowData.name} onClick={e => showEditDialog(rowData)} tooltip="Edit" className="p-button-secondary p-button-text" />;
    };
       
    return (
       <div className="session-list">
          <Button label="Add" className="p-button-success" onClick={showAddDialog} />
          <DataTable value={groups} header="Groups">
-            <Column field="id" header="ID" body={editTemplate} style={{width:'10%', textAlign:'right'}} />
-            <Column field="name" header="Group" />
+            <Column field="name" header="Group" body={editTemplate} style={{textAlign:'center', width:'30%'}} />
             <Column field="description" header="Description" />               
             <Column header="Delete" body={deleteTemplate} style={{textAlign:'center', width: '8em'}} />
          </DataTable>
