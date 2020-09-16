@@ -2,9 +2,9 @@ import React from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Button} from 'primereact/button';
 import {Column} from 'primereact/column';
-import AddGroup from './AddGroup';
-import DeleteGroup from './DeleteGroup';
-import EditGroup from './EditGroup';
+import AddGroup from './addGroupRenderer';
+import DeleteGroup from './deleteGroupRenderer';
+import EditGroup from './editGroupRenderer';
 import './Groups.css';
 export default ({
       groups, group={},

@@ -35,4 +35,21 @@ const deleteSession = (sessions, id) => async dispatch => {
       });
 };
 
-export { deleteSession, sessions };
+const fetchLoginHistory = () => async dispatch => {
+   await jsonPlaceholder.get(process.env.REACT_APP_logins)
+      .then( response => {
+         dispatch({
+            type: constants.LOGINS,
+            payload: response.data
+         });
+
+      })
+      .catch( error => {
+         dispatch({
+            type: constants.ERROR,
+            payload: { detail: error.response.statusText, sumary: error.response.status }
+         });
+      });
+};
+
+export { deleteSession, fetchLoginHistory, sessions };

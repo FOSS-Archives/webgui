@@ -5,14 +5,17 @@ import {Menubar} from 'primereact/menubar';
 import {InputText} from 'primereact/inputtext';
 import {fetchGroups as groupAction} from '../../actions/groups';
 import {users as userAction} from '../../actions/users';
-import {sessions as sessionAction} from '../../actions/sessions';
+import {sessions as sessionAction, fetchLoginHistory} from '../../actions/sessions';
 
 class Menus extends Component {
    setModule = (route) => {
       switch(route) {
         case "groups":
           this.props.groupAction();
-          break;         
+          break;
+        case "loginHistory":
+          this.props.fetchLoginHistory();
+          break;
         case "users":
           this.props.userAction();
           this.props.groupAction();
@@ -82,7 +85,7 @@ class Menus extends Component {
                },
                {
                   "label": "Login History",
-                  "command": null,
+                  command: () => this.setModule('loginHistory'),
                   "icon": "pi pi-calendar"
                }, 
                {
@@ -111,4 +114,4 @@ class Menus extends Component {
 
 const routedMenu = withRouter(Menus);
 
-export default connect(null, {groupAction, userAction, sessionAction})(routedMenu);
+export default connect(null, {fetchLoginHistory, groupAction, userAction, sessionAction})(routedMenu);
