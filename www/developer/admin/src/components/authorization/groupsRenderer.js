@@ -7,7 +7,7 @@ import DeleteGroup from './deleteGroupRenderer';
 import EditGroup from './editGroupRenderer';
 import './Groups.css';
 export default ({
-      groups, group={},
+      groups, group,
       
       hideAddDialog,
       isAddVisible,
