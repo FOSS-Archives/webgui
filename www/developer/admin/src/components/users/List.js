@@ -3,6 +3,7 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import { updateUser } from '../../actions/users';
 
 import './List.css';
 class Users extends Component {
@@ -14,6 +15,7 @@ class Users extends Component {
    }
    
    displaySelection(event) {
+      this.props.updateUser(event.value);      
       let route = '/user/' + event.value.id;
       this.props.history.push(route);
    }
@@ -46,4 +48,4 @@ const mapStateToProps = state => {
 
 const routedUsers = withRouter(Users);
 
-export default connect(mapStateToProps)(routedUsers);
+export default connect(mapStateToProps, {updateUser})(routedUsers);
