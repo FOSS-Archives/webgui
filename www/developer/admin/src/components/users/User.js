@@ -1,61 +1,49 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {BreadCrumb} from 'primereact/breadcrumb';
-import {TabView,TabPanel} from 'primereact/tabview';
-import Account from './Account';
-import Groups from './Groups';
-import Preferences from './Preferences';
-import Profile from './Profile';
-import UI from './UI'
+import { saveUser, updateUser } from '../../actions/users';
+import UserRenderer from './userRenderer';
 
 import './User.css';
-const User = props => {
-   if (!props.users){
-      props.history.push('/');
+class User extends Component {
+   constructor(props){
+      super(props);
+      this.saveUser = this.saveUser.bind(this);
+      this.updateUser = this.updateUser.bind(this);
    }
    
-   let user = props.users.find( user => {
-      if ( user.id === props.match.params.id ){
-         return user;
+   componentDidMount(){
+      if (!this.props.users){
+         this.props.history.push('/');
+         
+      }else{
+         this.props.users.forEach( user => {
+            if ( user.id === this.props.match.params.id ){
+               this.updateUser(user);
+            } 
+         });
       }
-      return null;
-   });
-   
-   if (!user){
-      props.history.push('/');
+      
    }
    
-   let label = user.username + ' (' + user.id + ')';
+   saveUser(user){
+      this.props.saveUser(this.props.users, user);
+   }
    
-   return (
-      <div>
-         <BreadCrumb home={{icon: 'pi pi-list', command: () => props.history.push('/users')}} model={[{ label: label }]} style={{border:"none"}} />
-         <TabView>
-             <TabPanel header="Account">
-                 <Account {...user} />
-             </TabPanel>
-             <TabPanel header="User Interface">
-                 <UI {...user} />
-             </TabPanel>             
-             <TabPanel header="Profile">
-                 <Profile {...user} />
-             </TabPanel>
-             <TabPanel header="Groups">
-                 <Groups user={user} groups={props.groups} />
-             </TabPanel>
-             <TabPanel header="Preferences">
-                 <Preferences {...user} />
-             </TabPanel>
-         </TabView>
-      </div>
-   );
+   updateUser(user){
+      this.props.updateUser(user);  
+   }
+   
+   render(){
+      return <UserRenderer history={this.props.history} user={this.props.user} groups={this.props.groups} updateUser={this.updateUser} saveUser={this.saveUser} />;
+   }
 };
 
 const mapStateToProps = state => {
    return {
       groups: state.groups,
-      users: state.users
+      users: state.users,
+      user: state.user
    };   
 };
 
-export default connect(mapStateToProps)(User);
+export default connect(mapStateToProps, {saveUser, updateUser})(User);

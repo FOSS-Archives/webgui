@@ -8,4 +8,5 @@ export const MENUS = 'MENUS';
 export const MESSAGE_OK = 'MESSAGE_OK';
 export const PURGE = 'PURGE_STORE_STATE';
 export const USERS = 'USERS';
+export const USER = 'USER';
 export const SESSIONS = 'SESSIONS';

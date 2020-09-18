@@ -88,7 +88,7 @@ const validate = ({username, password}) => {
 // Usual Redux flow
 const mapStateToProps = state => {
    return {
-      user: state.user
+      user: state.loggedInUser
    };
 };
 

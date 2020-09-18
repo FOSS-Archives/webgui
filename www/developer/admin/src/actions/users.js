@@ -2,7 +2,7 @@ import * as constants from './constants';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 import {epocToFormatDate} from '../util/date/';
 
-export const users = () => async dispatch => {
+const users = () => async dispatch => {
    const response = await jsonPlaceholder.get(process.env.REACT_APP_users);
    let data = response.data;
    let users = [];
@@ -20,3 +20,44 @@ export const users = () => async dispatch => {
       });      
    }   
 };
+
+const updateUser = (user) => async dispatch => {
+   dispatch({
+      type: constants.USER,
+      payload: user
+   });      
+};
+
+const saveUser = (users, user) => async dispatch => {
+   await jsonPlaceholder.put(process.env.REACT_APP_users + '/' + user.id, user)
+      .then( response => {
+         // Edit the group in the array of groups
+         let editedUsers = [];
+         users.forEach( current => {
+            if ( current.id === user.id ){
+               current = user;
+            }
+            editedUsers.push(current);
+         });
+         // Update the group set in the store to reflect the edited group
+         dispatch({
+            type: constants.USERS,
+            payload: editedUsers
+         });
+         
+         dispatch({
+            type: constants.MESSAGE_OK,
+            payload: { detail: "Updated" }
+         });
+alert("Saved user...");
+      })
+      .catch( error => {
+         dispatch({
+            type: constants.ERROR,
+            payload: { detail: error.response.statusText, sumary: error.response.status }
+         });
+      });   
+   
+};
+
+export { users, saveUser, updateUser };

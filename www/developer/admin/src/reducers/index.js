@@ -5,6 +5,7 @@ import group from './group';
 import groups from './groups';
 import logins from './logins';
 import users from './users';
+import user from './user';
 import sessions from './sessions';
 
 const rootReducer = combineReducers({
@@ -12,9 +13,10 @@ const rootReducer = combineReducers({
    groups: groups,
    group: group,
    logins: logins,
-   user: authentication,
+   loggedInUser: authentication,
    sessions: sessions,
-   users: users
+   users: users,
+   user: user
 });
 
 export default rootReducer;
