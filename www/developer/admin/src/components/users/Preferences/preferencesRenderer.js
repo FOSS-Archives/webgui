@@ -13,11 +13,11 @@ export default ({user}) => {
 
         <TabPanel tabId="vertical-tab-auth">
           <p>Authentication Information</p>
-          <UI {...user} />
         </TabPanel>
 
         <TabPanel tabId="vertical-tab-misc">
           <p>Miscellaneous Information</p>
+          <UI {...user} />
         </TabPanel>        
       </Tabs>
    );
