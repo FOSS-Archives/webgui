@@ -17,11 +17,11 @@ const mainContainer = props => {
 
    } else {
       return (
-          <Router>
-             <NavigationTop loginContainer={<Login user={props.user} />} />
-             <Messages />
-             <BottomPanel />              
-          </Router>
+         <Router>
+            <NavigationTop loginContainer={<Login user={props.user} />} />
+            <Messages />
+            <BottomPanel />              
+         </Router>
       );
 
    }

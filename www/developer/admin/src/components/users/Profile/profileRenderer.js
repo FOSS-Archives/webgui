@@ -1,36 +1,29 @@
 import React from 'react';
-import { Tab, TabPanel, Tabs, TabList } from "react-web-tabs";
+import {Fieldset} from "primereact/fieldset";
 import Contact from './contactRenderer';
 import Home from './homeRenderer';
 import Personal from './personalRenderer';
 import Work from './workRenderer';
 
-export default ({user}) => {
+export default ({user, index}) => {
    return (
-      <Tabs defaultTab="vertical-tab-one" vertical className="vertical-tabs">
-        <TabList>
-          <Tab tabFor="vertical-tab-contact">Contact</Tab>        
-          <Tab tabFor="vertical-tab-home">Home</Tab>
-          <Tab tabFor="vertical-tab-personal">Personal</Tab>          
-          <Tab tabFor="vertical-tab-work">Work</Tab>          
-        </TabList>
-
-        <TabPanel tabId="vertical-tab-contact">
+      <div>
+        <Fieldset legend="Contact">
            <Contact {...user} />
-        </TabPanel>
+        </Fieldset>
 
-        <TabPanel tabId="vertical-tab-home">
+        <Fieldset legend="Home">
            <Home {...user} />
-        </TabPanel>
+        </Fieldset>
         
-        <TabPanel tabId="vertical-tab-personal">
+        <Fieldset legend="Personal">
            <Personal {...user} />
-        </TabPanel>
+        </Fieldset>
         
-        <TabPanel tabId="vertical-tab-work">
+        <Fieldset legend="Work">
            <Work {...user} />
-        </TabPanel>        
-      </Tabs>
+        </Fieldset>        
+      </div>
    );
 };
 

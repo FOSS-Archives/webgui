@@ -8,11 +8,10 @@ import registerServiceWorker from './registerServiceWorker';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import './styles/primeflex.css';
+import 'primeflex/primeflex.css';
 // Our app starts here
 import MainContainer from './components/MainContainer';
 import {store, persistor} from './store';
-
 render(
    <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

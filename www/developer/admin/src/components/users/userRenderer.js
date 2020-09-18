@@ -16,15 +16,15 @@ export default ({user, groups, history, updateUser, saveUser}) => {
              <TabPanel header="Account">
                  <Account user={user} updateUser={updateUser} saveUser={saveUser} />
              </TabPanel>
-             <TabPanel header="User Interface">
-<div>interface goes here</div>
-             </TabPanel>             
              <TabPanel header="Profile">
                  <Profile user={user} />
              </TabPanel>
              <TabPanel header="Groups">
                  <Groups user={user} groups={groups} />
              </TabPanel>
+             <TabPanel header="User Interface">
+<div>interface goes here</div>
+             </TabPanel>             
              <TabPanel header="Preferences">
                  <Preferences {...user} />
              </TabPanel>

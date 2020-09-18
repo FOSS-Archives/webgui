@@ -2,6 +2,7 @@ import React from 'react';
 import {Panel} from 'primereact/panel';
 import {Button} from 'primereact/button';
 import {Message} from 'primereact/message';
+import {Captcha} from 'primereact/captcha';
 import {Form, Field} from 'react-final-form';
 import Messages from '../Errors';
 
@@ -51,6 +52,7 @@ export default ({user, onSubmit, onLogout}) => {
                        )}
                      />                   
                      <div className="p-grid">
+                        <div className="p-col"><Captcha siteKey="mysitekey" ></Captcha></div>
                         <div className="p-col"><button type="submit" disabled={submitting || pristine}>Submit</button></div>
                      </div>
                   </Panel>
@@ -66,7 +68,10 @@ export default ({user, onSubmit, onLogout}) => {
       
    }else{
       return ( 
-         <Form onSubmit={onSubmit} validate={validate} className="login-container" render={formProps => formFormat( formProps )} />
+         <div>
+            <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+            <Form onSubmit={onSubmit} validate={validate} className="login-container" render={formProps => formFormat( formProps )} />
+         </div>       
       );
       
    }   

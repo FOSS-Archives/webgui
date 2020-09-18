@@ -1,24 +1,17 @@
 import React from 'react';
-import { Tab, TabPanel, Tabs, TabList } from "react-web-tabs";
+import {Fieldset} from "primereact/fieldset";
 import UI from './UI';
 
 export default ({user}) => {
-   
    return (
-      <Tabs defaultTab="vertical-tab-one" vertical className="vertical-tabs">
-        <TabList>
-          <Tab tabFor="vertical-tab-auth">Authentication</Tab>        
-          <Tab tabFor="vertical-tab-misc">Miscellaneous</Tab>
-        </TabList>
+      <div>
+         <Fieldset legend="Authentication">
+      
+         </Fieldset>         
 
-        <TabPanel tabId="vertical-tab-auth">
-          <p>Authentication Information</p>
-        </TabPanel>
-
-        <TabPanel tabId="vertical-tab-misc">
-          <p>Miscellaneous Information</p>
-          <UI {...user} />
-        </TabPanel>        
-      </Tabs>
+         <Fieldset legend="Miscellaneous Information">
+            <UI {...user} />
+         </Fieldset>        
+      </div>
    );
 };
