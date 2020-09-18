@@ -11,10 +11,12 @@ export default ({handleDelete, hideDialog, canShowDialog, group}) => {
          </div>
       );
    };
+   
+   let name = group !== null ? group.name : '';
      
    return (
       <Dialog header="Delete Groups" visible={canShowDialog} style={{width: '50vw'}} onHide={hideDialog} footer={deleteFooter()}>
-         <p>Are you sure you want to delete the group [{group.name}]?</p>
+         <p>Are you sure you want to delete the group [{name}]?</p>
       </Dialog>
    );
 };
