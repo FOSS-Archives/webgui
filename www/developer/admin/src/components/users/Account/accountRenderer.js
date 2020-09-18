@@ -1,6 +1,8 @@
 import React from 'react';
+import AvatarRenderer from './avatarRenderer';
 import DateCreated from './dateCreatedRenderer';
 import LastUpated from './lastUpdatedRenderer';
+import PhotoRenderer from './photoRenderer';
 import EditableField from '../../EditableField';
 
 export default ({user, updateField}) => {
@@ -13,8 +15,8 @@ export default ({user, updateField}) => {
          <EditableField object={user} fieldName="firstname" fieldLabel="First Name:" updateFieldState={updateField} />              
          <EditableField object={user} fieldName="lastname" fieldLabel="Last Name:" updateFieldState={updateField} />     
          <EditableField object={user} fieldName="signature" fieldLabel="Signature:" updateFieldState={updateField} />              
-         <EditableField object={user} fieldName="photo" fieldLabel="Photo:" updateFieldState={updateField} />     
-         <EditableField object={user} fieldName="avatar" fieldLabel="Avatar:" updateFieldState={updateField} />              
+         <PhotoRenderer user={user} updateFieldState={updateField} />     
+         <AvatarRenderer user={user} updateFieldState={updateField} />              
       </div>
    );
 };

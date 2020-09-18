@@ -6,21 +6,35 @@ class Account extends Component{
    constructor(props){
       super(props);
       this.state = {
-         user: props.user
+         user: { ...props.user, ...{ dirty: false } }
       };
       this.updateField = this.updateField.bind(this);
    }
 
-   updateField(fieldName, fieldValue){
-      let user = {...this.state.user, ...{[fieldName]: fieldValue}};
-      this.setState({ user: user });
+   updateField(fieldName, fieldValue){     
+      // Mark the user as dirty so we can display conditonal buttons
+      let userModified = false;
+      Object.keys(this.state.user).forEach( key => {
+         if (this.props.user[key] !== fieldValue){
+            userModified = true;
+         }
+         
+      });
+      if (userModified){      
+         let updatedUser = {...this.state.user, ...{[fieldName]: fieldValue, dirty: userModified} };
+         this.setState({ user: updatedUser });
+      }
    };   
    
    render(){
+      let saveUserButton = this.state.user.dirty ?
+         <Button label="Save" onClick={e => this.props.saveUser(this.state.user)} /> :
+         '';        
+      
       return (
          <div>
             <AccountRenderer user={this.state.user} updateField={this.updateField} />
-            <Button label="Save" onClick={e => this.props.saveUser(this.state.user)} />
+            {saveUserButton}
          </div>
       );
    }
