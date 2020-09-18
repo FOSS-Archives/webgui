@@ -1,26 +1,20 @@
 import React from 'react';
-import Alias from './aliasRenderer';
-import Avatar from './avatarRenderer';
 import DateCreated from './dateCreatedRenderer';
-import FirstName from './firstNameRenderer';
-import LastName from './lastNameRenderer';
 import LastUpated from './lastUpdatedRenderer';
-import Photo from './photoRenderer';
-import Signature from './signatureRenderer';
-import Username from './usernameRenderer';
+import EditableField from '../../EditableField';
 
 export default ({user, updateField}) => {
    return (
       <div>
-         <Username user={user} updateField={updateField} />     
-         <Alias user={user} updateField={updateField} />
+         <EditableField object={user} fieldName="username" fieldLabel="Username:" updateFieldState={updateField} />     
+         <EditableField object={user} fieldName="alias" fieldLabel="Alias:" updateFieldState={updateField} />     
          <DateCreated {...user} />
-         <LastUpated {...user} />
-         <FirstName user={user} updateField={updateField} />
-         <LastName user={user} updateField={updateField} />
-         <Signature user={user} updateField={updateField} />
-         <Photo user={user} updateField={updateField} />
-         <Avatar user={user} updateField={updateField} />
+         <LastUpated {...user} />         
+         <EditableField object={user} fieldName="firstname" fieldLabel="First Name:" updateFieldState={updateField} />              
+         <EditableField object={user} fieldName="lastname" fieldLabel="Last Name:" updateFieldState={updateField} />     
+         <EditableField object={user} fieldName="signature" fieldLabel="Signature:" updateFieldState={updateField} />              
+         <EditableField object={user} fieldName="photo" fieldLabel="Photo:" updateFieldState={updateField} />     
+         <EditableField object={user} fieldName="avatar" fieldLabel="Avatar:" updateFieldState={updateField} />              
       </div>
    );
 };

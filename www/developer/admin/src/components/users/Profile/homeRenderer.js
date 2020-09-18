@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Home.css';
-const Home = user => {
+export default user => {
    return (
       <div>
          <p>Home Information</p>
@@ -23,5 +23,3 @@ const Home = user => {
    );   
    
 };
-
-export default Home;

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Tab, TabPanel, Tabs, TabList } from "react-web-tabs";
+import UI from './UI';
 
-const Preferences = props => {
+export default ({user}) => {
    
    return (
       <Tabs defaultTab="vertical-tab-one" vertical className="vertical-tabs">
@@ -12,6 +13,7 @@ const Preferences = props => {
 
         <TabPanel tabId="vertical-tab-auth">
           <p>Authentication Information</p>
+          <UI {...user} />
         </TabPanel>
 
         <TabPanel tabId="vertical-tab-misc">
@@ -20,5 +22,3 @@ const Preferences = props => {
       </Tabs>
    );
 };
-
-export default Preferences;

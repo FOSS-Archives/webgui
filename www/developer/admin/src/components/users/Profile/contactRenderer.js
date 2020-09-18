@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Contact.css';
-const Contact = user => {
+export default user => {
    return (
       <div>
          <p>Contact Information</p>           
@@ -19,5 +19,3 @@ const Contact = user => {
    );   
    
 };
-
-export default Contact;

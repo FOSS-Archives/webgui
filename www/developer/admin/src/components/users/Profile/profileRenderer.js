@@ -1,16 +1,11 @@
 import React from 'react';
 import { Tab, TabPanel, Tabs, TabList } from "react-web-tabs";
-import Contact from './Profile/Contact';
-import Home from './Profile/Home';
-import Personal from './Profile/Personal';
-import Work from './Profile/Work';
+import Contact from './contactRenderer';
+import Home from './homeRenderer';
+import Personal from './personalRenderer';
+import Work from './workRenderer';
 
-import 'react-web-tabs/dist/react-web-tabs.css';
-const Profile = props => {
-   if (!props.username){
-      return <div>Nothing found</div>;
-   }
-   
+export default ({user}) => {
    return (
       <Tabs defaultTab="vertical-tab-one" vertical className="vertical-tabs">
         <TabList>
@@ -21,26 +16,24 @@ const Profile = props => {
         </TabList>
 
         <TabPanel tabId="vertical-tab-contact">
-           <Contact {...props} />
+           <Contact {...user} />
         </TabPanel>
 
         <TabPanel tabId="vertical-tab-home">
-           <Home {...props} />
+           <Home {...user} />
         </TabPanel>
         
         <TabPanel tabId="vertical-tab-personal">
-           <Personal {...props} />
+           <Personal {...user} />
         </TabPanel>
         
         <TabPanel tabId="vertical-tab-work">
-           <Work {...props} />
+           <Work {...user} />
         </TabPanel>        
       </Tabs>
    );
 };
 
-export default Profile;
-   
    /* 
     *  please go ahead and suggest a structure, but do `show table userProfileField` and `show table `userProfileCategory` w.r.t categories. 
     *  you may or may not want to include that in the structure.

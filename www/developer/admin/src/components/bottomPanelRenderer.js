@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Groups from './authorization/Groups';
-import Intro from './Intro';
+import Intro from './introRenderer';
 import LoginTimes from './authorization/LoginTimes';
 import Sessions from './users/Sessions';
 import Users from './users/List';

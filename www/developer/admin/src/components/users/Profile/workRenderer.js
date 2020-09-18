@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Work.css';
-const Work = user => {
+export default user => {
    return (
       <div>
          <p>Work Information</p>           
@@ -30,4 +30,3 @@ const Work = user => {
    
 };
 
-export default Work;

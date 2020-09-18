@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import {connect} from 'react-redux';
-import BottomPane from './BottomPaneComponent';
+import BottomPanel from './bottomPanelRenderer';
 import Login from './authentication/LoginContainer';
 import NavigationTop from './navigation/NavigationTopContainer';
 import Messages from './Errors';
@@ -9,14 +9,18 @@ import Messages from './Errors';
 import './MainContainer.css';
 const mainContainer = props => {
    if (!props.user || !props.user.authenticated) {
-      return <Login />;
+      return (
+         <Router>
+           <Login />
+         </Router>
+      );
 
    } else {
       return (
           <Router>
              <NavigationTop loginContainer={<Login user={props.user} />} />
              <Messages />
-             <BottomPane />              
+             <BottomPanel />              
           </Router>
       );
 

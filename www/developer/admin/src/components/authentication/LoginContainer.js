@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Panel} from 'primereact/panel';
-import {Button} from 'primereact/button';
-import {Message} from 'primereact/message';
-import { login, logout } from '../../actions/authentication';
-import { Form, Field } from 'react-final-form';
-import Messages from '../Errors';
+import { withRouter } from 'react-router-dom';
+import {login, logout} from '../../actions/authentication';
+import LoginRenderer from './loginRenderer';
 
 import './LoginContainer.css';
 class LoginContainer extends Component {
@@ -15,81 +12,23 @@ class LoginContainer extends Component {
 
    }
    
-   onSubmit = async values => this.props.login(values.username, values.password);
-   
-   formFormat = ({ form, handleSubmit, submitting, pristine }) => {
-      return ( 
-         <form onSubmit={handleSubmit}>
-            <div className="p-grid">
-               <div className="p-col-2"></div>            
-               <div className="p-col-8"><Messages /></div>
-               <div className="p-col-2"></div>               
-            
-               <div className="p-col-4"></div>
-               <div className="p-col-4">
-                  <Panel header="Admin Login">                  
-                     <Field name="username"
-                       render={({ input, meta }) => (
-                         <div>
-                           <label className="p-col-fixed" style={{width:'100px'}}>Username:</label>
-                           <input {...input} placeholder="username" />
-                           {meta.touched && meta.error && <span>{meta.error}</span>}
-                         </div>
-                       )}
-                     />
-                     
-                     <Field name="password"
-                       render={({ input, meta }) => (
-                         <div>
-                           <label className="p-col-fixed" style={{width:'100px'}}>Password:</label>
-                           <input type="password" {...input} placeholder="password" />
-                           {meta.touched && meta.error && <span>{meta.error}</span>}
-                         </div>
-                       )}
-                     />                   
-                     <div className="p-grid">
-                        <div className="p-col"><button type="submit" disabled={submitting || pristine}>Submit</button></div>
-                     </div>
-                  </Panel>
-               </div>
-               <div className="p-col-4"></div>
-            </div>
-         </form>
-      );
-   };
+   onLogin = async values => {
+      this.props.login(values.username, values.password);
+      this.props.history.push("/");
+   }
    
    render(){
-      if ( this.props.user && this.props.user.authenticated ){
-         return <Button label="Logout" icon="pi pi-power-off" className="p-button-danger allium-logout-button" onClick={this.onLogout} />;
-      }
-      
       return ( 
-         <Form onSubmit={this.onSubmit.bind(this)} validate={validate} className="login-container" 
-               render={formProps => this.formFormat( formProps )} />
+         <LoginRenderer user={this.props.user} onSubmit={this.onLogin.bind(this)} onLogout={this.onLogout.bind(this)} />
       );
       
    }   
 };
 
-// Redux form stuff
-const validate = ({username, password}) => {
-   let errors = {};
-   if (!username){
-      errors.username = <Message severity="error" text="Login required!" />;
-   }
-   if (!password){
-      errors.password = <Message severity="error" text="Password required!" />;
-   }
-   return errors;
-};
-
-//const formWrapped = reduxForm({ form: "loginForm", validate })(LoginContainer);
-
-// Usual Redux flow
 const mapStateToProps = state => {
    return {
       user: state.loggedInUser
    };
 };
 
-export default connect(mapStateToProps, {login, logout})(LoginContainer);
+export default connect(mapStateToProps, {login, logout})(withRouter(LoginContainer));
