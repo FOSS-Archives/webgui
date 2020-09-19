@@ -7,3 +7,11 @@
    padding-bottom: .5em !important;   
    min-height: 10px !important;
 }
+
+.allium-editable-field > div.alium-field-uneditable {
+   padding-left: .5em !important;
+}
+
+.allium-editable-field > div.p-inplace-closable {
+   padding-left: .1em !important;
+}

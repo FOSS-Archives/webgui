@@ -4,7 +4,7 @@ export default user => {
    return (
       <div className="p-grid allium-editable-field">          
          <div className="p-col-1 p-md-6 p-lg-3 font-weight-bold text-right">Last Login:</div> 
-         <div className="p-col-11 p-md-6 p-lg-3">{user.lastlogin}</div>
+         <div className="p-col-11 p-md-6 p-lg-3 alium-field-uneditable">{user.lastlogin}</div>
       </div>           
    );
 };
