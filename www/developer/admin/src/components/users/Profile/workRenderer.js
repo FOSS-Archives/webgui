@@ -1,27 +1,19 @@
 import React from 'react';
+import EditableField from '../../EditableField';
 
 import './Work.css';
-export default user => {
+export default ({user, updateField}) => {
    return (        
-      <div className="p-grid">
-         <div className="p-col-2 text-right font-weight-bold">Name (Company Name):</div>
-         <div className="p-col-10">{user.companyname}</div>
-         <div className="p-col-2 text-right font-weight-bold">Department:</div>
-         <div className="p-col-10">{user.workdepartment}</div>
-         <div className="p-col-2 text-right font-weight-bold">Website:</div>
-         <div className="p-col-10">{user.workwebsite}</div>
-         <div className="p-col-2 text-right font-weight-bold">Address:</div>
-         <div className="p-col-10">{user.workaddress}</div>
-         <div className="p-col-2 text-right font-weight-bold">City:</div>
-         <div className="p-col-10">{user.workcity}</div>
-         <div className="p-col-2 text-right font-weight-bold">State:</div>
-         <div className="p-col-10">{user.workstate}</div>
-         <div className="p-col-2 text-right font-weight-bold">Zip Code:</div>
-         <div className="p-col-10">{user.workzip}</div>
-         <div className="p-col-2 text-right font-weight-bold">Country:</div>
-         <div className="p-col-10">{user.workcountry}</div>
-         <div className="p-col-2 text-right font-weight-bold">Timezone:</div>
-         <div className="p-col-10">{user.worktimezone}</div>                    
+      <div>
+         <EditableField object={user} fieldName="companyname" fieldLabel="Name (Company Name):" updateFieldState={updateField} />  
+         <EditableField object={user} fieldName="workdepartment" fieldLabel="Department:" updateFieldState={updateField} />          
+         <EditableField object={user} fieldName="workwebsite" fieldLabel="Website:" updateFieldState={updateField} />           
+         <EditableField object={user} fieldName="workaddress" fieldLabel="Address:" updateFieldState={updateField} />  
+         <EditableField object={user} fieldName="workcity" fieldLabel="City:" updateFieldState={updateField} />          
+         <EditableField object={user} fieldName="workstate" fieldLabel="State:" updateFieldState={updateField} />           
+         <EditableField object={user} fieldName="workzip" fieldLabel="Zip Code:" updateFieldState={updateField} />  
+         <EditableField object={user} fieldName="workcountry" fieldLabel="Country:" updateFieldState={updateField} />          
+         <EditableField object={user} fieldName="worktimezone" fieldLabel="Timezone:" updateFieldState={updateField} />           
       </div>
    );   
    

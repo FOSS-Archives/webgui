@@ -1,17 +1,15 @@
 import React from 'react';
+import EditableField from '../../EditableField';
 
 import './Personal.css';
-export default user => {
+export default ({user, updateField}) => {
    
-   return (         
-      <div className="p-grid">
-         <div className="p-col-2 text-right font-weight-bold">Gender:</div>
-         <div className="p-col-10">{user.gender}</div>
-         <div className="p-col-2 text-right font-weight-bold">Pronoun:</div>
-         <div className="p-col-10">{user.pronoun}</div>            
-         <div className="p-col-2 text-right font-weight-bold">Birth Date:</div>
-         <div className="p-col-10">{user.birthdate}</div>            
-      </div>
+   return (
+      <div>
+         <EditableField object={user} fieldName="gender" fieldLabel="Gender:" updateFieldState={updateField} />  
+         <EditableField object={user} fieldName="pronoun" fieldLabel="Pronoun:" updateFieldState={updateField} />          
+         <EditableField object={user} fieldName="birthdate" fieldLabel="Birth Date:" updateFieldState={updateField} />  
+      </div>           
    );   
    
 };

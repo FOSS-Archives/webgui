@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Button} from 'primereact/button';
 import {Fieldset} from "primereact/fieldset";
 import Contact from './contactRenderer';
 import Home from './homeRenderer';
@@ -6,29 +7,47 @@ import Personal from './personalRenderer';
 import Work from './workRenderer';
 
 import './Profile.css';
-export default ({user, index}) => {
+export default ({user, index, saveUser}) => {
+   let [updatableUser, updateUser] = useState(user);
+   let [dirty, setDirty] = useState(false);
+      
+   let updateField = (fieldName, fieldValue) => {     
+      // Mark the user as dirty so we can display conditonal buttons
+      let userModified = false;
+      Object.keys(updatableUser).forEach( key => {
+         if (user[key] !== fieldValue){
+            userModified = true;
+         }
+      });
+      if (userModified){      
+         let updatedUser = { ...updatableUser, ...{[fieldName]: fieldValue} };
+         updateUser(updatedUser);
+         setDirty(true);         
+         
+      }else{
+         setDirty(false);
+         
+      }
+   };
+   
    return (
       <div>
         <Fieldset legend="Contact">
-           <Contact {...user} />
+           <Contact user={updatableUser} updateField={updateField} />
         </Fieldset>
 
         <Fieldset legend="Home">
-           <Home {...user} />
+           <Home user={updatableUser}  updateField={updateField} />
         </Fieldset>
         
         <Fieldset legend="Personal">
-           <Personal {...user} />
+           <Personal user={updatableUser} updateField={updateField} />
         </Fieldset>
         
         <Fieldset legend="Work">
-           <Work {...user} />
+           <Work user={updatableUser} updateField={updateField} />
         </Fieldset>        
+        {dirty && <Button label="Save" onClick={e => saveUser(updatableUser)} />}
       </div>
    );
 };
-
-   /* 
-    *  please go ahead and suggest a structure, but do `show table userProfileField` and `show table `userProfileCategory` w.r.t categories. 
-    *  you may or may not want to include that in the structure.
-    */
