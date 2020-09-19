@@ -5,6 +5,7 @@ import Account from './Account/Account';
 import Groups from './Groups';
 import Preferences from './Preferences/preferencesRenderer';
 import Profile from './Profile/profileRenderer';
+import UI from './UI/uiRenderer';
 
 import './User.css';
 export default ({user, groups, history, updateUser, saveUser}) => {
@@ -23,7 +24,7 @@ export default ({user, groups, history, updateUser, saveUser}) => {
                  <Groups user={user} groups={groups} />
              </TabPanel>
              <TabPanel header="User Interface">
-<div>interface goes here</div>
+                 <UI {...user} />
              </TabPanel>             
              <TabPanel header="Preferences">
                  <Preferences {...user} />

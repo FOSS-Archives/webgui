@@ -4,9 +4,9 @@ import { InputText } from 'primereact/inputtext';
 
 export default ({user, updateField}) => {
    return (
-      <div className="p-grid">          
-         <div className="p-col-1 text-right font-weight-bold">Avatar:</div>         
-         <Inplace closable className="p-col-11">
+      <div className="p-grid allium-editable-field">
+         <div className="p-col-1 p-md-6 p-lg-3 font-weight-bold text-right">Avatar:</div>         
+         <Inplace closable>
             <InplaceDisplay>
                {user.avatar || 'Click to Edit'}
             </InplaceDisplay>

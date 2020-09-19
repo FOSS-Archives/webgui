@@ -4,9 +4,9 @@ import { InputText } from 'primereact/inputtext';
 
 export default ({user, updateField}) => {
    return (
-      <div className="p-grid">          
-         <div className="p-col-1 text-right font-weight-bold">Signature:</div>         
-         <Inplace closable className="p-col-11">
+      <div className="p-field">          
+         <div className="font-weight-bold">Signature:</div>         
+         <Inplace closable>
             <InplaceDisplay>
                {user.signature || 'Click to Edit'}
             </InplaceDisplay>

@@ -2,9 +2,9 @@ import React from 'react';
 
 export default user => {
    return (
-      <div className="p-grid">          
-         <div className="p-col-1 text-right font-weight-bold">Last Login:</div>         
-         <label className="p-col-11">{user.lastlogin}</label>
-      </div>
+      <div className="p-grid allium-editable-field">          
+         <div className="p-col-1 p-md-6 p-lg-3 font-weight-bold text-right">Last Login:</div> 
+         <div className="p-col-11 p-md-6 p-lg-3">{user.lastlogin}</div>
+      </div>           
    );
 };
