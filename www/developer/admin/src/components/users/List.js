@@ -22,7 +22,7 @@ class Users extends Component {
   
    render(){
       return (
-         <div className="user-list">
+         <div className="allium-user-list">
             <DataTable value={this.props.users} selectionMode="single" header="Users" selection={this.state.selected}
                onSelectionChange={e => this.displaySelection(e)}>
                <Column field="id" header="ID" />                 
@@ -33,7 +33,7 @@ class Users extends Component {
                <Column field="lastname" header="Last Name" />
                <Column field="created" header="Created" />
                <Column field="lastlogin" header="Last Login" />
-               <Column field="active" header="Active" className="user-lis-active-column" />
+               <Column field="active" header="Active" className="allium-active-column" />
             </DataTable>     
          </div>
       );

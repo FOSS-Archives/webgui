@@ -5,6 +5,7 @@ import Home from './homeRenderer';
 import Personal from './personalRenderer';
 import Work from './workRenderer';
 
+import './Profile.css';
 export default ({user, index}) => {
    return (
       <div>

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import {login, logout} from '../../actions/authentication';
 import LoginRenderer from './loginRenderer';
 
-import './LoginContainer.css';
 class LoginContainer extends Component {
    onLogout = event => {
       event.preventDefault();

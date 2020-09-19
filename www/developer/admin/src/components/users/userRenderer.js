@@ -11,7 +11,7 @@ export default ({user, groups, history, updateUser, saveUser}) => {
    let label = user.username + ' (' + user.id + ')';
    return (
       <div>
-         <BreadCrumb home={{icon: 'pi pi-list', command: () => history.push('/users')}} model={[{ label: label }]} style={{border:"none"}} />
+         <BreadCrumb home={{icon: 'pi pi-list', command: () => history.push('/users')}} model={[{ label: label }]} className="allium-bc" />
          <TabView>
              <TabPanel header="Account">
                  <Account user={user} updateUser={updateUser} saveUser={saveUser} />

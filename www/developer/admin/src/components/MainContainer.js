@@ -17,7 +17,7 @@ const mainContainer = props => {
 
    } else {
       return (
-         <Router>
+         <Router>           
             <NavigationTop loginContainer={<Login user={props.user} />} />
             <Messages />
             <BottomPanel />              

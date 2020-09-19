@@ -8,7 +8,7 @@ import {users as userAction} from '../../actions/users';
 import {sessions as sessionAction, fetchLoginHistory} from '../../actions/sessions';
 
 class Menus extends Component {
-   setModule = (route) => {
+   setNavigation = (route) => {
       switch(route) {
         case "groups":
           this.props.groupAction();
@@ -75,17 +75,17 @@ class Menus extends Component {
             "items": [
                {
                   "label": "Active Sessions",
-                  command: () => this.setModule('sessions'),
+                  command: () => this.setNavigation('sessions'),
                   "icon": "pi pi-key"
                }, 
                {
                   "label": "Groups",
-                  command: () => this.setModule('groups'),
+                  command: () => this.setNavigation('groups'),
                   "icon": "pi pi-users"
                },
                {
                   "label": "Login History",
-                  command: () => this.setModule('loginHistory'),
+                  command: () => this.setNavigation('loginHistory'),
                   "icon": "pi pi-calendar"
                }, 
                {
@@ -95,7 +95,7 @@ class Menus extends Component {
                },
                {
                   "label": "Users",
-                  command: () => this.setModule('users'),
+                  command: () => this.setNavigation('users'),
                   "icon": "pi pi-list"
                }
             ]

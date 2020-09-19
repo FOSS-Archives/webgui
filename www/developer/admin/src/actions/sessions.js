@@ -2,11 +2,18 @@ import * as constants from './constants';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
 const sessions = () => async dispatch => {
-   const response = await jsonPlaceholder.get(process.env.REACT_APP_sessions);
-   dispatch({
-      type: constants.SESSIONS,
-      payload: response.data
-   });
+   await jsonPlaceholder.get(process.env.REACT_APP_sessions).then( response =>{
+      dispatch({
+         type: constants.SESSIONS,
+         payload: response.data
+      });
+   })
+   .catch( error => {
+      dispatch({
+         type: constants.ERROR,
+         payload: { detail: error.response.statusText, sumary: error.response.status }
+      });
+   });   
 };
 
 const deleteSession = (sessions, id) => async dispatch => {

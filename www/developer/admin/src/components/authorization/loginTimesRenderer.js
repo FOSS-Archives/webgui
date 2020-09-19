@@ -4,7 +4,7 @@ import {Column} from 'primereact/column';
 import './LoginTimes.css';
 export default ({ logins }) => {
    return (
-      <div className="login-list">
+      <div className="allium-login-list">
          <DataTable value={logins} header="Login History">
             <Column field="uid" header="User Id" />         
             <Column field="username" header="Username" style={{textAlign:'center', width:'30%'}} />
