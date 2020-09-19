@@ -12,11 +12,13 @@ import 'primeflex/primeflex.css';
 // Our app starts here
 import MainContainer from './components/MainContainer';
 import {store, persistor} from './store';
-render(
+render (
    <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
          <MainContainer />
       </PersistGate>
-   </Provider>, document.getElementById('root'));
+   </Provider>, 
+   document.getElementById('root')
+);
 
 registerServiceWorker();
