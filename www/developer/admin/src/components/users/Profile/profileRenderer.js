@@ -20,29 +20,34 @@ export default ({user, index, saveUser}) => {
          }
       });
       if ( modified ){
-         updateUser({ ...stateUser , ...{[fieldName]: fieldValue} });         
+         updateUser({ ...stateUser , ...{[fieldName]: fieldValue} });
       }
       setDirty(modified);
    };
    
+   let updateAppSessionUser = () => {
+      saveUser(stateUser);
+      setDirty(false);
+   };
+   
    return (
       <div>
-        <Fieldset legend="Contact">
-           <Contact user={stateUser} updateField={updateField} />
-        </Fieldset>
+         <Fieldset legend="Contact">
+            <Contact user={stateUser} updateField={updateField} />
+         </Fieldset>
 
-        <Fieldset legend="Home">
-           <Home user={stateUser}  updateField={updateField} />
-        </Fieldset>
-        
-        <Fieldset legend="Personal">
-           <Personal user={stateUser} updateField={updateField} />
-        </Fieldset>
-        
-        <Fieldset legend="Work">
-           <Work user={stateUser} updateField={updateField} />
-        </Fieldset>        
-        {dirty && <Button label="Save" onClick={e => saveUser(stateUser)} />}
+         <Fieldset legend="Home">
+            <Home user={stateUser}  updateField={updateField} />
+         </Fieldset>
+
+         <Fieldset legend="Personal">
+            <Personal user={stateUser} updateField={updateField} />
+         </Fieldset>
+
+         <Fieldset legend="Work">
+            <Work user={stateUser} updateField={updateField} />
+         </Fieldset>        
+         {dirty && <Button label="Save" onClick={e => updateAppSessionUser()} />}
       </div>
    );
 };
