@@ -8,46 +8,41 @@ import Work from './workRenderer';
 
 import './Profile.css';
 export default ({user, index, saveUser}) => {
-   let [updatableUser, updateUser] = useState(user);
+   let [stateUser, updateUser] = useState(user);
    let [dirty, setDirty] = useState(false);
       
-   let updateField = (fieldName, fieldValue) => {     
+   let updateField = (fieldName, fieldValue) => {
       // Mark the user as dirty so we can display conditonal buttons
-      let userModified = false;
-      Object.keys(updatableUser).forEach( key => {
+      let modified = false;
+      Object.keys(stateUser).forEach( key => {
          if (user[key] !== fieldValue){
-            userModified = true;
+            modified = true;
          }
       });
-      if (userModified){      
-         let updatedUser = { ...updatableUser, ...{[fieldName]: fieldValue} };
-         updateUser(updatedUser);
-         setDirty(true);         
-         
-      }else{
-         setDirty(false);
-         
+      if ( modified ){
+         updateUser({ ...stateUser , ...{[fieldName]: fieldValue} });         
       }
+      setDirty(modified);
    };
    
    return (
       <div>
         <Fieldset legend="Contact">
-           <Contact user={updatableUser} updateField={updateField} />
+           <Contact user={stateUser} updateField={updateField} />
         </Fieldset>
 
         <Fieldset legend="Home">
-           <Home user={updatableUser}  updateField={updateField} />
+           <Home user={stateUser}  updateField={updateField} />
         </Fieldset>
         
         <Fieldset legend="Personal">
-           <Personal user={updatableUser} updateField={updateField} />
+           <Personal user={stateUser} updateField={updateField} />
         </Fieldset>
         
         <Fieldset legend="Work">
-           <Work user={updatableUser} updateField={updateField} />
+           <Work user={stateUser} updateField={updateField} />
         </Fieldset>        
-        {dirty && <Button label="Save" onClick={e => saveUser(updatableUser)} />}
+        {dirty && <Button label="Save" onClick={e => saveUser(stateUser)} />}
       </div>
    );
 };
