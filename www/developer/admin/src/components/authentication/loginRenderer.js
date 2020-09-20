@@ -7,7 +7,7 @@ import {Form, Field} from 'react-final-form';
 import Messages from '../Errors';
 
 import './LoginContainer.css';
-export default ({user, onSubmit, onLogout}) => {
+export default ({user, onSubmit, onLogout, remoteServiceKey}) => {
    
    // Redux form stuff
    let validate = ({username, password}) => {
@@ -52,7 +52,7 @@ export default ({user, onSubmit, onLogout}) => {
                        )}
                      />                   
                      <div className="p-grid">
-                        <div className="p-col"><Captcha siteKey="mysitekey" ></Captcha></div>
+                     {remoteServiceKey !== null || <div className="p-col"><Captcha siteKey={remoteServiceKey} ></Captcha></div>}
                         <div className="p-col"><button type="submit" disabled={submitting || pristine}>Submit</button></div>
                      </div>
                   </Panel>
