@@ -26,16 +26,16 @@ export default ({user, index, saveUser}) => {
       
    return (
       <div>
+         <Fieldset legend="Personal">
+            <Personal user={stateUser} updateField={updateField} />
+         </Fieldset>
+         
          <Fieldset legend="Contact">
             <Contact user={stateUser} updateField={updateField} />
          </Fieldset>
 
          <Fieldset legend="Home">
             <Home user={stateUser}  updateField={updateField} />
-         </Fieldset>
-
-         <Fieldset legend="Personal">
-            <Personal user={stateUser} updateField={updateField} />
          </Fieldset>
 
          <Fieldset legend="Work">
