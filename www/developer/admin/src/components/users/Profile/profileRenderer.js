@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import isEqual from 'react-fast-compare';
 import {Button} from 'primereact/button';
 import {Fieldset} from "primereact/fieldset";
 import Contact from './contactRenderer';
@@ -12,24 +13,17 @@ export default ({user, index, saveUser}) => {
    let [dirty, setDirty] = useState(false);
       
    let updateField = (fieldName, fieldValue) => {
-      // Mark the user as dirty so we can display conditonal buttons
-      let modified = false;
-      Object.keys(stateUser).forEach( key => {
-         if (user[key] !== fieldValue){
-            modified = true;
-         }
-      });
-      if ( modified ){
-         updateUser({ ...stateUser , ...{[fieldName]: fieldValue} });
-      }
+      let modifiedUser = { ...stateUser, ...{[fieldName]: fieldValue} };
+      let modified = !isEqual(user, modifiedUser);
       setDirty(modified);
+      updateUser(modifiedUser);
    };
    
    let updateAppSessionUser = () => {
+      setDirty(false);      
       saveUser(stateUser);
-      setDirty(false);
    };
-   
+      
    return (
       <div>
          <Fieldset legend="Contact">
@@ -46,8 +40,8 @@ export default ({user, index, saveUser}) => {
 
          <Fieldset legend="Work">
             <Work user={stateUser} updateField={updateField} />
-         </Fieldset>        
-         {dirty && <Button label="Save" onClick={e => updateAppSessionUser()} />}
+         </Fieldset>
+         {dirty && <Button id="allium-save-profile" label="Save" onClick={e => updateAppSessionUser()} />}
       </div>
    );
 };
