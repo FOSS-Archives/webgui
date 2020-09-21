@@ -13,6 +13,7 @@ class LoginContainer extends Component {
    
    onLogin = async values => {
       this.props.login(values.username, values.password);
+      document.title += ` (${values.username})`;
       this.props.history.push("/");
    }
    
