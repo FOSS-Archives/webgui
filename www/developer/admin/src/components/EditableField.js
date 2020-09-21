@@ -19,7 +19,7 @@ export default ({object, fieldName, fieldLabel, updateFieldState}) => {
                {object[fieldName] || 'Click to Edit'}
             </InplaceDisplay>
             <InplaceContent>
-               <InputText value={object[fieldName]} onChange={(e) => saveFieldValue(e.target.value)} autoFocus />
+               <InputText value={objectField} onChange={(e) => saveFieldValue(e.target.value)} autoFocus />
             </InplaceContent>
          </Inplace>
       </div>
