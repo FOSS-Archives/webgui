@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 
 import './EditableField.css';
 export default ({object, fieldName, fieldLabel, updateFieldState}) => {
+   let [objectField, setObjectField] = useState(object[fieldName]);
+
+   let saveFieldValue = fieldValue => {
+      setObjectField(fieldValue);
+      updateFieldState(fieldName, fieldValue);
+   };      
+    
    return (
       <div className="p-grid allium-editable-field">
          <div className="p-col-2 p-md-2 p-lg-2 font-weight-bold text-nowrap">{fieldLabel}</div>
@@ -12,7 +19,7 @@ export default ({object, fieldName, fieldLabel, updateFieldState}) => {
                {object[fieldName] || 'Click to Edit'}
             </InplaceDisplay>
             <InplaceContent>
-               <InputText value={object[fieldName]} onChange={(e) => updateFieldState(fieldName, e.target.value)} autoFocus />
+               <InputText value={object[fieldName]} onChange={(e) => saveFieldValue(e.target.value)} autoFocus />
             </InplaceContent>
          </Inplace>
       </div>
