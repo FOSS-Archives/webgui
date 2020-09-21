@@ -1,0 +1,13 @@
+#allium-editable-textarea {
+   display: inline-block;
+}
+
+#allium-editable-textarea button:first-of-type {
+   margin-top: .5em;
+   margin-bottom: .5em;
+   float: right;
+}
+
+#overlay_panel{
+  
+}
