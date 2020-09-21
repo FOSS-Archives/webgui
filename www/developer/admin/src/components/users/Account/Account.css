@@ -1,3 +1,4 @@
-#allium-editor .p-editor-container {
-
+.alium-field-editor button#save {
+   margin-top: .5em;
+   width: 10%;
 }

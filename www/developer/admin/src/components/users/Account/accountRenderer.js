@@ -1,9 +1,9 @@
 import React from 'react';
 import EditableField from '../../EditableField';
+import EditableTextarea from './../../EditableTextarea';
 import DateCreated from './dateCreatedRenderer';
 import LastUpated from './lastUpdatedRenderer';
 import MediaRenderer from './mediaRenderer';
-import SignatureRenderer from './signatureRenderer';
 
 import './Account.css';
 export default ({user, updateField}) => {
@@ -16,7 +16,7 @@ export default ({user, updateField}) => {
             <LastUpated {...user} />         
             <EditableField object={user} fieldName="firstname" fieldLabel="First Name:" updateFieldState={updateField} />              
             <EditableField object={user} fieldName="lastname" fieldLabel="Last Name:" updateFieldState={updateField} />
-            <SignatureRenderer user={user} updateFieldState={updateField} />
+            <EditableTextarea object={user} fieldName="signature" fieldLabel="Signature:" updateFieldState={updateField} />
          </div>
          <div className="p-col-4">
             <div className="box box-stretched">
