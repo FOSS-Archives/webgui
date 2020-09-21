@@ -2,14 +2,8 @@ import * as constants from './constants';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
 export const login = (username, password) => async (dispatch, storeState) => {
-   let loginTemplate = `?op=auth&method=login&username=${username}&identifier=${password}`;
-   if (process.env.NODE_ENV === 'development'){
-      loginTemplate = `login/55f97ffd69-47jq2`;
-      console.log("Always login in development");
-   }
-
    try{
-      const response = await jsonPlaceholder.get(loginTemplate);
+      const response = await jsonPlaceholder.get(process.env.REACT_APP_login_template);
       if (response.data !== undefined && response.data.session){
          dispatch({
             type: constants.LOGIN,
@@ -19,11 +13,11 @@ export const login = (username, password) => async (dispatch, storeState) => {
       }else{
          dispatch({
             type: constants.LOGIN,
-            payload: { ...response.data, authenticated: false }
+            payload: { ...response.data, authenticated: false, severity: 'warn' }
          });
          dispatch({ // Purge the state of the store based on reducers implementation
             type: constants.ERROR,
-            payload: { detail: 'Invalid state, please try again.', summary: 'Login failed' }
+            payload: { detail: 'Invalid state, please try again.', summary: 'Login failed', severity: 'warn' }
          });
       }  
       
