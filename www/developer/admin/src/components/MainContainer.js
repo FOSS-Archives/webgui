@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import BottomPanel from './bottomPanelRenderer';
 import Login from './authentication/LoginContainer';
 import NavigationTop from './navigation/NavigationTopContainer';
-import Messages from './Errors';
+import Messages from './MessageQueueRenderer';
 
 import './MainContainer.css';
 const mainContainer = props => {
