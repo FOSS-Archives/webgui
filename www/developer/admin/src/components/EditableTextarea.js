@@ -1,36 +1,26 @@
-import React, { Component } from 'react';
-import {Button} from 'primereact/button';
-import {OverlayPanel} from 'primereact/overlaypanel';
-import {Editor} from 'primereact/editor';
+import React, {useState} from 'react';
+import {Inplace, InplaceDisplay, InplaceContent} from 'primereact/inplace';
+import {InputTextarea} from 'primereact/inputtextarea';
 
-import './EditableTextarea.css';
-class EditableTextarea extends Component {
-   constructor(props){
-      super(props);
-      this.state = {
-         text: this.props.text
-      };
-      this.saveFieldValue = this.saveFieldValue.bind(this); 
-   }
-   
-   saveFieldValue(){
-      this.props.onSave(this.props.field, this.state.text);
-      this.props.onHide();
-   }
-   
-   render() {
-      return (
-         <div id="allium-editable-textarea">
-            <i className="pi pi-pencil" onClick={(e) => this.op.toggle(e)} aria-haspopup aria-controls="overlay_panel"></i>
-            <OverlayPanel id="overlay_panel" ref={(el) => this.op = el} showCloseIcon>              
-               <div className="card">
-                  <Editor value={this.state.text} onTextChange={e => this.setState({text: e.htmlValue})} />
-               </div>
-               <Button label="Save" icon="pi pi-check" onClick={() => this.saveFieldValue()} />
-            </OverlayPanel>
-         </div>
-      );
-   }
+export default ({object, fieldName, fieldLabel, updateFieldState}) => {
+   let [objectField, setObjectField] = useState(object[fieldName]);
+
+   let saveFieldValue = fieldValue => {
+      setObjectField(fieldValue);
+      updateFieldState(fieldName, fieldValue);
+   };
+
+   return (
+      <div className="p-grid allium-editable-field">          
+         <div className="p-col-2 p-md-2 p-lg-2 font-weight-bold text-nowrap">Signature:</div> 
+         <Inplace closable className="p-col-10 p-md-10 p-lg-8">
+            <InplaceDisplay>
+               {objectField || 'Click to Edit'}
+            </InplaceDisplay>
+            <InplaceContent>
+               <InputTextarea rows={5} cols={30} value={objectField} onChange={e => saveFieldValue(e.target.value)} autoFocus />
+            </InplaceContent>
+         </Inplace>
+      </div>
+   );
 };
-
-export default EditableTextarea;
