@@ -4,7 +4,7 @@ import {Button} from 'primereact/button';
 import {Message} from 'primereact/message';
 import {Captcha} from 'primereact/captcha';
 import {Form, Field} from 'react-final-form';
-import Messages from '../Errors';
+import Messages from '../MessageQueueRenderer';
 
 import './LoginContainer.css';
 export default ({user, onSubmit, onLogout, remoteServiceKey}) => {
@@ -26,7 +26,9 @@ export default ({user, onSubmit, onLogout, remoteServiceKey}) => {
          <form onSubmit={handleSubmit}>
             <div className="p-grid">
                <div className="p-col-2"></div>            
-               <div className="p-col-8"><Messages /></div>
+               <div className="p-col-8">
+                  <Messages />
+               </div>
                <div className="p-col-2"></div>               
             
                <div className="p-col-4"></div>
