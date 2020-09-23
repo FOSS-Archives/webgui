@@ -4,7 +4,7 @@ import {TabView,TabPanel} from 'primereact/tabview';
 import Account from './Account/Account';
 import Groups from './Groups';
 import Preferences from './Preferences/preferencesRenderer';
-import Profile from './Profile/profileRenderer';
+import Profile from './Profile/Profile';
 import UI from './UI/uiRenderer';
 
 import './User.css';
