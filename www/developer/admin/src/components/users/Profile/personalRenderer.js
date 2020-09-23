@@ -5,13 +5,12 @@ import PronounRenderer from './pronounRenderer';
 
 import './Personal.css';
 export default ({user, updateField}) => {
-   
+      
    return (
       <div>
          <GenderRenderer user={user} updateFieldState={updateField} />  
          <PronounRenderer user={user} updateFieldState={updateField} />          
-         <EditableField object={user} fieldName="birthdate" fieldLabel="Birth Date:" updateFieldState={updateField} fieldType="Calendar"
-            validator={birthdate => birthdate.toString()} />  
+         <EditableField object={user} fieldName="birthdate" fieldLabel="Birth Date:" updateFieldState={updateField} fieldType="Calendar" />  
       </div>           
    );   
    
