@@ -3,7 +3,7 @@ import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 
 import './EditableField.css';
-export default ({object, fieldName, fieldLabel, updateFieldState}) => {
+export default ({object, fieldName, fieldLabel, updateFieldState, fieldComponent}) => {
    let [objectField, setObjectField] = useState(object[fieldName]);
 
    let saveFieldValue = fieldValue => {
@@ -19,7 +19,7 @@ export default ({object, fieldName, fieldLabel, updateFieldState}) => {
                {object[fieldName] || 'Click to Edit'}
             </InplaceDisplay>
             <InplaceContent>
-               <InputText value={objectField} onChange={(e) => saveFieldValue(e.target.value)} autoFocus />
+               {fieldComponent != null ? fieldComponent : <InputText value={objectField} onChange={(e) => saveFieldValue(e.target.value)} autoFocus />}
             </InplaceContent>
          </Inplace>
       </div>
