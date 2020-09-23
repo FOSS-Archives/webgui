@@ -2,7 +2,6 @@ import React from 'react';
 import EditableField from '../../EditableField';
 import GenderRenderer from './genderRenderer';
 import PronounRenderer from './pronounRenderer';
-import {validate} from 'validate.js';
 
 import './Personal.css';
 export default ({user, updateField}) => {
