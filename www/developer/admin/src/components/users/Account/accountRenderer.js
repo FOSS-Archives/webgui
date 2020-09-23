@@ -1,6 +1,5 @@
 import React from 'react';
 import EditableField from '../../EditableField';
-import EditableTextarea from './../../EditableTextarea';
 import DateCreated from './dateCreatedRenderer';
 import LastUpated from './lastUpdatedRenderer';
 import MediaRenderer from './mediaRenderer';
@@ -16,7 +15,7 @@ export default ({user, updateField}) => {
             <EditableField object={user} fieldName="lastname" fieldLabel="Last Name:" updateFieldState={updateField} />            
             <DateCreated {...user} />
             <LastUpated {...user} />         
-            <EditableTextarea object={user} fieldName="signature" fieldLabel="Signature:" updateFieldState={updateField} />
+            <EditableField object={user} fieldName="signature" fieldLabel="Signature:" updateFieldState={updateField} fieldType="InputTextarea" />
          </div>
          <div className="p-col-4">
             <div className="box box-stretched">
