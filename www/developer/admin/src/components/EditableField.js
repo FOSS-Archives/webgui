@@ -6,15 +6,27 @@ export default ({object, fieldName, fieldLabel, updateFieldState, fieldType, fie
    let [valid,setValid] = useState(true);
 
    let saveFieldValue = fieldValue => {
-      let fieldEvaluation = sanitize(fieldValue);
-      if ( !fieldEvaluation.error ){
-         setObjectField(fieldValue);
-         updateFieldState(fieldName, fieldValue);
+      let finalFieldValue = null;
+      if ( fieldValue != null ){
+         // Date fields need to be set according to global settings
+         if ( typeof fieldValue === 'object' ){
+            finalFieldValue = fieldValue.toString();
+         }
+         fieldValue = finalFieldValue;
       }
+      
+      if ( sanitize != null ){
+         let fieldEvaluation = sanitize(fieldValue);
+         finalFieldValue = fieldEvaluation.data;     
+      }      
+      setObjectField(finalFieldValue);
+      updateFieldState(fieldName, finalFieldValue);
+      
    };
    
    const sanitize = fieldValue => {
       if (validator != null ){
+         // You have to make sure your validator returns an object of type: { error: [true|false], data: [field value] }
          let sanitizedField = validator(fieldValue);
          setValid( !sanitizedField.error );
          return sanitizedField;
