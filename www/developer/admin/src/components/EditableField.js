@@ -10,7 +10,7 @@ export default ({object, fieldName, fieldLabel, updateFieldState, fieldType, fie
    let [objectField, setObjectField] = useState(object[fieldName]);
 
    let saveFieldValue = fieldValue => {
-      if (fieldType === 'Calendar'){
+      if (fieldType === 'Calendar' && fieldValue != null){
          fieldValue = fieldValue.toString();
       }
       setObjectField(fieldValue);
