@@ -2,6 +2,7 @@ import React from 'react';
 import EditableField from '../../EditableField';
 import GenderRenderer from './genderRenderer';
 import PronounRenderer from './pronounRenderer';
+import {validate} from 'validate.js';
 
 import './Personal.css';
 export default ({user, updateField}) => {
@@ -10,7 +11,8 @@ export default ({user, updateField}) => {
       <div>
          <GenderRenderer user={user} updateFieldState={updateField} />  
          <PronounRenderer user={user} updateFieldState={updateField} />          
-         <EditableField object={user} fieldName="birthdate" fieldLabel="Birth Date:" updateFieldState={updateField} fieldType="Calendar" />  
+         <EditableField object={user} fieldName="birthdate" fieldLabel="Birth Date:" updateFieldState={updateField} fieldType="Calendar"
+            validator={birthdate => birthdate.toString()} />  
       </div>           
    );   
    
