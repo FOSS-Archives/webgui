@@ -10,13 +10,12 @@ export default ({object, fieldName, fieldLabel, updateFieldState, fieldType, fie
       if ( fieldValue != null ){
          // Date fields need to be set according to global settings
          finalFieldValue = ( typeof fieldValue === 'object' ) ? fieldValue.toString() : fieldValue;
-        
       }
       
-      if ( sanitize != null ){
-         let fieldEvaluation = sanitize(fieldValue);
+      if ( validator != null ){
+         let fieldEvaluation = sanitize(finalFieldValue);
          finalFieldValue = fieldEvaluation.data;     
-      }      
+      }  
       setObjectField(finalFieldValue);
       updateFieldState(fieldName, finalFieldValue);
       
