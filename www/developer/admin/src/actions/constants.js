@@ -1,3 +1,4 @@
+export const COUNTRIES = 'COUNTRIES';
 export const ERROR = 'ERROR';
 export const GROUP = 'GROUP';
 export const GROUPS = 'GROUPS';
@@ -11,3 +12,4 @@ export const USERS = 'USERS';
 export const USER = 'USER';
 export const SESSIONS = 'SESSIONS';
 export const STATES = 'STATES';
+export const TIMEZONES = 'TIMEZONES';

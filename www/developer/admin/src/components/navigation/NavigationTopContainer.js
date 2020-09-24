@@ -6,7 +6,7 @@ import {InputText} from 'primereact/inputtext';
 import {fetchGroups as groupAction} from '../../actions/groups';
 import {users as userAction} from '../../actions/users';
 import {sessions as sessionAction, fetchLoginHistory} from '../../actions/sessions';
-import {states as statesAction} from '../../actions/states';
+import {geography} from '../../actions/geography';
 
 class Menus extends Component {
    setNavigation = (route) => {
@@ -20,7 +20,7 @@ class Menus extends Component {
         case "users":
           this.props.userAction();
           this.props.groupAction();
-          this.props.statesAction();
+          this.props.geography();
           break;
         case "sessions":
           this.props.sessionAction();
@@ -116,4 +116,4 @@ class Menus extends Component {
 
 const routedMenu = withRouter(Menus);
 
-export default connect(null, {fetchLoginHistory, groupAction, userAction, sessionAction, statesAction})(routedMenu);
+export default connect(null, {fetchLoginHistory, groupAction, userAction, sessionAction, geography})(routedMenu);
