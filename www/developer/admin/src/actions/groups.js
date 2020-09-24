@@ -12,7 +12,7 @@ const fetchGroups = () => async dispatch => {
       })
       .catch( error => {
          dispatch({
-            type: constants.ERROR,
+            type: constants.MESSAGE,
             payload: { detail: error.response.statusText, sumary: error.response.status }
          });
       });   
@@ -23,13 +23,13 @@ const addGroup = group => async dispatch => {
    await jsonPlaceholder.post(process.env.REACT_APP_groups, group)
       .then( response => {
          dispatch({
-            type: constants.MESSAGE_OK,
-            payload: { detail: "Added", type: "OK" }
+            type: constants.MESSAGE,
+            payload: { detail: "Added", severiry: "info" }
          });
       })
       .catch( error => {
          dispatch({
-            type: constants.ERROR,
+            type: constants.MESSAGE,
             payload: { detail: error.response.statusText, sumary: error.response.status }
          });
       });
@@ -49,13 +49,13 @@ const deleteGroup = (groups, id) => async dispatch => {
          });         
          
          dispatch({
-            type: constants.MESSAGE_OK,
-            payload: { detail: "Deleted" }
+            type: constants.MESSAGE,
+            payload: { detail: "Deleted", severity: "info" }
          });
       })
       .catch( error => {
          dispatch({
-            type: constants.ERROR,
+            type: constants.MESSAGE,
             payload: { detail: error.response.statusText, sumary: error.response.status }
          });
       });
@@ -79,13 +79,13 @@ const updateGroup = (groups, group) => async dispatch => {
          });
          
          dispatch({
-            type: constants.MESSAGE_OK,
-            payload: { detail: "Updated" }
+            type: constants.MESSAGE,
+            payload: { detail: "Updated", severity: "info" }
          });
       })
       .catch( error => {
          dispatch({
-            type: constants.ERROR,
+            type: constants.MESSAGE,
             payload: { detail: error.response.statusText, sumary: error.response.status }
          });
       });

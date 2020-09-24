@@ -10,7 +10,7 @@ const sessions = () => async dispatch => {
    })
    .catch( error => {
       dispatch({
-         type: constants.ERROR,
+         type: constants.MESSAGE,
          payload: { detail: error.response.statusText, sumary: error.response.status }
       });
    });   
@@ -30,13 +30,13 @@ const deleteSession = (sessions, id) => async dispatch => {
          });         
          
          dispatch({
-            type: constants.MESSAGE_OK,
-            payload: { detail: "Deleted" }
+            type: constants.MESSAGE,
+            payload: { detail: "Deleted", severity: "info" }
          });
       })
       .catch( error => {
          dispatch({
-            type: constants.ERROR,
+            type: constants.MESSAGE,
             payload: { detail: error.response.statusText, sumary: error.response.status }
          });
       });
@@ -53,7 +53,7 @@ const fetchLoginHistory = () => async dispatch => {
       })
       .catch( error => {
          dispatch({
-            type: constants.ERROR,
+            type: constants.MESSAGE,
             payload: { detail: error.response.statusText, sumary: error.response.status }
          });
       });

@@ -46,14 +46,14 @@ const saveUser = (users, user) => async dispatch => {
          });
          
          dispatch({
-            type: constants.MESSAGE_OK,
-            payload: { detail: "Updated" }
+            type: constants.MESSAGE,
+            payload: { detail: "Updated", severity: "info" }
          });
-alert("Saved user...");
+
       })
       .catch( error => {
          dispatch({
-            type: constants.ERROR,
+            type: constants.MESSAGE,
             payload: { detail: error.response.statusText, sumary: error.response.status }
          });
       });   

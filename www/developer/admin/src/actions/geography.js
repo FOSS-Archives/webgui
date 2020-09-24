@@ -18,7 +18,7 @@ const geography = () => async dispatch => {
    })
    .catch( error => {
       dispatch({
-         type: constants.ERROR,
+         type: constants.MESSAGE,
          payload: { detail: error.response.statusText, sumary: error.response.status }
       });
    });   

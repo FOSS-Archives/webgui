@@ -1,12 +1,11 @@
 export const COUNTRIES = 'COUNTRIES';
-export const ERROR = 'ERROR';
+export const MESSAGE = 'MESSAGE';
 export const GROUP = 'GROUP';
 export const GROUPS = 'GROUPS';
 export const LOGIN = 'LOGIN';
 export const LOGINS = 'LOGINS';
 export const LOGOUT = 'LOGOUT';
 export const MENUS = 'MENUS';
-export const MESSAGE_OK = 'MESSAGE_OK';
 export const PURGE = 'PURGE_STORE_STATE';
 export const USERS = 'USERS';
 export const USER = 'USER';

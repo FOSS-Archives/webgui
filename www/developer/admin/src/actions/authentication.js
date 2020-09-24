@@ -16,7 +16,7 @@ export const login = (username, password) => async (dispatch, storeState) => {
                payload: { ...response.data, authenticated: false, severity: 'warn' }
             });
             dispatch({ // Purge the state of the store based on reducers implementation
-               type: constants.ERROR,
+               type: constants.MESSAGE,
                payload: { detail: 'Invalid state, please try again.', summary: 'Login failed', severity: 'warn' }
             });
          }
@@ -24,7 +24,7 @@ export const login = (username, password) => async (dispatch, storeState) => {
       })
       .catch( error => {
          dispatch({
-            type: constants.ERROR,
+            type: constants.MESSAGE,
             payload: { detail: "Unknown Error Occured. Server response not received. Check server logs.", summary: '' }
          });
          
