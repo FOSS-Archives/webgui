@@ -2,11 +2,11 @@ import React from 'react';
 import {Fieldset} from "primereact/fieldset";
 import Contact from './contactRenderer';
 
-export default user => {
+export default props => {
    return (
       <div>
          <Fieldset legend="Contact">
-            <Contact {...user} />
+            <Contact {...props}  />
          </Fieldset>        
       </div>
    );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Contact.css';
-export default user => {
+export default ({user}) => {
    return (
       <div className="p-grid">
          <div className="p-col-3 text-right font-weight-bold">Language:</div>
