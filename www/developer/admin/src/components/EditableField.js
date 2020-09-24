@@ -9,10 +9,8 @@ export default ({object, fieldName, fieldLabel, updateFieldState, fieldType, fie
       let finalFieldValue = null;
       if ( fieldValue != null ){
          // Date fields need to be set according to global settings
-         if ( typeof fieldValue === 'object' ){
-            finalFieldValue = fieldValue.toString();
-         }
-         fieldValue = finalFieldValue;
+         finalFieldValue = ( typeof fieldValue === 'object' ) ? fieldValue.toString() : fieldValue;
+        
       }
       
       if ( sanitize != null ){
