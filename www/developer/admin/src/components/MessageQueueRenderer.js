@@ -24,7 +24,7 @@ class MessageQueueRenderer extends Component {
 
 const mapStateToProps = state => {
    return {
-      messages: state.errors
+      messages: state.messages
    };
 };
 
