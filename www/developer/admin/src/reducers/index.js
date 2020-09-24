@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {errors} from './errors';
+import messages from './messages';
 import authentication from './authentication';
 import countries from './countries';
 import group from './group';
@@ -13,7 +13,7 @@ import timezones from './timezones';
 
 const rootReducer = combineReducers({
    countries: countries,
-   errors: errors,
+   messages: messages,
    groups: groups,
    group: group,
    logins: logins,

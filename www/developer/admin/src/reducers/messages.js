@@ -1,15 +1,15 @@
 import * as constants from '../actions/constants';
 
-export function errors(errors = [], action){
+export default (state = [], action) => {
    switch (action.type) {
-      case constants.ERROR:
+      case constants.MESSAGE:
          return [action.payload];
     
       case constants.PURGE:
          return null;
       
       default:
-         return errors;
+         return state;
    }
 
-}
+};
