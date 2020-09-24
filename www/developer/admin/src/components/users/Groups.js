@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
-import {PickList} from 'primereact/picklist';
+import isEqual from 'react-fast-compare';
+import GroupRenderer from './groupRenderer';
 
 class Groups extends Component {
    
-   constructor() {
-      super();
+   constructor(props) {
+      super(props);
       this.state = {
           source: [],
-          target: []
+          target: [],
+          dirty: false,
+          user: this.props.user
       };
-      this.groupTemplate = this.groupTemplate.bind(this);
       this.onChange = this.onChange.bind(this);
+      this.updateAppSessionUser = this.updateAppSessionUser.bind(this);
    }
 
    componentDidMount() {
@@ -39,29 +42,23 @@ class Groups extends Component {
          target: event.target
       });
       
-      this.props.user.groups = event.target.map( group => Object.keys(group)[0] );
+      let groups = event.target.map( group => Object.keys(group)[0] );
+      let modifiedUser = { ...this.state.user, ...{"groups": groups} };
+      let modified = !isEqual(this.props.user, modifiedUser);
+      this.setState({ user: modifiedUser, dirty: modified });
+      modified && this.props.updateUser(modifiedUser);
+  
    }
-   
-   groupTemplate(group) {
-      let key = Object.keys(group)[0];
-      return (
-          <div className="p-clearfix" key={key}>
-             <div alt={key} style={{ float: 'right' }}>{group[key]}</div>
-          </div>
-      );
-    }   
+      
+   updateAppSessionUser(){
+      this.setState({ dirty: false });      
+      this.props.saveUser(this.state.user);
+   };
+ 
    
    render() {   
-      return (
-          <div>
-             <div>Groups</div>
-             <PickList source={this.state.source} target={this.state.target} itemTemplate={this.groupTemplate}
-                sourceHeader="Available" targetHeader="Selected" responsive={true}
-                sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
-                showSourceControls={false} showTargetControls={false}
-                onChange={this.onChange}></PickList>
-         </div>
-      );
+      return <GroupRenderer user={this.state.user} source={this.state.source} target={this.state.target} 
+         onChange={e => this.onChange(e)} dirty={this.state.dirty} updateAppSessionUser={this.updateAppSessionUser} />;
    }
 };
 

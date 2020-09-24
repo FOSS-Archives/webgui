@@ -21,7 +21,7 @@ export default ({user, groups, history, updateUser, saveUser}) => {
                  <Profile user={user} updateUser={updateUser} saveUser={saveUser} />
              </TabPanel>
              <TabPanel header="Groups">
-                 <Groups user={user} groups={groups} />
+                 <Groups user={user} groups={groups} updateUser={updateUser} saveUser={saveUser} />
              </TabPanel>
              <TabPanel header="User Interface">
                  <UI {...user} />
