@@ -10,3 +10,4 @@ export const PURGE = 'PURGE_STORE_STATE';
 export const USERS = 'USERS';
 export const USER = 'USER';
 export const SESSIONS = 'SESSIONS';
+export const STATES = 'STATES';
