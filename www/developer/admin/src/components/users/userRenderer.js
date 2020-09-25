@@ -20,14 +20,14 @@ export default ({user, groups, history, updateUser, saveUser}) => {
              <TabPanel header="Profile">
                  <Profile user={user} updateUser={updateUser} saveUser={saveUser} />
              </TabPanel>
-             <TabPanel header="Groups">
+             <TabPanel header="Groups" onClick={e => alert("Clicked")}>
                  <Groups user={user} groups={groups} updateUser={updateUser} saveUser={saveUser} />
              </TabPanel>
              <TabPanel header="User Interface">
                  <UI {...user} />
              </TabPanel>             
              <TabPanel header="Preferences">
-                 <Preferences {...user} />
+                 <Preferences user={user} updateUser={updateUser} saveUser={saveUser} />
              </TabPanel>
          </TabView>
       </div>
