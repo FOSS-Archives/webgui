@@ -1,0 +1,10 @@
+.allium-privacy-radio label{
+   padding-left: .2em;
+   padding-right: .5em;
+}
+
+.allium-privacy-group{
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   width: 30%;
+}

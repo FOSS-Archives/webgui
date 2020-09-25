@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {Checkbox} from 'primereact/checkbox';
 import LanguageRendererField from '../../languageRenderer';
+import ProfilePrivacyField from './profilePrivacyRenderer';
 import FieldContext from '../../../contexts/fields';
 
 import './Contact.css';
@@ -22,10 +23,7 @@ export default ({user, updateField}) => {
             <div className={context.label}>Time Format:</div>
             <div className={context.value}>{user.timeformat}</div>
          </div>
-         <div className={context.parent}>         
-            <div className={context.label}>Profile Privacy Setting:</div>
-            <div className={context.value}>{user.profileprivacy}</div>
-         </div>
+         <ProfilePrivacyField fieldValue={user.profileprivacy} updateFieldState={updateField} context={context} />    
          <div className={context.parent}>            
             <div className={context.label}>Private Message Options:</div>
             <div className={context.value}>{user.messageoptions}</div>
