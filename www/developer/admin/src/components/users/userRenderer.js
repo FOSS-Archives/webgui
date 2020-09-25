@@ -6,9 +6,16 @@ import Groups from './Groups';
 import Preferences from './Preferences/Preferences';
 import Profile from './Profile/Profile';
 import UI from './UI/uiRenderer';
+import FieldContext from '../../contexts/fields';
 
 import './User.css';
 export default ({user, groups, history, updateUser, saveUser}) => {
+   const fixPreferenceDisplay = {
+      parent: "p-grid allium-editable-field",
+      label: "p-col-2 p-md-2 p-lg-3 font-weight-bold text-nowrap",
+      value: "p-col-10 p-md-10 p-lg-7"
+   };      
+      
    let label = user.username + ' (' + user.id + ')';
    return (
       <div>
@@ -27,9 +34,11 @@ export default ({user, groups, history, updateUser, saveUser}) => {
                <UI {...user} />
             </TabPanel>             
             <TabPanel header="Preferences">
-               <Preferences user={user} updateUser={updateUser} saveUser={saveUser} />
+               <FieldContext.Provider value={fixPreferenceDisplay}>
+                  <Preferences user={user} updateUser={updateUser} saveUser={saveUser} />
+               </FieldContext.Provider>
             </TabPanel>
          </TabView>
-      </div>
+      </div>  
    );
 };

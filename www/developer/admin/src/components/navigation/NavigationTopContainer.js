@@ -7,6 +7,7 @@ import {fetchGroups as groupAction} from '../../actions/groups';
 import {users as userAction} from '../../actions/users';
 import {sessions as sessionAction, fetchLoginHistory} from '../../actions/sessions';
 import {geography} from '../../actions/geography';
+import {preferences} from '../../actions/preferences';
 
 class Menus extends Component {
    setNavigation = (route) => {
@@ -21,6 +22,7 @@ class Menus extends Component {
           this.props.userAction();
           this.props.groupAction();
           this.props.geography();
+          this.props.preferences();
           break;
         case "sessions":
           this.props.sessionAction();
@@ -116,4 +118,4 @@ class Menus extends Component {
 
 const routedMenu = withRouter(Menus);
 
-export default connect(null, {fetchLoginHistory, groupAction, userAction, sessionAction, geography})(routedMenu);
+export default connect(null, {fetchLoginHistory, groupAction, userAction, sessionAction, geography, preferences})(routedMenu);

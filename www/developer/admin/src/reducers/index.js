@@ -5,11 +5,12 @@ import countries from './countries';
 import group from './group';
 import groups from './groups';
 import logins from './logins';
-import users from './users';
-import user from './user';
+import preferences from './preferences';
 import sessions from './sessions';
 import states from './states';
 import timezones from './timezones';
+import users from './users';
+import user from './user';
 
 const rootReducer = combineReducers({
    countries: countries,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
    group: group,
    logins: logins,
    loggedInUser: authentication,
+   preferences: preferences,
    sessions: sessions,
    states: states,
    timezones: timezones,

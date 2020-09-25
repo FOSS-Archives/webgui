@@ -6,6 +6,7 @@ export const LOGIN = 'LOGIN';
 export const LOGINS = 'LOGINS';
 export const LOGOUT = 'LOGOUT';
 export const MENUS = 'MENUS';
+export const PREFERENCES = 'PREFERENCES';
 export const PURGE = 'PURGE_STORE_STATE';
 export const USERS = 'USERS';
 export const USER = 'USER';

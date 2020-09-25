@@ -7,11 +7,11 @@ export default ({user, updateUser, saveUser}) => {
    const [dirty, setDirty] = useState(false);
    const [stateUser, updateStateUser] = useState(user);
    
-   const updateField = (event) => {
-      let updated = { ...stateUser, ...{[event.target.name]: event.checked} };
-      let modified = !isEqual(user, updated);
+   const updateField = (fieldName, fieldValue) => {
+      let modifiedUser = { ...stateUser, ...{[fieldName]: fieldValue} };
+      let modified = !isEqual(user, modifiedUser);
+      updateStateUser(modifiedUser);
       setDirty(modified);
-      updateStateUser(updated);
    };
    
    const updateAppSessionUser = () => {

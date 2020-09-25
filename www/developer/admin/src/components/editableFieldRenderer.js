@@ -1,16 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Inplace, InplaceDisplay, InplaceContent} from 'primereact/inplace';
 import {Message} from 'primereact/message';
 import SubFieldComponent from './editableFieldSelectedRenderer';
+import FieldContext from '../contexts/fields';
 
 import './EditableField.css';
 export default props => {
+   const context = useContext(FieldContext);
    return (
-      <div className="p-grid allium-editable-field">
-         <div className="p-col-2 p-md-2 p-lg-2 font-weight-bold text-nowrap">
+      <div className={context.parent}>
+         <div className={context.label}>
             {props.valid ? props.fieldLabel : <Message severity="error" text={props.fieldLabel} />}
          </div>
-         <Inplace closable className="p-col-10 p-md-10 p-lg-8">
+         <Inplace closable className={context.value}>
             <InplaceDisplay className="p-invalid">
                {props.fieldData || 'Click to Edit'}
             </InplaceDisplay>
