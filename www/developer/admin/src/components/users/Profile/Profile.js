@@ -7,20 +7,22 @@ import ProfileRenderer from './profileRenderer';
  * We are going to need some sort of validation and requirements of fields 
  */
 import './Profile.css';
-export default ({user, saveUser}) => {
-   let [stateUser, updateUser] = useState(user);
+export default ({user, updateUser, saveUser}) => {
+   let [stateUser, updateStateUser] = useState(user);
    let [dirty, setDirty] = useState(false);
       
    let updateField = (fieldName, fieldValue) => {
       let modifiedUser = { ...stateUser, ...{[fieldName]: fieldValue} };
       let modified = !isEqual(user, modifiedUser);
       setDirty(modified);
-      updateUser(modifiedUser);
+      updateStateUser(modifiedUser);
    };
    
    let updateAppSessionUser = () => {
-      setDirty(false);      
       saveUser(stateUser);
+      updateUser(stateUser);
+      setDirty(false);      
+
    };
             
    let emailValidator = email => {
