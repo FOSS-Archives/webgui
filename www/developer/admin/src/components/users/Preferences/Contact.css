@@ -1,9 +1,9 @@
-.allium-privacy-radio label{
+.allium-radio label{
    padding-left: .2em;
    padding-right: .5em;
 }
 
-.allium-privacy-group{
+.allium-radio-group{
    display: grid;
    grid-template-columns: 1fr 1fr 1fr;
    width: 30%;

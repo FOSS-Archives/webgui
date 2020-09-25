@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Checkbox} from 'primereact/checkbox';
 import LanguageRendererField from '../../languageRenderer';
-import ProfilePrivacyField from './profilePrivacyRenderer';
+import RadioField from '../radioRenderer';
 import FieldContext from '../../../contexts/fields';
 
 import './Contact.css';
@@ -23,11 +23,10 @@ export default ({user, updateField}) => {
             <div className={context.label}>Time Format:</div>
             <div className={context.value}>{user.timeformat}</div>
          </div>
-         <ProfilePrivacyField fieldValue={user.profileprivacy} updateFieldState={updateField} context={context} />    
-         <div className={context.parent}>            
-            <div className={context.label}>Private Message Options:</div>
-            <div className={context.value}>{user.messageoptions}</div>
-         </div>
+         <RadioField fieldName="profileprivacy" fieldLabel="Profile Privacy:" fieldValue={user.profileprivacy} 
+            updateFieldState={updateField} context={context} />
+         <RadioField fieldName="messageoptions" fieldLabel="Private Message Options:" fieldValue={user.messageoptions} 
+            updateFieldState={updateField} context={context} />
          <div className={context.parent}>            
             <div className={context.label}>Show when online?:</div>
             <Checkbox className={context.value} checked={user.showwhenonline} onChange={e => updateField("showwhenonline", e.checked)} />
