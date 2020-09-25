@@ -15,13 +15,14 @@ class Account extends Component{
 
    updateField(fieldName, fieldValue){
       let modifiedUser = { ...this.state.user, ...{[fieldName]: fieldValue} };
-      let modified = !isEqual(modifiedUser, this.props.user);
+      let modified = !isEqual(this.props.user, modifiedUser);
       this.setState({ dirty: modified, user: modifiedUser });      
    };
    
    updateAppSessionUser(){
-      this.setState({ dirty: false });      
       this.props.saveUser(this.state.user);
+      this.props.updateUser(this.state.user);
+      this.setState({ dirty: false });            
    };
    
    render(){
