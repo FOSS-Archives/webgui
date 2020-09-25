@@ -3,7 +3,7 @@ import {BreadCrumb} from 'primereact/breadcrumb';
 import {TabView,TabPanel} from 'primereact/tabview';
 import Account from './Account/Account';
 import Groups from './Groups';
-import Preferences from './Preferences/preferencesRenderer';
+import Preferences from './Preferences/Preferences';
 import Profile from './Profile/Profile';
 import UI from './UI/uiRenderer';
 
@@ -14,21 +14,21 @@ export default ({user, groups, history, updateUser, saveUser}) => {
       <div>
          <BreadCrumb home={{icon: 'pi pi-list', command: () => history.push('/users')}} model={[{ label: label }]} className="allium-bc" />
          <TabView>
-             <TabPanel header="Account">
-                 <Account user={user} updateUser={updateUser} saveUser={saveUser} />
-             </TabPanel>
-             <TabPanel header="Profile">
-                 <Profile user={user} updateUser={updateUser} saveUser={saveUser} />
-             </TabPanel>
-             <TabPanel header="Groups" onClick={e => alert("Clicked")}>
-                 <Groups user={user} groups={groups} updateUser={updateUser} saveUser={saveUser} />
-             </TabPanel>
-             <TabPanel header="User Interface">
-                 <UI {...user} />
-             </TabPanel>             
-             <TabPanel header="Preferences">
-                 <Preferences user={user} updateUser={updateUser} saveUser={saveUser} />
-             </TabPanel>
+            <TabPanel header="Account">
+               <Account user={user} updateUser={updateUser} saveUser={saveUser} />
+            </TabPanel>
+            <TabPanel header="Profile">
+               <Profile user={user} updateUser={updateUser} saveUser={saveUser} />
+            </TabPanel>
+            <TabPanel header="Groups" onClick={e => alert("Clicked")}>
+               <Groups user={user} groups={groups} updateUser={updateUser} saveUser={saveUser} />
+            </TabPanel>
+            <TabPanel header="User Interface">
+               <UI {...user} />
+            </TabPanel>             
+            <TabPanel header="Preferences">
+               <Preferences user={user} updateUser={updateUser} saveUser={saveUser} />
+            </TabPanel>
          </TabView>
       </div>
    );
