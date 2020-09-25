@@ -46,18 +46,19 @@ class Groups extends Component {
       let modifiedUser = { ...this.state.user, ...{"groups": groups} };
       let modified = !isEqual(this.props.user, modifiedUser);
       this.setState({ user: modifiedUser, dirty: modified });
-      modified && this.props.updateUser(modifiedUser);
-  
+      
    }
       
    updateAppSessionUser(){
-      this.setState({ dirty: false });      
       this.props.saveUser(this.state.user);
+      this.props.updateUser(this.state.user);      
+      this.setState({ dirty: false });
+      
    };
  
    
    render() {   
-      return <GroupRenderer user={this.state.user} source={this.state.source} target={this.state.target} 
+      return <GroupRenderer user={this.props.user} source={this.state.source} target={this.state.target} 
          onChange={e => this.onChange(e)} dirty={this.state.dirty} updateAppSessionUser={this.updateAppSessionUser} />;
    }
 };
