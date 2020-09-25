@@ -31,7 +31,7 @@ export default ({user, groups, history, updateUser, saveUser}) => {
                <Groups user={user} groups={groups} updateUser={updateUser} saveUser={saveUser} />
             </TabPanel>
             <TabPanel header="User Interface">
-               <UI {...user} />
+               <UI user={user} updateUser={updateUser} saveUser={saveUser} />
             </TabPanel>             
             <TabPanel header="Preferences">
                <FieldContext.Provider value={fixPreferenceDisplay}>
