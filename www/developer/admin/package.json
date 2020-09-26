@@ -25,7 +25,8 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "ts-pnp": "^1.2.0",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "validate.js": "^0.13.1"
   },
   "scripts": {
     "start": "BROWSER='google chrome' react-scripts start",
