@@ -1,0 +1,201 @@
+{
+  "login": [
+    {
+      "id": "55f97ffd69-47jq2",
+      "identity": {
+        "avatar": "",
+        "first": null,
+        "last": null
+      },
+      "session": "_2d-UzZpNpCv_j-bKky9Tw"
+    }
+  ],
+  "groups": [
+    {
+      "name": "one",
+      "id": 1,
+      "description": "First groups "
+    },
+    {
+      "name": "two",
+      "id": 2,
+      "description": "second groups"
+    },
+    {
+      "name": "three",
+      "id": 3,
+      "description": "The number 3"
+    },
+    {
+      "name": "Four",
+      "description": "Just add the fourth one",
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "id": "55f97ffd69-47jq2",
+      "username": "jdoe",
+      "alias": "Kestrel",
+      "email": "jdoe@mycompnany.com",
+      "firstname": "John",
+      "lastname": "Doe",
+      "avatar": "/images/ne.jpg",
+      "photo": "/images/ne.jpg",
+      "created": "1969/12/31 19:00:01",
+      "lastlogin": "1969/12/31 19:00:01",
+      "language": "Portuguese/Portugal",
+      "friendly": true,
+      "dateformat": "MM/DD/YYYY",
+      "timeformat": "HH:MM:SS pm",
+      "uilevel": "5",
+      "profileprivacy": "2",
+      "messageoptions": "0",
+      "showwhenonline": true,
+      "notifyemail": false,
+      "notifysms": true,
+      "gender": "male",
+      "pronoun": "he",
+      "birthdate": "Mon Sep 14 2020 00:00:00 GMT-0400 (EDT)",
+      "active": "true",
+      "cell": "8005551211",
+      "signature": "John Doe LLC\n1 Main Street, Hartford, CT 06103\n(800)555-1212",
+      "homephone": "8005551212",
+      "workphone": "8005551213",
+      "homeaddress": "1 Main Street",
+      "homecity": "Springfield",
+      "homestate": "CT",
+      "homezip": "999999",
+      "homecountry": "NZ",
+      "hometimezone": "Chicago (GMT-5)",
+      "companyname": "WebGUI",
+      "workdepartment": "Personnel",
+      "workwebsite": "http://www.webgui.org",
+      "workaddress": "10 Main Street",
+      "workcity": "Springfield",
+      "workstate": "CT",
+      "workzip": "00001",
+      "workcountry": "AU",
+      "worktimezone": "Phoenix (GMT-7)",
+      "groups": [
+        "1"
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "_2d-UzZpNpCv_j-bKky9Tw",
+      "uid": "55f97ffd69-47jq2",
+      "username": "myUsername",
+      "expires": "100010010",
+      "last_view": "22222",
+      "ip": "127.0.0.1",
+      "created": "111111111"
+    }
+  ],
+  "logins": [
+    {
+      "id": "1",
+      "uid": "55f97ffd69-47jq2",
+      "username": "myUsername",
+      "created": "111111111",
+      "last_active": "22222",
+      "ip": "127.0.0.1"
+    }
+  ],
+  "geography": {
+    "states": [
+      "AZ",
+      "AL",
+      "AK",
+      "CT",
+      "CA",
+      "NY"
+    ],
+    "countries": [
+      "US",
+      "AU",
+      "NZ",
+      "CA",
+      "AU",
+      "FR"
+    ],
+    "timezones": [
+      "Chicago (GMT-5)",
+      "Denver (GMT-6)",
+      "Phoenix (GMT-7)"
+    ]
+  },
+  "preferences": {
+    "language": [
+      "English/US",
+      "English/England",
+      "Spanish",
+      "Portuguese/Brazil",
+      "Portuguese/Portugal"
+    ],
+    "dateformats": [
+      "YYYY/MM/DD",
+      "MM/DD/YY",
+      "MM/DD/YYYY"
+    ],
+    "timeformats": [
+      "HH:MM:SS pm",
+      "HH:MM pm",
+      "2400hrs"
+    ],
+    "profileprivacy": [
+      {
+        "0": "Public"
+      },
+      {
+        "1": "Friends Only"
+      },
+      {
+        "2": "Private"
+      }
+    ],
+    "uilevels": [
+      {
+        "0": "Beginer"
+      },
+      {
+        "1": "Novice"
+      },
+      {
+        "2": "Trained"
+      },
+      {
+        "3": "Rookie"
+      },
+      {
+        "4": "Skilled"
+      },
+      {
+        "5": "Adept"
+      },
+      {
+        "6": "Professional"
+      },
+      {
+        "7": "Expert"
+      },
+      {
+        "8": "Master"
+      },
+      {
+        "9": "Guru"
+      }
+    ]
+  },
+  "authenticationmethods": {
+    "WebGUI": {},
+    "LDAP": {},
+    "CAS": {},
+    "OAUTH": {
+      "TWITTER": {},
+      "FACEBOOK": {},
+      "GOOGLE": {}
+    }
+  }
+}
