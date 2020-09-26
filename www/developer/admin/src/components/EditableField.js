@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import EditableFieldRenderer from './editableFieldRenderer';
 
-export default ({object, fieldName, fieldLabel, updateFieldState, fieldType, fieldTypeData, validator}) => {
+export default ({object, fieldName, fieldLabel, updateFieldState, fieldType, fieldTypeData, fieldTypeSwitch, validator}) => {
    let [objectField, setObjectField] = useState(object[fieldName]);
    let [valid,setValid] = useState(true);
 
@@ -42,7 +42,8 @@ export default ({object, fieldName, fieldLabel, updateFieldState, fieldType, fie
          fieldLabel={fieldLabel}
          fieldType={fieldType} 
          fieldTypeData={fieldTypeData} 
-         saveFieldValue={saveFieldValue} 
+         fieldTypeSwitch={fieldTypeSwitch}         
+         saveFieldValue={saveFieldValue}
          valid={valid} />
    );
 };

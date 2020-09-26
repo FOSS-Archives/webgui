@@ -11,7 +11,7 @@ const UILevelRenderer = ({object, fieldName, fieldLabel, updateFieldState, prefe
 
    return (
       <EditableField object={object} fieldName={fieldName} fieldLabel={fieldLabel} updateFieldState={updateFieldState} 
-         fieldType="Dropdown" fieldTypeData={data} />
+         fieldType="Dropdown" fieldTypeData={data} fieldTypeSwitch={true} />
    );
       
 };

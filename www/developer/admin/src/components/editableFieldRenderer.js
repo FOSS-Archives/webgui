@@ -7,6 +7,20 @@ import FieldContext from '../contexts/fields';
 import './EditableField.css';
 export default props => {
    const context = useContext(FieldContext);
+   
+   /*
+    * We need a way to render the actual label of a drop down box or other field when 
+    * using subcomponents that have values different than the "displayable" value
+    */
+   let visualFieldData = props.fieldData;
+   if (props.fieldTypeSwitch != null && props.fieldTypeData != null){
+      props.fieldTypeData.forEach( current => {
+         if (current.value === props.fieldData){
+            visualFieldData = current.label;
+         }
+      });
+   }
+   
    return (
       <div className={context.parent}>
          <div className={context.label}>
@@ -14,7 +28,7 @@ export default props => {
          </div>
          <Inplace closable className={context.value}>
             <InplaceDisplay className="p-invalid">
-               {props.fieldData || 'Click to Edit'}
+               {visualFieldData || 'Click to Edit'}
             </InplaceDisplay>
             <InplaceContent>
                <SubFieldComponent {...props} />
