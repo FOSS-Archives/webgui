@@ -8,10 +8,10 @@ const RadioRenderer = ({fieldName, fieldLabel, fieldValue, updateFieldState, con
       let value = privacy[key];
       let labelId = value + "-" + key;
       return (
-         <div className="allium-radio text-nowrap">
+         <div key={key} className="allium-radio text-nowrap">
             <RadioButton value={key} checked={fieldValue === key} onChange={e => updateFieldState(fieldName,key)} 
-               id={labelId} key={key} name={fieldName} />
-            <label for={labelId} className="text-nowrap">{value}</label>
+               id={labelId}  name={fieldName} />
+            <label htmlFor={labelId} className="text-nowrap">{value}</label>
          </div>
       );
    });
