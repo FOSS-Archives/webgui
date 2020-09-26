@@ -16,7 +16,7 @@ class MessageQueueRenderer extends Component {
    render(){  
       return (
          <div>
-            <Messages ref={el => this.messages = el} style={{width:'95%',paddingLeft:'1em'}} />
+            <Messages ref={el => this.messages = el} style={{width:'98%',paddingLeft:'1em'}} />
          </div>
       );
    }
