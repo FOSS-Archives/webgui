@@ -20,8 +20,10 @@ export default ({user, updateField}) => {
             <div className={context.parent}>          
                <div className={context.label}>Last login:</div> 
                <div className={context.value}>{user.lastlogin}</div>
-            </div>             
+            </div>
+            <pre>
             <EditableField object={user} fieldName="signature" fieldLabel="Signature:" updateFieldState={updateField} fieldType="InputTextarea" />
+            </pre>
          </div>
          <div className="p-col-4">
             <div className="box box-stretched">
