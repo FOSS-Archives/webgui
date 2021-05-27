@@ -112,11 +112,11 @@ Where things are at:
 * The bug tracker for this community effort is here:  http://github.com/AlliumCepa/webgui/issues
 * The original bug tracker is here:  http://www.webgui.org/8
 * Developer discussion forums, for conversations relating to the code itself, are here:  http://www.webgui.org/webgui/dev/discuss
-* IRC chat is at #webgui on FreeNode; use your favorite IRC-enabled chat client or see irc.org for more info
+* IRC chat is at #webgui on irc.perl.org/MAGnet; use your favorite IRC-enabled chat client or see irc.org for more info
 * The Wiki is at http://webgui.org/wiki
 * The official PlainBlack WebGUI repo is at http://github.org/plainblack/webgui
 
-If you connect to IRC, please be patient.
+If you connect to IRC, please be patient.  If you're not able to wait for a response, please consider email instead.
 
 As a general rule, if you're fixing a bug mentioned in http://www.webgui.org/8, discuss it at http://www.webgui.org/webgui/dev/discuss.
 If you're adding a new feature or want to talk about the community process itself, discuss it on https://github.com/AlliumCepa/webgui/issues/.
